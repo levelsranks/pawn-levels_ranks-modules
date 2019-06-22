@@ -24,11 +24,11 @@ SourceMod 1.9.0.6241 и выше (только stable-версия)
 
 Установка:
 ----------
-```
-1) Удалите прошлую версию плагина, если есть
-2) Распакуйте содержимое архива по папкам
-3) Настройте файл:
-- addons/sourcemod/configs/levels_ranks/chat.ini
-- addons/sourcemod/configs/levels_ranks/chat_old.ini​
-4) Перезапустить сервер
+
+- Удалите прошлую версию плагина, если есть.
+- Распакуйте содержимое архива по папкам.
+- Настройте файлы:
+    - addons/sourcemod/configs/levels_ranks/chat.ini
+    - addons/sourcemod/configs/levels_ranks/chat_old.ini​
+- Перезапустите сервер.
 ```
