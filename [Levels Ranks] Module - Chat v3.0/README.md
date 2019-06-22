@@ -3,7 +3,7 @@
 [Levels Ranks] Module - Chat - это модуль для плагина Levels Ranks. Данный модуль добавляет префикс к никнейму игрока ввиде ранга, а также позволяет настроить цвет префикса/никнейма/сообщения игрока.​
 
 <h1 align="center">
-    <a href="https://hlmod.ru/attachments/20180718125358_1-jpg.32237/"><img src="https://hlmod.ru/attachments/20180718125358_1-jpg.32237/"/></a>
+    <a href="//levels-ranks.ru/content/modules/chat.jpg"><img src="//levels-ranks.ru/content/modules/chat.jpg/"/></a>
     <br/>
 </h1>​
 
