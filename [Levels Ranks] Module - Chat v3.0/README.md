@@ -3,7 +3,7 @@
 [Levels Ranks] Module - Chat - это модуль для плагина Levels Ranks. Данный модуль добавляет префикс к никнейму игрока ввиде ранга, а также позволяет настроить цвет префикса/никнейма/сообщения игрока.​
 
 <h1 align="center">
-    <a href="https://sbpp.github.io"><img src="https://hlmod.ru/attachments/20180718125358_1-jpg.32237/" height="25%" width="25%"/></a>
+    <a href="https://sbpp.github.io"><img src="https://hlmod.ru/attachments/20180718125358_1-jpg.32237/" height="50%" width="50%"/></a>
     <br/>
 </h1>​
 
