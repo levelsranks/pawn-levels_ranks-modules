@@ -1,0 +1,13 @@
+﻿"Phrases"
+{
+	"Overlay_MenuOff"
+	{
+		"en"			"Overlay [on]"
+		"ru"			"Оверлеи [вкл]"
+	}
+	"Overlay_MenuOn"
+	{
+		"en"			"Overlays [off]"
+		"ru"			"Оверлеи [выкл]"
+	}
+}

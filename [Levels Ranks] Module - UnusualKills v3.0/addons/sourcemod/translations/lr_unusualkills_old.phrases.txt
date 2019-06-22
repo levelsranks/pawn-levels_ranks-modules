@@ -1,0 +1,67 @@
+"Phrases"
+{
+	// For CS:S v34.
+	"OP"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} for a open killing]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} за первое убийство]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} за перше вбивство]"
+	}
+	"Penetrated"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} for a penetrated]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} за прострел]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} за простріл]"
+	}
+	"NoScope"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} no zoom]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} без прицела]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} без прицілу]"
+	}
+	"Run"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} on the run]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} на бегу]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} на бігу]"
+	}
+	"Jump"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} a jump kill]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} в прыжке]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} в стрибку]"
+	}
+	"Flash"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} blinded by a light grenade]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} с ослеплением от световой гранаты]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} з осліпленням від светової гранати]"
+	}
+	"Ace"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {BLUE}{1} [{2} to ACE]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {BLUE}{1} [{2} за ACE]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {BLUE}{1} [{2} за ACE]"
+	}
+	"Smoke"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} in the smoke]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} в дым]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} в дим]"
+	}
+	"Whirl"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} with a reversal]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} с разворота]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} з розвороту]"
+	}
+}

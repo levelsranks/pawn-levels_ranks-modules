@@ -1,0 +1,9 @@
+﻿"Phrases"
+{
+	"Distributor"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [+{2} for nothing]"
+		"ru"		"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [+{2} за просто так]"
+	}
+}

@@ -1,0 +1,103 @@
+﻿"Phrases"
+{
+	"Chat"
+	{
+		"en"			"Chat Settings"
+		"ru"			"Настроить Чат"
+	}
+	"Chat_Off"
+	{
+		"en"			"Disable All"
+		"ru"			"Выключить всё"
+	}
+	"Chat_On"
+	{
+		"en"			"Enable All"
+		"ru"			"Включить всё"
+	}
+	"Prefix_Color"
+	{
+		"en"			"Prefix color"
+		"ru"			"Цвет префикса"
+	}
+	"Name_Color"
+	{
+		"en"			"Name color"
+		"ru"			"Цвет никнейма"
+	}
+	"Text_Color"
+	{
+		"en"			"Text color"
+		"ru"			"Цвет текста"
+	}
+	"Default"
+	{
+		"en"			"Orange"
+		"ru"			"Оранжевый"
+	}
+	"Team"
+	{
+		"en"			"Team Color"
+		"ru"			"Командный"
+	}
+	"White"
+	{
+		"en"			"White"
+		"ru"			"Белый"
+	}
+	"Red"
+	{
+		"en"			"Red"
+		"ru"			"Красный"
+	}
+	"Green"
+	{
+		"en"			"Green"
+		"ru"			"Зеленый"
+	}
+	"Lime"
+	{
+		"en"			"Lime"
+		"ru"			"Лайм"
+	}
+	"Lightgreen"
+	{
+		"en"			"Lightgreen"
+		"ru"			"Светло-зеленый"
+	}
+	"Lightred"
+	{
+		"en"			"Lightred"
+		"ru"			"Светло-красный"
+	}
+	"Gray"
+	{
+		"en"			"Gray"
+		"ru"			"Серый"
+	}
+	"Lightolive"
+	{
+		"en"			"Lightolive"
+		"ru"			"Светло-оливковый"
+	}
+	"Olive"
+	{
+		"en"			"Olive"
+		"ru"			"Оливковый"
+	}
+	"Lightblue"
+	{
+		"en"			"Lightblue"
+		"ru"			"Светло-синий"
+	}
+	"Blue"
+	{
+		"en"			"Blue"
+		"ru"			"Синий"
+	}
+	"Purple"
+	{
+		"en"			"Purple"
+		"ru"			"Розовый"
+	}
+}

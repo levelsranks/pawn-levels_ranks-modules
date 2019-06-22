@@ -1,0 +1,66 @@
+"Phrases"
+{
+	"OP"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} for a open killing]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} за первое убийство]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} за перше вбивство]"
+	}
+	"Penetrated"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} for a penetrated]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} за прострел]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} за простріл]"
+	}
+	"NoScope"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} no zoom]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} без прицела]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {GREEN}{1} [{2} без прицілу]"
+	}
+	"Run"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} on the run]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} на бегу]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {GREEN}{1} [{2} на бігу]"
+	}
+	"Jump"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} a jump kill]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} в прыжке]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} в стрибку]"
+	}
+	"Flash"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {1} [{2} blinded by a light grenade]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {1} [{2} с ослеплением от световой гранаты]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {1} [{2} з осліпленням від светової гранати]"
+	}
+	"Ace"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {BLUE}{1} [{2} to ACE]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {BLUE}{1} [{2} за ACE]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {BLUE}{1} [{2} за ACE]"
+	}
+	"Smoke"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {GRAY}{1} [{2} in the smoke]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GRAY}{1} [{2} в дым]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {GRAY}{1} [{2} в дим]"
+	}
+	"Whirl"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} with a reversal]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} с разворота]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} з розвороту]"
+	}
+}

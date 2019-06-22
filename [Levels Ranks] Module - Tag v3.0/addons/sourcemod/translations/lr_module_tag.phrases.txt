@@ -1,0 +1,13 @@
+﻿"Phrases"
+{
+	"TagRankOff"
+	{
+		"en"		"Tag rank [off]"
+		"ru"		"Ранк-тег [выкл]"
+	}
+	"TagRankOn"
+	{
+		"en"		"Tag rank [on]"
+		"ru"		"Ранк-тег [вкл]"
+	}
+}
