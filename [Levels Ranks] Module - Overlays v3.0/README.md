@@ -24,7 +24,7 @@
 - Удалите прошлую версию плагина, если есть.
 - Распакуйте содержимое архива по папкам.
 - Настройте файл:
-        - addons/sourcemod/configs/levels_ranks/overlays.ini
-        - addons/sourcemod/configs/levels_ranks/downloads_overlays.ini
+	- addons/sourcemod/configs/levels_ranks/overlays.ini
+	- addons/sourcemod/configs/levels_ranks/downloads_overlays.ini
 - Перезапустите сервер.
 ```
