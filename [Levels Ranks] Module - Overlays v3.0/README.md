@@ -7,7 +7,7 @@
 
 Оверлеи от пользователей:
 -------------------------
-<a href="//levels-ranks.ru/plugins/other/LR-Overlays-Kleuser.zip">Kleuser</a>
+- <a href="//levels-ranks.ru/plugins/other/LR-Overlays-Kleuser.zip">Kleuser</a>
 
 Поддерживаемые игры:
 --------------------
