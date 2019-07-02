@@ -1,0 +1,264 @@
+﻿"Phrases"
+{
+	"Back"
+	{
+		"en"		"Back"
+		"ru"		"Назад"
+	}
+	"TOPGeneral"
+	{
+		"en"		"TOP-10 by kills"
+		"ru"		"TOP-10 по киллам"
+	}
+	"TOPGeneralCount"
+	{
+		"en"		"TOP-10 by total count"
+		"ru"		"TOP-10 по общему кол-ву"
+	}
+	"TOPGeneralWeapon"
+	{
+		"en"		"TOP-10 by weapons"
+		"ru"		"TOP-10 по оружиям"
+	}
+	"TOPList"
+	{
+		"#format"	"{1:i},{2:i},{3:s}"
+		"en"		"{1} - {2} kills - {3}"
+		"ru"		"{1} - {2} киллов - {3}"
+	}
+	"weapon_knife"
+	{
+		"en"		"TOP-10 by Knife"
+		"ru"		"TOP-10 по Ножам"
+	}
+	"weapon_taser"
+	{
+		"en"		"TOP-10 by Zeus"
+		"ru"		"TOP-10 по Зевсам"
+	}
+	"weapon_inferno"
+	{
+		"en"		"TOP-10 by Molotov"
+		"ru"		"TOP-10 по Молотовым"
+	}
+	"weapon_hegrenade"
+	{
+		"en"		"TOP-10 by Hegrenade"
+		"ru"		"TOP-10 по гранатам"
+	}
+	"weapon_glock"
+	{
+		"en"		"TOP-10 by Glock"
+		"ru"		"TOP-10 по Glock"
+	}
+	"weapon_hkp2000"
+	{
+		"en"		"TOP-10 by P2000"
+		"ru"		"TOP-10 по P2000"
+	}
+	"weapon_tec9"
+	{
+		"en"		"TOP-10 by Tec-9"
+		"ru"		"TOP-10 по Tec-9"
+	}
+	"weapon_usp_silencer"
+	{
+		"en"		"TOP-10 by USP-S"
+		"ru"		"TOP-10 по USP-S"
+	}
+	"weapon_p250"
+	{
+		"en"		"TOP-10 by P250"
+		"ru"		"TOP-10 по P250"
+	}
+	"weapon_cz75a"
+	{
+		"en"		"TOP-10 by CZ75-Auto"
+		"ru"		"TOP-10 по CZ75-Auto"
+	}
+	"weapon_fiveseven"
+	{
+		"en"		"TOP-10 by Five-Seven"
+		"ru"		"TOP-10 по Five-Seven"
+	}
+	"weapon_elite"
+	{
+		"en"		"TOP-10 by Dual Berettas"
+		"ru"		"TOP-10 по Dual Berettas"
+	}
+	"weapon_revolver"
+	{
+		"en"		"TOP-10 by R8 Revolver"
+		"ru"		"TOP-10 по R8 Revolver"
+	}
+	"weapon_deagle"
+	{
+		"en"		"TOP-10 by Desert Deagle"
+		"ru"		"TOP-10 по Desert Deagle"
+	}
+	"weapon_negev"
+	{
+		"en"		"TOP-10 by Negev"
+		"ru"		"TOP-10 по Negev"
+	}
+	"weapon_m249"
+	{
+		"en"		"TOP-10 by M249"
+		"ru"		"TOP-10 по M249"
+	}
+	"weapon_mag7"
+	{
+		"en"		"TOP-10 by MAG-7"
+		"ru"		"TOP-10 по MAG-7"
+	}
+	"weapon_sawedoff"
+	{
+		"en"		"TOP-10 by Sawedoff"
+		"ru"		"TOP-10 по Sawedoff"
+	}
+	"weapon_nova"
+	{
+		"en"		"TOP-10 by Nova"
+		"ru"		"TOP-10 по Nova"
+	}
+	"weapon_xm1014"
+	{
+		"en"		"TOP-10 by XM1014"
+		"ru"		"TOP-10 по XM1014"
+	}
+	"weapon_bizon"
+	{
+		"en"		"TOP-10 by PP-Bizon"
+		"ru"		"TOP-10 по ПП-19 Бизон"
+	}
+	"weapon_mac10"
+	{
+		"en"		"TOP-10 by MAC-10"
+		"ru"		"TOP-10 по MAC-10"
+	}
+	"weapon_ump45"
+	{
+		"en"		"TOP-10 by UMP-45"
+		"ru"		"TOP-10 по UMP-45"
+	}
+	"weapon_mp9"
+	{
+		"en"		"TOP-10 by MP9"
+		"ru"		"TOP-10 по MP9"
+	}
+	"weapon_mp7"
+	{
+		"en"		"TOP-10 by MP7"
+		"ru"		"TOP-10 по MP7"
+	}
+	"weapon_p90"
+	{
+		"en"		"TOP-10 by P90"
+		"ru"		"TOP-10 по P90"
+	}
+	"weapon_galilar"
+	{
+		"en"		"TOP-10 by Galil AR"
+		"ru"		"TOP-10 по Galil AR"
+	}
+	"weapon_famas"
+	{
+		"en"		"TOP-10 by Famas"
+		"ru"		"TOP-10 по Famas"
+	}
+	"weapon_ak47"
+	{
+		"en"		"TOP-10 by AK-47"
+		"ru"		"TOP-10 по AK-47"
+	}
+	"weapon_m4a1"
+	{
+		"en"		"TOP-10 by M4A1"
+		"ru"		"TOP-10 по M4A1"
+	}
+	"weapon_m4a1_silencer"
+	{
+		"en"		"TOP-10 by M4A1-S"
+		"ru"		"TOP-10 по M4A1-S"
+	}
+	"weapon_aug"
+	{
+		"en"		"TOP-10 by AUG"
+		"ru"		"TOP-10 по AUG"
+	}
+	"weapon_sg556"
+	{
+		"en"		"TOP-10 by SG 553"
+		"ru"		"TOP-10 по SG 553"
+	}
+	"weapon_ssg08"
+	{
+		"en"		"TOP-10 by SSG 08"
+		"ru"		"TOP-10 по SSG 08"
+	}
+	"weapon_awp"
+	{
+		"en"		"TOP-10 by AWP"
+		"ru"		"TOP-10 по AWP"
+	}
+	"weapon_scar20"
+	{
+		"en"		"TOP-10 by SCAR-20"
+		"ru"		"TOP-10 по SCAR-20"
+	}
+	"weapon_g3sg1"
+	{
+		"en"		"TOP-10 by G3SG1"
+		"ru"		"TOP-10 по G3SG1"
+	}
+	"weapon_usp"
+	{
+		"en"		"TOP-10 by USP"
+		"ru"		"TOP-10 по USP"
+	}
+	"weapon_p228"
+	{
+		"en"		"TOP-10 by P228"
+		"ru"		"TOP-10 по P228"
+	}
+	"weapon_m3"
+	{
+		"en"		"TOP-10 by M3"
+		"ru"		"TOP-10 по M3"
+	}
+	"weapon_tmp"
+	{
+		"en"		"TOP-10 by TMP"
+		"ru"		"TOP-10 по TMP"
+	}
+	"weapon_mp5navy"
+	{
+		"en"		"TOP-10 by MP5"
+		"ru"		"TOP-10 по MP5"
+	}
+	"weapon_galil"
+	{
+		"en"		"TOP-10 by Galil"
+		"ru"		"TOP-10 по Galil"
+	}
+	"weapon_scout"
+	{
+		"en"		"TOP-10 by Scout"
+		"ru"		"TOP-10 по Scout"
+	}
+	"weapon_sg550"
+	{
+		"en"		"TOP-10 by SG 550"
+		"ru"		"TOP-10 по SG 550"
+	}
+	"weapon_sg552"
+	{
+		"en"		"TOP-10 by SG 552"
+		"ru"		"TOP-10 по SG 552"
+	}
+	"weapon_mp5sd"
+	{
+		"en"		"TOP-10 by MP5-SD"
+		"ru"		"TOP-10 по MP5-SD"
+	}
+}

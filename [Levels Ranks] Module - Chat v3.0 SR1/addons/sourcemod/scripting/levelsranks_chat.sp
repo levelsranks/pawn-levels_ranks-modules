@@ -38,7 +38,7 @@ char		g_sColors_Game[12][32],
 Handle	g_hChat;
 EngineVersion EngineGame;
 
-public Plugin myinfo = {name = "[LR] Module - Chat", author = PLUGIN_AUTHOR, version = PLUGIN_VERSION}
+public Plugin myinfo = {name = "[LR] Module - Chat", author = PLUGIN_AUTHOR, version = "v3.0 SR1"}
 public void OnPluginStart()
 {
 	switch(EngineGame = GetEngineVersion())
@@ -85,7 +85,6 @@ public void OnPluginStart()
 public void LR_OnCoreIsReady()
 {
 	ConfigLoad();
-	LR_GetTitleMenu(g_sPluginTitle, 64);
 }
 
 public void OnMapStart()
@@ -96,7 +95,6 @@ public void OnMapStart()
 public void LR_OnSettingsModuleUpdate()
 {
 	ConfigLoad();
-	LR_GetTitleMenu(g_sPluginTitle, 64);
 }
 
 void ConfigLoad()
@@ -163,6 +161,7 @@ void ConfigLoad()
 	}
 	else SetFailState("[" ... PLUGIN_NAME ... " Chat] section Prefixs is not found (%s)", sPath);
 	delete hLR_Chat;
+	LR_GetTitleMenu(g_sPluginTitle, 64);
 }
 
 public void LR_OnMenuCreated(int iClient, Menu& hMenu)
@@ -370,6 +369,8 @@ public void OnClientDisconnect(int iClient)
 		FormatEx(sBuffer, 20, "%i;%i;%i;%i;%i;", g_bNew[iClient], g_bChatOff[iClient], g_iPrefixColor[iClient], g_iNameColor[iClient], g_iTextColor[iClient]);
 		SetClientCookie(iClient, g_hChat, sBuffer);		
 	}
+	g_bNew[iClient] = false;
+	g_bPrivatePrefix[iClient] = false;
 }
 
 public void OnPluginEnd()
