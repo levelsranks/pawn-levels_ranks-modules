@@ -16,10 +16,10 @@
 	<ul><li>Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.</li></ul>
 </details>
 
-<details><summary>Как установить кастомные звания?</summary>
-1) В конфиге (<code>levels_ranks/fakerank.ini</code>) установите значение <code>"0"</code> у параметра <code>"Type"</code>;
-2) Файл со званием переместите в <code>materials/panorama/images/icons/skillgroups/</code> на FastDL;
-3) Укажите в конфиге модуля у "звания в ТАБ(е)" его индекс - skillgroup(индекс).svg.
+<details><summary>Как установить кастомные звания?</summary> <br>
+1) В конфиге (<code>levels_ranks/fakerank.ini</code>) установите значение <code>"0"</code> у параметра <code>"Type"</code>; <br>
+2) Файл со званием переместите в <code>materials/panorama/images/icons/skillgroups/</code> на FastDL; <br>
+3) Укажите в конфиге модуля у "звания в ТАБ(е)" его индекс - skillgroup(индекс).svg. <br>
 4) Пропишите в консоль сервера <code>sm_lvl_reload</code> и смените карту.
 </details>
 
