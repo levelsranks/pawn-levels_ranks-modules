@@ -13,9 +13,9 @@
 
 <details><summary>[Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.</summary>
 	<br/><a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a>
--	<br/><details>
+	<br/><details>
 		Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
-	</details>
+	</details><br/>
 </details>
 
 <details><summary>Как установить кастомные звания?</summary>
