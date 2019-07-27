@@ -16,8 +16,8 @@
 
 <details><summary>Как установить кастомные звания ?</summary>
 
-1) В конфиге (`levels_ranks/fakerank.ini`) установите значение "0" у параметра "Type"; 
-2) Файл со званием переместите в materials/panorama/images/icons/skillgroups/ на FastDL; 
+1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`; 
+2) Файл со званием переместите ``в materials/panorama/images/icons/skillgroups/`` на FastDL; 
 3) Укажите в конфиге модуля у звания в ТАБ(е) его индекс - skillgroup(индекс).svg. 
 
 </details>
