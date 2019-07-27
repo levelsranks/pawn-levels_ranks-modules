@@ -15,7 +15,7 @@
 	<br/><a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a>
 </details>
 
-	- Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
+ - Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
 
 <details><summary>Как установить кастомные звания?</summary>
 1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`;
@@ -40,4 +40,3 @@
 - Настройте файл:
 	- addons/sourcemod/configs/levels_ranks/fakerank.ini
 - Перезапустите сервер.
-```
