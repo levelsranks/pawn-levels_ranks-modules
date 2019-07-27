@@ -9,7 +9,7 @@
 
 Кастомные звания:
 -------------------------
-- Kruya Elite (by Unity) - <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.zip">Скачать</a>.
+- Kruzya Elite (by Unity) - <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.zip">Скачать</a>.
 
   - [Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.
   - Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
