@@ -9,7 +9,7 @@
 
 Кастомные звания:
 -------------------------
-- <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.svg">Kruya Elite</a>
+- <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.zip">Kruya Elite</a>
 
   - [Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.
   - Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
@@ -19,6 +19,7 @@
 1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`; 
 2) Файл со званием переместите в ``materials/panorama/images/icons/skillgroups/`` на FastDL; 
 3) Укажите в конфиге модуля у звания в ТАБ(е) его индекс - skillgroup(индекс).svg. 
+4) Пропишите в консоль сервера `sm_lvl_reload` и смените карту.
 
 </details>
 
