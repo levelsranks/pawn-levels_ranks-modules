@@ -1,7 +1,7 @@
-[Levels Ranks] Module - FakeRank
+[Levels Ranks] Module - Fake Rank
 ===========================
 
-[Levels Ranks] Module - FakeRank - это модуль для плагина Levels Ranks. Данный модуль, используя ранги Ядра, показывает их в TAB(е).
+[Levels Ranks] Module - Fake Rank - это модуль для плагина Levels Ranks. Данный модуль, используя ранги Ядра, показывает их в TAB(е).
 
 <a href="//levels-ranks.ru/content/modules/fakerank.png"><img src="https://levels-ranks.ru/content/modules/fakerank.png"/></a>
 <a href="//levels-ranks.ru/content/modules/fakerank2.png"><img src="https://levels-ranks.ru/content/modules/fakerank2.png"/></a>
@@ -9,16 +9,16 @@
 
 Кастомные звания:
 -------------------------
-- 1) <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.svg">Kruya Elite</a>
+- <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.svg">Kruya Elite</a>
 
   - [Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.
   - Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
 
 <details><summary>Как установить кастомные звания ?</summary>
 
-- 1) В конфиге (levels_ranks/fakerank.ini) установите значение "0" у параметра "Type"; 
-- 2) Файл со званием переместите в materials/panorama/images/icons/skillgroups/ на FastDL; 
-- 3) Укажите в конфиге модуля у звания в ТАБ(е) его индекс - skillgroup(индекс).svg. 
+- В конфиге (levels_ranks/fakerank.ini) установите значение "0" у параметра "Type"; 
+- Файл со званием переместите в materials/panorama/images/icons/skillgroups/ на FastDL; 
+- Укажите в конфиге модуля у звания в ТАБ(е) его индекс - skillgroup(индекс).svg. 
 
 </details>
 
