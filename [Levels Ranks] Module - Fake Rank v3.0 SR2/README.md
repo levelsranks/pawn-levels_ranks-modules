@@ -13,12 +13,12 @@
 
 <details><summary>[Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.</summary>
 	<br/><a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a><br/>
-	<details>><br/>
+	<details><br/>
 		Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
-	</details
+	</details>
 </details>
 
-<details><summary>Как установить кастомные звания?<br/></summary>
+<details><summary>Как установить кастомные звания?</summary>
 1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`;
 2) Файл со званием переместите в ``materials/panorama/images/icons/skillgroups/`` на FastDL;
 3) Укажите в конфиге модуля у "звания в ТАБ(е)" его индекс - skillgroup(индекс).svg.
