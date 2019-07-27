@@ -17,10 +17,10 @@
 </details>
 
 <details><summary>Как установить кастомные звания?</summary>
-1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`;
-2) Файл со званием переместите в ``materials/panorama/images/icons/skillgroups/`` на FastDL;
+1) В конфиге (<code>levels_ranks/fakerank.ini</code>) установите значение <code>"0"</code> у параметра <code>"Type"</code>;
+2) Файл со званием переместите в <code>materials/panorama/images/icons/skillgroups/</code> на FastDL;
 3) Укажите в конфиге модуля у "звания в ТАБ(е)" его индекс - skillgroup(индекс).svg.
-4) Пропишите в консоль сервера `sm_lvl_reload` и смените карту.
+4) Пропишите в консоль сервера <code>sm_lvl_reload</code> и смените карту.
 </details>
 
 Поддерживаемые игры:
