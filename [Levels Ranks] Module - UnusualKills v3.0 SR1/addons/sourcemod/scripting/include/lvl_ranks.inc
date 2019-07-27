@@ -212,16 +212,6 @@ forward void LR_OnLevelChanged(int iClient, int iNewLevel, bool bUp);
 forward void LR_OnPlayerKilled(Event hEvent, int& iExpGive, int iExpVictim, int iExpAttacker);
 
 /**
- * Called when clearing the Database is initiated.
- *
- * @param hQuery	-	Handle of the Transaction
- * @param sSteamID	-	Client's SteamID2
- * @param iDays	-	How many days a player must be absent for being deleted from the database
- * @param bFull	-	If true, purge will be full
- */
-forward void LR_OnPurgeDatabase(Transaction hQuery, const char[] sSteamID, int iDays, bool bFull);
-
-/**
  * Called when data is loaded.
  *
  * @param iClient	-	Client index
