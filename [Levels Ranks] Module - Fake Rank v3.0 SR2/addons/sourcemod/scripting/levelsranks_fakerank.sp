@@ -8,11 +8,12 @@
 #define PLUGIN_NAME "Levels Ranks"
 #define PLUGIN_AUTHOR "RoadSide Romeo & Wend4r"
 
-int			m_iCompetitiveRanking;
+int			g_iType,
+			m_iCompetitiveRanking;
 
 KeyValues	g_hKv;
 
-public Plugin myinfo = {name = "[LR] Module - FakeRank", author = PLUGIN_AUTHOR, version = PLUGIN_VERSION ... " SR1"}
+public Plugin myinfo = {name = "[LR] Module - FakeRank", author = PLUGIN_AUTHOR, version = PLUGIN_VERSION ... " SR2"}
 
 public void OnPluginStart()
 {
@@ -35,11 +36,16 @@ void LoadSettings()
 {
 	static char sPath[PLATFORM_MAX_PATH];
 
-	if(!g_hKv)
+	if(g_hKv)
 	{
-		g_hKv = new KeyValues("LR_FakeRank");
+		delete g_hKv;
+	}
+	else
+	{
 		BuildPath(Path_SM, sPath, sizeof(sPath), "configs/levels_ranks/fakerank.ini");
 	}
+
+	g_hKv = new KeyValues("LR_FakeRank");
 
 	if(!g_hKv.ImportFromFile(sPath))
 	{
@@ -47,8 +53,24 @@ void LoadSettings()
 	}
 	g_hKv.GotoFirstSubKey();
 
+	switch(g_hKv.GetNum("Type", 0))
+	{
+		case 0:
+		{
+			g_iType = 0;
+		}
+		case 1:
+		{
+			g_iType = 50;
+		}
+		case 2:
+		{
+			g_iType = 70;
+		}
+	}
+
 	g_hKv.Rewind();
-	if(!g_hKv.JumpToKey("FakeRank", false))
+	if(!g_hKv.JumpToKey("FakeRank"))
 	{
 		SetFailState("[" ... PLUGIN_NAME ... " Fake Rank] \"%s\" -> \"FakeRank\" - selection is not found", sPath);
 	}
@@ -56,19 +78,35 @@ void LoadSettings()
 
 public void OnMapStart()
 {
+	static const char sPath[] = "materials/panorama/images/icons/skillgroups/skillgroup%i.svg";
+	static char sBuffer[256];
+
 	SDKHook(GetPlayerResourceEntity(), SDKHook_ThinkPost, OnThinkPost);
+
+	static char sRank[12];
+
+	for(int i = LR_GetCountLevels() + 1, iIndex; i != 1;)
+	{
+		IntToString(--i, sRank, 12);
+
+		if((iIndex = g_hKv.GetNum(sRank, -1) + g_iType) > 18)
+		{
+			FormatEx(sBuffer, sizeof(sBuffer), sPath, iIndex);
+			AddFileToDownloadsTable(sBuffer);
+		}
+	}
 }
 
 void OnThinkPost(int iEnt)
 {
-	for(int i = 1; i != MaxClients; i++)
+	for(int i = 1; i <= MaxClients; i++)
 	{
 		if(LR_GetClientStatus(i))
 		{
-			static char sRank[12];	// Max Value Rank - 4294967296 (uint32)
+			static char sRank[12];
 
 			IntToString(LR_GetClientInfo(i, ST_RANK), sRank, 12);
-			SetEntData(iEnt, m_iCompetitiveRanking + i*4, g_hKv.GetNum(sRank));
+			SetEntData(iEnt, m_iCompetitiveRanking + i*4, g_hKv.GetNum(sRank) + g_iType);
 		}
 	}
 }
