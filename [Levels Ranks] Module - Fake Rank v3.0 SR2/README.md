@@ -12,17 +12,17 @@
 - Kruzya Elite (by Unity) - <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.zip">Скачать</a>.
 
 <details><summary>[Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.</summary>
-	<span/><a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a>
-	<span/><details>
+	<br/><a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a>
+-	<br/><details>
 		Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.
 	</details>
 </details>
 
 <details><summary>Как установить кастомные звания?</summary>
 <br/>
-1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`; 
-2) Файл со званием переместите в ``materials/panorama/images/icons/skillgroups/`` на FastDL; 
-3) Укажите в конфиге модуля у "звания в ТАБ(е)" его индекс - skillgroup(индекс).svg. 
+1) В конфиге (`levels_ranks/fakerank.ini`) установите значение `"0"` у параметра `"Type"`; <br/>
+2) Файл со званием переместите в ``materials/panorama/images/icons/skillgroups/`` на FastDL; <br/>
+3) Укажите в конфиге модуля у "звания в ТАБ(е)" его индекс - skillgroup(индекс).svg. <br/>
 4) Пропишите в консоль сервера `sm_lvl_reload` и смените карту.
 
 </details>
