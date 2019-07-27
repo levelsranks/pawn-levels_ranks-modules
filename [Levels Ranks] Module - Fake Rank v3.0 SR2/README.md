@@ -12,8 +12,11 @@
 - Kruzya Elite (by Unity) - <a href="//levels-ranks.ru/plugins/modules/custom_fakerank/skillgroup181.zip">Скачать</a>.
 
 <details><summary>[Faceit Ranks] Pack (10 уровней/званий) - <a href="//vk.com/wend4r">Купить за 100 рублей</a>.</summary>
-	<br/><a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a></br>
-	 <ul><li>Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.</li></ul>
+	<br/>
+	<a href="//levels-ranks.ru/content/modules/fakerank_faceit.png"><img src="https://levels-ranks.ru/content/modules/fakerank_faceit.png"/></a>
+	<br/>
+	<ul><li>Свои звания на заказ - <a href="//vk.com/wend4r">Купить (1 звание - 50 рублей)</a>.</li></ul>
+	</br>
 </details>
 
 <details><summary>Как установить кастомные звания?</summary>
