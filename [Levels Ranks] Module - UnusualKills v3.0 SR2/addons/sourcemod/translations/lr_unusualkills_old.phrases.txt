@@ -43,13 +43,6 @@
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} с ослеплением от световой гранаты]"
 		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} з осліпленням від светової гранати]"
 	}
-	"Ace"
-	{
-		"#format"		"{1:i},{2:s}"
-		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {BLUE}{1} [{2} to ACE]"
-		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {BLUE}{1} [{2} за ACE]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {BLUE}{1} [{2} за ACE]"
-	}
 	"Smoke"
 	{
 		"#format"		"{1:i},{2:s}"

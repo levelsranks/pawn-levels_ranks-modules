@@ -1,4 +1,3 @@
-
 #include <sourcemod>
 #include <sdktools_gamerules>
 #include <sdktools_functions>
@@ -14,10 +13,7 @@
 
 #define Crash(%0) SetFailState("[Levels Ranks] Unusual Kills: " ... %0)
 
-#define Weapons_Prohibited 0
-#define Weapons_NoZoom 1
-
-#define MAX_UKTYPES 8
+#define MAX_UKTYPES 9
 #define UnusualKill_None 0
 #define UnusualKill_OpenFrag (1 << 1)
 #define UnusualKill_Penetrated (1 << 2)
@@ -27,6 +23,7 @@
 #define UnusualKill_Flash (1 << 6)
 #define UnusualKill_Smoke (1 << 7)
 #define UnusualKill_Whirl (1 << 8)
+#define UnusualKill_LastClip (1 << 9)
 
 #define SQL_CreateTable "\
 CREATE TABLE IF NOT EXISTS `%s_unusualkills` \
@@ -39,46 +36,57 @@ CREATE TABLE IF NOT EXISTS `%s_unusualkills` \
 	`Jump` int NOT NULL DEFAULT 0, \
 	`Flash` int NOT NULL DEFAULT 0, \
 	`Smoke` int NOT NULL DEFAULT 0, \
-	`Whirl` int NOT NULL DEFAULT 0\
+	`Whirl` int NOT NULL DEFAULT 0, \
+	`LastClip` int NOT NULL DEFAULT 0\
 )%s"
 #define SQL_CreatePlayer "INSERT INTO `%s_unusualkills` (`SteamID`) VALUES ('%s');"
-#define SQL_LoadPlayer "SELECT `OP`, `Penetrated`, `NoScope`, `Run`, `Jump`, `Flash`, `Smoke`, `Whirl` FROM `%s_unusualkills` WHERE `SteamID` = '%s';"
+#define SQL_LoadPlayer "SELECT `OP`, `Penetrated`, `NoScope`, `Run`, `Jump`, `Flash`, `Smoke`, `Whirl`, `LastClip` FROM `%s_unusualkills` WHERE `SteamID` = '%s';"
 #define SQL_SavePlayer "UPDATE `%s_unusualkills` SET %s WHERE `SteamID` = '%s';"
 
 #define RadiusSmoke 100.0
 
+enum ArrayListBuffer
+{
+	ArrayList:ChatCommands = 0,
+	ArrayList:ProhibitedWeapons,
+	ArrayList:NoScope_Weapons
+};
+
 bool  	  g_bMessages,
 		  g_bOPKill,
-		  g_bTimerMouse[MAXPLAYERS+1];
+		  g_bShowItem[MAX_UKTYPES];
 
 int 	  g_iExp[MAX_UKTYPES],
 		  g_iExpMode,
 		  g_iMinSmokes,
 		  g_iMaxClients,
 		  g_iMouceX[MAXPLAYERS+1],
+		  g_iWhirlInterval = 1,
 		  g_iUK[MAXPLAYERS+1][MAX_UKTYPES],
 		  g_iWhirl = 300,
 		  m_bIsScoped,
+		  m_iClip1,
+		  m_hActiveWeapon,
 		  m_flFlashDuration,
 		  m_vecOrigin,
 		  m_vecVelocity;
 
 float	  g_flMinFlash = 5.0,
-		  g_flMinLenVelocity = 100.0,
-		  g_flWhirlTimer = 1.5;
+		  g_flMinLenVelocity = 100.0;
 
 char  	  g_sTableName[32],
+		  g_sMenuTitle[64],
 		  g_sSteamID[MAXPLAYERS+1][32];
 
 static const char
-		  g_sNameUK[][] = {"OP", "Penetrated", "NoScope", "Run", "Jump", "Flash", "Smoke", "Whirl"};
+		  g_sNameUK[][] = {"OP", "Penetrated", "NoScope", "Run", "Jump", "Flash", "Smoke", "Whirl", "LastClip"};
 
 EngineVersion
 		  g_iEngine;
 
 Database  g_hDataBase;
 
-ArrayList g_hWeapons[2],
+ArrayList g_hBuffer[ArrayListBuffer],
 		  g_hSmokeEnt;
 
 // levelsranks_unusualkills.sp
@@ -86,15 +94,27 @@ public Plugin myinfo =
 {
 	name = "[LR] Module - Unusual Kills", 
 	author = "Wend4r", 
-	version = PLUGIN_VERSION ... " SR1", 
+	version = PLUGIN_VERSION ... " SR2", 
 	url = "Discord: Wend4r#0001 | VK: vk.com/wend4r"
 }
 
 public void OnPluginStart()
 {
-	LoadTranslations((g_iEngine = GetEngineVersion()) != Engine_SourceSDK2006 ? "lr_unusualkills.phrases" : "lr_unusualkills_old.phrases");
+	if((g_iEngine = GetEngineVersion()) == Engine_SourceSDK2006)
+	{
+		LoadTranslations("lr_unusualkills_old.phrases");
+		LoadTranslations("lr_core_old.phrases");
+	}
+	else
+	{
+		LoadTranslations("lr_unusualkills.phrases");
+		LoadTranslations("lr_core.phrases");
+	}
+	LoadTranslations("lr_unusualkills_menu.phrases");
 
 	m_bIsScoped = FindSendPropInfo("CCSPlayer", "m_bIsScoped");
+	m_iClip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
+	m_hActiveWeapon = FindSendPropInfo("CBasePlayer", "m_hActiveWeapon");
 	m_flFlashDuration = FindSendPropInfo("CCSPlayer", "m_flFlashDuration");
 	m_vecOrigin = FindSendPropInfo("CBaseEntity", "m_vecOrigin");
 	m_vecVelocity = FindSendPropInfo("CBasePlayer", "m_vecVelocity[0]");
@@ -113,19 +133,19 @@ public void OnPluginStart()
 
 public void OnAllPluginsLoaded()
 {
-	g_hDataBase = LR_GetDatabase();
 	LR_GetTableName(g_sTableName, sizeof(g_sTableName));
 
-	SQL_LockDatabase(g_hDataBase);
+	SQL_LockDatabase((g_hDataBase = LR_GetDatabase()));
 
 	char sQuery[512];
+
 	FormatEx(sQuery, sizeof(sQuery), SQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
 
 	g_hDataBase.Query(SQL_Callback, sQuery, -1);
 
-	for(int i = 6; i != MAX_UKTYPES; i++)
+	for(int i = 6; i != MAX_UKTYPES;)
 	{
-		FormatEx(sQuery, sizeof(sQuery), "ALTER TABLE `%s_unusualkills` ADD `%s` int NOT NULL DEFAULT 0;", g_sTableName, g_sNameUK[i]);
+		FormatEx(sQuery, sizeof(sQuery), "ALTER TABLE `%s_unusualkills` ADD `%s` int NOT NULL DEFAULT 0;", g_sTableName, g_sNameUK[i++]);
 		SQL_FastQuery(g_hDataBase, sQuery);
 	}
 
@@ -136,6 +156,7 @@ public void OnAllPluginsLoaded()
 	g_hDataBase.SetCharset("utf8");
 
 	char sSteamID[32];
+
 	for(int i = 1; i != g_iMaxClients; i++)
 	{
 		if(LR_GetClientStatus(i))
@@ -153,16 +174,18 @@ public void LR_OnSettingsModuleUpdate()
 
 void LoadSettings()
 {
-	static int  iType[] = {127, 127, 127, 127, 127, 5, 127, 127, 127, 4, 127, 127, 127, 2, 0, 1, 127, 3, 6, 127, 127, 127, 7};
+	static int  iUKSymbolTypes[] = {127, 127, 127, 127, 127, 5, 127, 127, 127, 4, 127, 8, 127, 2, 0, 1, 127, 3, 6, 127, 127, 127, 7};
+
 	static char sPath[PLATFORM_MAX_PATH], sBuffer[512];
-	static KeyValues hKv;
 
-	if(!hKv)
+	KeyValues hKv = new KeyValues("LR_UnusualKills");
+
+	if(!sPath[0])
 	{
-		hKv = new KeyValues("LR_UnusualKills");
-
-		g_hWeapons[Weapons_Prohibited] = new ArrayList(64);
-		g_hWeapons[Weapons_NoZoom] = new ArrayList(64);
+		for(ArrayListBuffer i; i != ArrayListBuffer; i++)
+		{
+			g_hBuffer[i] = new ArrayList(64);
+		}
 
 		BuildPath(Path_SM, sPath, sizeof(sPath), "configs/levels_ranks/UnusualKills.ini");
 	}
@@ -179,8 +202,13 @@ void LoadSettings()
 	g_iExpMode = hKv.GetNum("Exp_Mode", 1);
 	g_bMessages = LR_GetParamUsualMessage() == 1;
 
-	hKv.GetString("ProhibitedWeapons", sBuffer, sizeof(sBuffer));
-	ExplodeInArrayList(sBuffer, Weapons_Prohibited);
+	LR_GetTitleMenu(g_sMenuTitle, sizeof(g_sMenuTitle));
+
+	hKv.GetString("ChatCommands", sBuffer, sizeof(sBuffer), "!uk,!ukstats,!unusualkills");
+	ExplodeInArrayList(sBuffer, ChatCommands);
+
+	hKv.GetString("ProhibitedWeapons", sBuffer, sizeof(sBuffer), "hegrenade,molotov,incgrenade");
+	ExplodeInArrayList(sBuffer, ProhibitedWeapons);
 
 	hKv.JumpToKey("TypeKills"); /**/
 
@@ -189,18 +217,19 @@ void LoadSettings()
 	{
 		hKv.GetSectionName(sBuffer, 32);
 
-		int iUKType = iType[(sBuffer[0] | 32) - 97];
+		int iUKType = iUKSymbolTypes[(sBuffer[0] | 32) - 97];
+
 		switch(iUKType)
 		{
 			case 127:
 			{
 				LogError("%s: \"LR_UnusualKills\" -> \"Settings\" -> \"TypeKills\" -> \"%s\" - invalid selection", sPath, sBuffer);
-				return;
+				continue;
 			}
 			case 2:
 			{
 				hKv.GetString("weapons", sBuffer, sizeof(sBuffer));
-				ExplodeInArrayList(sBuffer, Weapons_NoZoom);
+				ExplodeInArrayList(sBuffer, NoScope_Weapons);
 			}
 			case 3:
 			{
@@ -208,21 +237,24 @@ void LoadSettings()
 			}
 			case 5:
 			{
-				g_flMinFlash = hKv.GetFloat("degree") * 100.0;
+				g_flMinFlash = hKv.GetFloat("degree") * 10.0;
 			}
 			case 7:
 			{
 				g_iWhirl = hKv.GetNum("whirl", 300);
-				g_flWhirlTimer = hKv.GetFloat("time", 1.5);
+				g_iWhirlInterval = hKv.GetNum("interval", 1);
 			}
 		}
 
 		g_iExp[iUKType] = g_iExpMode ? hKv.GetNum("exp") : 0;
+		g_bShowItem[iUKType] = view_as<bool>(hKv.GetNum("menu"));
 	}
 	while(hKv.GotoNextKey());
+
+	delete hKv;
 }
 
-void ExplodeInArrayList(const char[] sText, int iArray)
+void ExplodeInArrayList(const char[] sText, ArrayListBuffer Array)
 {
 	int  iLastSize = 0;
 
@@ -233,7 +265,7 @@ void ExplodeInArrayList(const char[] sText, int iArray)
 			char sBuf[64];
 
 			strcopy(sBuf, i-iLastSize, sText[iLastSize]);
-			g_hWeapons[iArray].PushString(sBuf);
+			g_hBuffer[Array].PushString(sBuf);
 
 			iLastSize = i;
 		}
@@ -242,7 +274,7 @@ void ExplodeInArrayList(const char[] sText, int iArray)
 	if(!iLastSize)
 	{
 		PrintToServer(sText);
-		g_hWeapons[iArray].PushString(sText);
+		g_hBuffer[Array].PushString(sText);
 	}
 }
 
@@ -255,16 +287,14 @@ void OnRoundStart()
 
 public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 {
-	static char sWeapon[24];
+	static char sWeapon[32];
 
 	hEvent.GetString("weapon", sWeapon, sizeof(sWeapon));
 
-	if(g_hWeapons[Weapons_Prohibited].FindString(sWeapon) == -1)
+	if(g_hBuffer[ProhibitedWeapons].FindString(sWeapon) == -1)
 	{
-		int iClient = GetClientOfUserId(hEvent.GetInt("userid")),
-			iAttacker = GetClientOfUserId(hEvent.GetInt("attacker"));
-
-		int iUKFlags = UnusualKill_None;
+		int iAttacker = GetClientOfUserId(hEvent.GetInt("attacker")),
+			iUKFlags = UnusualKill_None;
 
 		static float vecVelocity[3];
 
@@ -279,7 +309,7 @@ public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 			iUKFlags |= UnusualKill_Penetrated;
 		}
 
-		if(g_iEngine == Engine_CSGO && !GetEntData(iAttacker, m_bIsScoped) && g_hWeapons[Weapons_NoZoom].FindString(sWeapon) != -1)
+		if(g_iEngine == Engine_CSGO && !GetEntData(iAttacker, m_bIsScoped) && g_hBuffer[NoScope_Weapons].FindString(sWeapon) != -1)
 		{
 			iUKFlags |= UnusualKill_NoScope;
 		}
@@ -302,7 +332,7 @@ public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 			iUKFlags |= UnusualKill_Flash;
 		}
 
-		for(int i = g_iMinSmokes, iSmokeEntity; i != g_hSmokeEnt.Length;)
+		for(int iClient = GetClientOfUserId(hEvent.GetInt("userid")), i = g_iMinSmokes, iSmokeEntity; i != g_hSmokeEnt.Length;)
 		{
 			if(IsValidEntity((iSmokeEntity = g_hSmokeEnt.Get(i++))))
 			{
@@ -342,6 +372,11 @@ public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 			iUKFlags |= UnusualKill_Whirl;
 		}
 
+		if(!GetEntData(GetEntDataEnt2(iAttacker, m_hActiveWeapon), m_iClip1))
+		{
+			iUKFlags |= UnusualKill_LastClip;
+		}
+
 		if(iUKFlags)
 		{
 			char sBuffer[8],
@@ -353,6 +388,7 @@ public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 				if(iUKFlags & (1 << iType + 1))
 				{
 					FormatEx(sColumns, sizeof(sColumns), "%s`%s` = %d, ", sColumns, g_sNameUK[iType], ++g_iUK[iAttacker][iType]);
+
 					if(g_iExp[iType])
 					{
 						if(g_iExpMode == 1)
@@ -399,18 +435,59 @@ void OnSmokeEvent(Event hEvent, const char[] sName)
 
 public void OnPlayerRunCmdPost(int iClient, int iButtons, int iImpulse, const float flVel[3], const float flAngles[3], int iWeapon, int iSubType, int iCmdNum, int iTickCount, int iSeed, const int iMouse[2])
 {
-	g_iMouceX[iClient] += iMouse[0];
+	static int iInterval[MAXPLAYERS+1];
 
-	if(!g_bTimerMouse[iClient])
+	if((g_iMouceX[iClient] += iMouse[0]) && iInterval[iClient] - GetTime() <= 0)
 	{
-		CreateTimer(g_flWhirlTimer, ResetMouseX, iClient);
+		g_iMouceX[iClient] = 0;
+		iInterval[iClient] = GetTime() + g_iWhirlInterval;
 	}
 }
 
-Action ResetMouseX(Handle hTimer, int iClient)
+public void OnClientSayCommand_Post(int iClient, const char[] sCommand, const char[] sArgs)
 {
-	g_iMouceX[iClient] = 0;
-	g_bTimerMouse[iClient] = false;
+	if(g_hBuffer[ChatCommands].FindString(sArgs) != -1)
+	{
+		SetGlobalTransTarget(iClient);
+
+		Menu hMenu = new Menu(MenuShowInfo_Callback);
+
+		int iKills = LR_GetClientInfo(iClient, ST_KILLS);
+
+		char sBuffer[512],
+			 sTrans[48];
+
+		if(iKills)
+		{
+			for(int i = 0; i != MAX_UKTYPES; i++)
+			{
+				if(g_bShowItem[i])
+				{
+					FormatEx(sTrans, sizeof(sTrans), "Menu_%s", g_sNameUK[i]);
+					FormatEx(sBuffer, sizeof(sBuffer), "%s%t\n", sBuffer, sTrans, g_iUK[iClient][i], 100 * g_iUK[iClient][i] / iKills);
+				}
+			}
+		}
+
+		hMenu.SetTitle("%s | %t\n \n%s\n ", g_sMenuTitle, "UnusualKill", sBuffer);
+
+		FormatEx(sBuffer, sizeof(sBuffer), "%t", "BackToMainMenu");
+		hMenu.AddItem("", sBuffer);
+
+		hMenu.Display(iClient, MENU_TIME_FOREVER);
+		hMenu.ExitButton = true;
+	}
+}
+
+int MenuShowInfo_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
+{	
+	switch(mAction)
+	{
+		case MenuAction_Select:
+		{
+			FakeClientCommand(iClient, "sm_lvl");
+		}
+	}
 }
 
 public void LR_OnPlayerLoaded(int iClient, const char[] sAuth)
@@ -445,6 +522,7 @@ public void SQL_Callback(Database db, DBResultSet dbRs, const char[] sError, int
 		{
 			// CreateDataPlayer
 			static char sQuery[256];
+
 			FormatEx(sQuery, sizeof(sQuery), SQL_CreatePlayer, g_sTableName, g_sSteamID[iIndex]);
 			g_hDataBase.Query(SQL_Callback, sQuery, -3);
 

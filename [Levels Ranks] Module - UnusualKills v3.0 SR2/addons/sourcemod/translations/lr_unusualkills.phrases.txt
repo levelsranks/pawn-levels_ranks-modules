@@ -42,13 +42,6 @@
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {1} [{2} с ослеплением от световой гранаты]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {1} [{2} з осліпленням від светової гранати]"
 	}
-	"Ace"
-	{
-		"#format"		"{1:i},{2:s}"
-		"en"			"{RED}[LR] {WHITE}Your exp: {BLUE}{1} [{2} to ACE]"
-		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {BLUE}{1} [{2} за ACE]"
-		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {BLUE}{1} [{2} за ACE]"
-	}
 	"Smoke"
 	{
 		"#format"		"{1:i},{2:s}"
@@ -62,5 +55,12 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} with a reversal]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} с разворота]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} з розвороту]"
+	}
+	"LastClip"
+	{
+		"#format"		"{1:i},{2:i}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} a last clip]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} последним патроном]"
+		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} останнім патроном]"
 	}
 }
