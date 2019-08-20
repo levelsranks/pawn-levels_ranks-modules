@@ -94,7 +94,7 @@ public Plugin myinfo =
 {
 	name = "[LR] Module - Unusual Kills", 
 	author = "Wend4r", 
-	version = PLUGIN_VERSION ... " SR2", 
+	version = PLUGIN_VERSION ... " SR3", 
 	url = "Discord: Wend4r#0001 | VK: vk.com/wend4r"
 }
 
@@ -294,6 +294,7 @@ public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 	if(g_hBuffer[ProhibitedWeapons].FindString(sWeapon) == -1)
 	{
 		int iAttacker = GetClientOfUserId(hEvent.GetInt("attacker")),
+			iActiveWeapon = GetEntDataEnt2(iAttacker, m_hActiveWeapon),
 			iUKFlags = UnusualKill_None;
 
 		static float vecVelocity[3];
@@ -372,7 +373,7 @@ public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 			iUKFlags |= UnusualKill_Whirl;
 		}
 
-		if(!GetEntData(GetEntDataEnt2(iAttacker, m_hActiveWeapon), m_iClip1))
+		if(iActiveWeapon != -1 && !GetEntData(iActiveWeapon, m_iClip1))
 		{
 			iUKFlags |= UnusualKill_LastClip;
 		}
@@ -529,7 +530,7 @@ public void SQL_Callback(Database db, DBResultSet dbRs, const char[] sError, int
 			bLoadData = false;
 		}
 
-		for(int i; i != MAX_UKTYPES; i++)
+		for(int i = 0; i != MAX_UKTYPES; i++)
 		{
 			g_iUK[iIndex][i] = bLoadData ? dbRs.FetchInt(i) : 0;
 		}
