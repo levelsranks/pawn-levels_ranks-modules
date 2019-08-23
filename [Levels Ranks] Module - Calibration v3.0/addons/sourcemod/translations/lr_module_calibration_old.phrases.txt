@@ -1,0 +1,15 @@
+﻿"Phrases"
+{
+	"CalibrationStatus"
+	{
+		"#format"		"{1:i}"
+		"en"			"{TEAM}[LR] {GREEN}{1} {DEFAULT}deaths left before calibration"
+		"ru"			"{TEAM}[LR] {DEFAULT}До окончания калибровки осталось {GREEN}{1} {DEFAULT}смертей"
+	}
+	"CalibrationStatusFinished"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} for completing calibration]"
+		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} за окончание калибровки]"
+	}
+}

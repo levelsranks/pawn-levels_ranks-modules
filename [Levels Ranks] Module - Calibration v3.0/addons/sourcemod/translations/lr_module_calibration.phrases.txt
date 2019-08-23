@@ -1,0 +1,15 @@
+﻿"Phrases"
+{
+	"CalibrationStatus"
+	{
+		"#format"		"{1:i}"
+		"en"			"{RED}[LR] {GREEN}{1} {WHITE}deaths left before calibration"
+		"ru"			"{RED}[LR] {WHITE}До окончания калибровки осталось {GREEN}{1} {WHITE}смертей"
+	}
+	"CalibrationStatusFinished"
+	{
+		"#format"		"{1:i},{2:s}"
+		"en"			"{RED}[LR] {WHITE}Your exp: {GRAY}{1} [{2} for completing calibration]"
+		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GRAY}{1} [{2} за окончание калибровки]"
+	}
+}
