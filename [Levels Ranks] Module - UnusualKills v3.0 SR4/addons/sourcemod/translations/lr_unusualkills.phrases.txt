@@ -58,7 +58,7 @@
 	}
 	"LastClip"
 	{
-		"#format"		"{1:i},{2:i}"
+		"#format"		"{1:i},{2:s}"
 		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} a last clip]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} последним патроном]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} останнім патроном]"

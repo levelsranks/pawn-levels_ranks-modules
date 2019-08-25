@@ -94,7 +94,7 @@ public Plugin myinfo =
 {
 	name = "[LR] Module - Unusual Kills", 
 	author = "Wend4r", 
-	version = PLUGIN_VERSION ... " SR3", 
+	version = PLUGIN_VERSION ... " SR4", 
 	url = "Discord: Wend4r#0001 | VK: vk.com/wend4r"
 }
 
@@ -287,134 +287,137 @@ void OnRoundStart()
 
 public void LR_OnPlayerKilled(Event hEvent, int& iExpGive)
 {
-	static char sWeapon[32];
-
-	hEvent.GetString("weapon", sWeapon, sizeof(sWeapon));
-
-	if(g_hBuffer[ProhibitedWeapons].FindString(sWeapon) == -1)
+	if(LR_CheckCountPlayers())
 	{
-		int iAttacker = GetClientOfUserId(hEvent.GetInt("attacker")),
-			iActiveWeapon = GetEntDataEnt2(iAttacker, m_hActiveWeapon),
-			iUKFlags = UnusualKill_None;
+		static char sWeapon[32];
 
-		static float vecVelocity[3];
+		hEvent.GetString("weapon", sWeapon, sizeof(sWeapon));
 
-		if(!g_bOPKill)
+		if(g_hBuffer[ProhibitedWeapons].FindString(sWeapon) == -1)
 		{
-			iUKFlags |= UnusualKill_OpenFrag;
-			g_bOPKill = true;
-		}
+			int iAttacker = GetClientOfUserId(hEvent.GetInt("attacker")),
+				iActiveWeapon = GetEntDataEnt2(iAttacker, m_hActiveWeapon),
+				iUKFlags = UnusualKill_None;
 
-		if(hEvent.GetBool("penetrated"))
-		{
-			iUKFlags |= UnusualKill_Penetrated;
-		}
+			static float vecVelocity[3];
 
-		if(g_iEngine == Engine_CSGO && !GetEntData(iAttacker, m_bIsScoped) && g_hBuffer[NoScope_Weapons].FindString(sWeapon) != -1)
-		{
-			iUKFlags |= UnusualKill_NoScope;
-		}
-
-		GetEntDataVector(iAttacker, m_vecVelocity, vecVelocity);
-
-		if(vecVelocity[2])
-		{
-			iUKFlags |= UnusualKill_Jump;
-			vecVelocity[2] = 0.0;
-		}
-
-		if(GetVectorDistance(NULL_VECTOR, vecVelocity) > g_flMinLenVelocity)
-		{
-			iUKFlags |= UnusualKill_Run;
-		}
-
-		if(g_flMinFlash < GetEntDataFloat(iAttacker, m_flFlashDuration))
-		{
-			iUKFlags |= UnusualKill_Flash;
-		}
-
-		for(int iClient = GetClientOfUserId(hEvent.GetInt("userid")), i = g_iMinSmokes, iSmokeEntity; i != g_hSmokeEnt.Length;)
-		{
-			if(IsValidEntity((iSmokeEntity = g_hSmokeEnt.Get(i++))))
+			if(!g_bOPKill)
 			{
-				static float vecClient[3], 
-							 vecAttacker[3], 
-							 vecSmoke[3],
+				iUKFlags |= UnusualKill_OpenFrag;
+				g_bOPKill = true;
+			}
 
-							 flDistance,
-							 flDistance2,
-							 flDistance3;
+			if(hEvent.GetBool("penetrated"))
+			{
+				iUKFlags |= UnusualKill_Penetrated;
+			}
 
-				GetEntDataVector(iClient, m_vecOrigin, vecClient);
-				GetEntDataVector(iAttacker, m_vecOrigin, vecAttacker);
-				GetEntDataVector(iSmokeEntity, m_vecOrigin, vecSmoke);
+			if(g_iEngine == Engine_CSGO && !GetEntData(iAttacker, m_bIsScoped) && g_hBuffer[NoScope_Weapons].FindString(sWeapon) != -1)
+			{
+				iUKFlags |= UnusualKill_NoScope;
+			}
 
-				vecClient[2] -= 64.0;
+			GetEntDataVector(iAttacker, m_vecVelocity, vecVelocity);
 
-				flDistance = GetVectorDistance(vecClient, vecSmoke);
-				flDistance2 = GetVectorDistance(vecAttacker, vecSmoke);
-				flDistance3 = GetVectorDistance(vecClient, vecAttacker);
+			if(vecVelocity[2])
+			{
+				iUKFlags |= UnusualKill_Jump;
+				vecVelocity[2] = 0.0;
+			}
 
-				if((flDistance + flDistance2) * 0.7 <= flDistance3 + RadiusSmoke)
+			if(GetVectorDistance(NULL_VECTOR, vecVelocity) > g_flMinLenVelocity)
+			{
+				iUKFlags |= UnusualKill_Run;
+			}
+
+			if(g_flMinFlash < GetEntDataFloat(iAttacker, m_flFlashDuration))
+			{
+				iUKFlags |= UnusualKill_Flash;
+			}
+
+			for(int iClient = GetClientOfUserId(hEvent.GetInt("userid")), i = g_iMinSmokes, iSmokeEntity; i != g_hSmokeEnt.Length;)
+			{
+				if(IsValidEntity((iSmokeEntity = g_hSmokeEnt.Get(i++))))
 				{
-					float flHalfPerimeter = (flDistance + flDistance2 + flDistance3) / 2.0;
+					static float vecClient[3], 
+								vecAttacker[3], 
+								vecSmoke[3],
 
-					if((2.0 * SquareRoot(flHalfPerimeter * (flHalfPerimeter - flDistance) * (flHalfPerimeter - flDistance2) * (flHalfPerimeter - flDistance3))) / flDistance3 < RadiusSmoke)
+								flDistance,
+								flDistance2,
+								flDistance3;
+
+					GetEntDataVector(iClient, m_vecOrigin, vecClient);
+					GetEntDataVector(iAttacker, m_vecOrigin, vecAttacker);
+					GetEntDataVector(iSmokeEntity, m_vecOrigin, vecSmoke);
+
+					vecClient[2] -= 64.0;
+
+					flDistance = GetVectorDistance(vecClient, vecSmoke);
+					flDistance2 = GetVectorDistance(vecAttacker, vecSmoke);
+					flDistance3 = GetVectorDistance(vecClient, vecAttacker);
+
+					if((flDistance + flDistance2) * 0.7 <= flDistance3 + RadiusSmoke)
 					{
-						iUKFlags |= UnusualKill_Smoke;
-						break;
+						float flHalfPerimeter = (flDistance + flDistance2 + flDistance3) / 2.0;
+
+						if((2.0 * SquareRoot(flHalfPerimeter * (flHalfPerimeter - flDistance) * (flHalfPerimeter - flDistance2) * (flHalfPerimeter - flDistance3))) / flDistance3 < RadiusSmoke)
+						{
+							iUKFlags |= UnusualKill_Smoke;
+							break;
+						}
 					}
 				}
 			}
-		}
 
-		if((g_iMouceX[iAttacker] < 0 ? -g_iMouceX[iAttacker] : g_iMouceX[iAttacker]) > g_iWhirl)
-		{
-			iUKFlags |= UnusualKill_Whirl;
-		}
-
-		if(iActiveWeapon != -1 && !GetEntData(iActiveWeapon, m_iClip1))
-		{
-			iUKFlags |= UnusualKill_LastClip;
-		}
-
-		if(iUKFlags)
-		{
-			char sBuffer[8],
-				 sColumns[MAX_UKTYPES * 16],
-				 sQuery[256];
-
-			for(int iType = 0; iType != MAX_UKTYPES; iType++)
+			if((g_iMouceX[iAttacker] < 0 ? -g_iMouceX[iAttacker] : g_iMouceX[iAttacker]) > g_iWhirl)
 			{
-				if(iUKFlags & (1 << iType + 1))
+				iUKFlags |= UnusualKill_Whirl;
+			}
+
+			if(iActiveWeapon != -1 && !GetEntData(iActiveWeapon, m_iClip1))
+			{
+				iUKFlags |= UnusualKill_LastClip;
+			}
+
+			if(iUKFlags)
+			{
+				char sBuffer[8],
+					 sColumns[MAX_UKTYPES * 16],
+					 sQuery[256];
+
+				for(int iType = 0; iType != MAX_UKTYPES; iType++)
 				{
-					FormatEx(sColumns, sizeof(sColumns), "%s`%s` = %d, ", sColumns, g_sNameUK[iType], ++g_iUK[iAttacker][iType]);
-
-					if(g_iExp[iType])
+					if(iUKFlags & (1 << iType + 1))
 					{
-						if(g_iExpMode == 1)
-						{
-							LR_ChangeClientValue(iAttacker, g_iExp[iType]);
+						FormatEx(sColumns, sizeof(sColumns), "%s`%s` = %d, ", sColumns, g_sNameUK[iType], ++g_iUK[iAttacker][iType]);
 
-							if(g_bMessages)
+						if(g_iExp[iType])
+						{
+							if(g_iExpMode == 1)
 							{
-								FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
-								LR_PrintToChat(iAttacker, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
+								LR_ChangeClientValue(iAttacker, g_iExp[iType]);
+
+								if(g_bMessages)
+								{
+									FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
+									LR_PrintToChat(iAttacker, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
+								}
+							}
+							else
+							{
+								iExpGive += g_iExp[iType];
 							}
 						}
-						else
-						{
-							iExpGive += g_iExp[iType];
-						}
+						// break;
 					}
-					// break;
 				}
+
+				sColumns[strlen(sColumns)-2] = '\0';
+
+				FormatEx(sQuery, sizeof(sQuery), SQL_SavePlayer, g_sTableName, sColumns, g_sSteamID[iAttacker]);
+				g_hDataBase.Query(SQL_Callback, sQuery, -2);
 			}
-
-			sColumns[strlen(sColumns)-2] = '\0';
-
-			FormatEx(sQuery, sizeof(sQuery), SQL_SavePlayer, g_sTableName, sColumns, g_sSteamID[iAttacker]);
-			g_hDataBase.Query(SQL_Callback, sQuery, -2);
 		}
 	}
 }
@@ -464,8 +467,10 @@ public void OnClientSayCommand_Post(int iClient, const char[] sCommand, const ch
 			{
 				if(g_bShowItem[i])
 				{
+					int iPercent = 100 * g_iUK[iClient][i] / iKills;
+
 					FormatEx(sTrans, sizeof(sTrans), "Menu_%s", g_sNameUK[i]);
-					FormatEx(sBuffer, sizeof(sBuffer), "%s%t\n", sBuffer, sTrans, g_iUK[iClient][i], 100 * g_iUK[iClient][i] / iKills);
+					FormatEx(sBuffer, sizeof(sBuffer), "%s%t\n", sBuffer, sTrans, g_iUK[iClient][i], iPercent || !g_iUK[iClient][i] ? iPercent : 1);
 				}
 			}
 		}
@@ -482,12 +487,9 @@ public void OnClientSayCommand_Post(int iClient, const char[] sCommand, const ch
 
 int MenuShowInfo_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 {	
-	switch(mAction)
+	if(mAction == MenuAction_Select)
 	{
-		case MenuAction_Select:
-		{
-			FakeClientCommand(iClient, "sm_lvl");
-		}
+		FakeClientCommand(iClient, "sm_lvl");
 	}
 }
 
