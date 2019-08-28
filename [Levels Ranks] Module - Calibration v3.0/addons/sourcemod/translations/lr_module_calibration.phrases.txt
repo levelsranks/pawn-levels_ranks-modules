@@ -5,11 +5,13 @@
 		"#format"		"{1:i}"
 		"en"			"{RED}[LR] {GREEN}{1} {WHITE}deaths left before calibration"
 		"ru"			"{RED}[LR] {WHITE}До окончания калибровки осталось {GREEN}{1} {WHITE}смертей"
+		"chi"			"{RED}[LR] {WHITE}在校准前还剩余{GREEN}{1} {WHITE}次死亡"
 	}
 	"CalibrationStatusFinished"
 	{
 		"#format"		"{1:i},{2:s}"
 		"en"			"{RED}[LR] {WHITE}Your exp: {GRAY}{1} [{2} for completing calibration]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GRAY}{1} [{2} за окончание калибровки]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GRAY}{1} [{2} 通过完成校准]"
 	}
 }
