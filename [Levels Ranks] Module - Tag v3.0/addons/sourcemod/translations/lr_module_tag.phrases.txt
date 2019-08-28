@@ -4,10 +4,12 @@
 	{
 		"en"		"Tag rank [off]"
 		"ru"		"Ранк-тег [выкл]"
+		"chi"		"标签段位 [已禁用]"
 	}
 	"TagRankOn"
 	{
 		"en"		"Tag rank [on]"
 		"ru"		"Ранк-тег [вкл]"
+		"chi"		"标签段位 [已启用]"
 	}
 }
