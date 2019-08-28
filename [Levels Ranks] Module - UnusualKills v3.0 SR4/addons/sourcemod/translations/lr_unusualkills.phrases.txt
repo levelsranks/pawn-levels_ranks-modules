@@ -6,6 +6,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} for a open killing]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} за первое убийство]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} за перше вбивство]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过首杀]"
 	}
 	"Penetrated"
 	{
@@ -13,6 +14,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} for a penetrated]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} за прострел]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} за простріл]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过穿透击杀]"
 	}
 	"NoScope"
 	{
@@ -20,6 +22,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} no zoom]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} без прицела]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {GREEN}{1} [{2} без прицілу]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过盲狙]"
 	}
 	"Run"
 	{
@@ -27,6 +30,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [{2} on the run]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [{2} на бегу]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {GREEN}{1} [{2} на бігу]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过跑打击杀]"
 	}
 	"Jump"
 	{
@@ -34,6 +38,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} a jump kill]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} в прыжке]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} в стрибку]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过空中击杀]"
 	}
 	"Flash"
 	{
@@ -41,6 +46,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {1} [{2} blinded by a light grenade]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {1} [{2} с ослеплением от световой гранаты]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {1} [{2} з осліпленням від светової гранати]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过致盲击杀]"
 	}
 	"Smoke"
 	{
@@ -48,6 +54,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {GRAY}{1} [{2} in the smoke]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {GRAY}{1} [{2} в дым]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {GRAY}{1} [{2} в дим]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过穿烟击杀]"
 	}
 	"Whirl"
 	{
@@ -55,6 +62,7 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} with a reversal]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} с разворота]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} з розвороту]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 通过大幅度转头击杀]"
 	}
 	"LastClip"
 	{
@@ -62,5 +70,6 @@
 		"en"			"{RED}[LR] {WHITE}Your exp: {OLIVE}{1} [{2} a last clip]"
 		"ru"			"{RED}[LR] {WHITE}Ваш опыт: {OLIVE}{1} [{2} последним патроном]"
 		"ua"			"{RED}[LR] {WHITE}Ваші поінти досвіду: {OLIVE}{1} [{2} останнім патроном]"
+		"chi"			"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [{2} 最后一发子弹]"
 	}
 }
