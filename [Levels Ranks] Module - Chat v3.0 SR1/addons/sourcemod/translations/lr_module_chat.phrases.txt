@@ -4,100 +4,120 @@
 	{
 		"en"			"Chat Settings"
 		"ru"			"Настроить Чат"
+		"chi"			"聊天设置"
 	}
 	"Chat_Off"
 	{
 		"en"			"Disable All"
 		"ru"			"Выключить всё"
+		"chi"			"禁用所有"
 	}
 	"Chat_On"
 	{
 		"en"			"Enable All"
 		"ru"			"Включить всё"
+		"chi"			"启用所有"
 	}
 	"Prefix_Color"
 	{
 		"en"			"Prefix color"
 		"ru"			"Цвет префикса"
+		"chi"			"前缀颜色"
 	}
 	"Name_Color"
 	{
 		"en"			"Name color"
 		"ru"			"Цвет никнейма"
+		"chi"			"昵称颜色"
 	}
 	"Text_Color"
 	{
 		"en"			"Text color"
 		"ru"			"Цвет текста"
+		"chi"			"文本颜色"
 	}
 	"Default"
 	{
 		"en"			"Orange"
 		"ru"			"Оранжевый"
+		"chi"			"橘色"
 	}
 	"Team"
 	{
 		"en"			"Team Color"
 		"ru"			"Командный"
+		"chi"			"队伍颜色"
 	}
 	"White"
 	{
 		"en"			"White"
 		"ru"			"Белый"
+		"chi"			"白色"
 	}
 	"Red"
 	{
 		"en"			"Red"
 		"ru"			"Красный"
+		"chi"			"红色"
 	}
 	"Green"
 	{
 		"en"			"Green"
 		"ru"			"Зеленый"
+		"chi"			"绿色"
 	}
 	"Lime"
 	{
 		"en"			"Lime"
 		"ru"			"Лайм"
+		"chi"			"浅绿色"
 	}
 	"Lightgreen"
 	{
 		"en"			"Lightgreen"
 		"ru"			"Светло-зеленый"
+		"chi"			"亮绿色"
 	}
 	"Lightred"
 	{
 		"en"			"Lightred"
 		"ru"			"Светло-красный"
+		"chi"			"亮红色"
 	}
 	"Gray"
 	{
 		"en"			"Gray"
 		"ru"			"Серый"
+		"chi"			"灰色"
 	}
 	"Lightolive"
 	{
 		"en"			"Lightolive"
 		"ru"			"Светло-оливковый"
+		"chi"			"浅橄榄色"
 	}
 	"Olive"
 	{
 		"en"			"Olive"
 		"ru"			"Оливковый"
+		"chi"			"橄榄色"
 	}
 	"Lightblue"
 	{
 		"en"			"Lightblue"
 		"ru"			"Светло-синий"
+		"chi"			"亮蓝色"
 	}
 	"Blue"
 	{
 		"en"			"Blue"
 		"ru"			"Синий"
+		"chi"			"蓝色"
 	}
 	"Purple"
 	{
 		"en"			"Purple"
 		"ru"			"Розовый"
+		"chi"			"紫色"
 	}
 }
