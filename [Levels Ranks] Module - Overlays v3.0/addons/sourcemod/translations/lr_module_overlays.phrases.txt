@@ -4,10 +4,12 @@
 	{
 		"en"			"Overlay [on]"
 		"ru"			"Оверлеи [вкл]"
+		"chi"			"升级覆盖 [开启]"
 	}
 	"Overlay_MenuOn"
 	{
 		"en"			"Overlays [off]"
 		"ru"			"Оверлеи [выкл]"
+		"chi"			"升级覆盖 [关闭]"
 	}
 }

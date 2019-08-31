@@ -4,261 +4,313 @@
 	{
 		"en"		"Back"
 		"ru"		"Назад"
+		"chi"		"返回"
 	}
 	"TOPGeneral"
 	{
 		"en"		"TOP-10 by kills"
 		"ru"		"TOP-10 по киллам"
+		"chi"		"击杀排名前十"
 	}
 	"TOPGeneralCount"
 	{
 		"en"		"TOP-10 by total count"
 		"ru"		"TOP-10 по общему кол-ву"
+		"chi"		"击杀总数排名前十"
 	}
 	"TOPGeneralWeapon"
 	{
 		"en"		"TOP-10 by weapons"
 		"ru"		"TOP-10 по оружиям"
+		"chi"		"常用武器排名前十"
 	}
 	"TOPList"
 	{
 		"#format"	"{1:i},{2:i},{3:s}"
 		"en"		"{1} - {2} kills - {3}"
 		"ru"		"{1} - {2} киллов - {3}"
+		"chi"		"{1} - {2} 击杀数 - {3}"
 	}
 	"weapon_knife"
 	{
 		"en"		"TOP-10 by Knife"
 		"ru"		"TOP-10 по Ножам"
+		"chi"		"匕首击杀排名前十"
 	}
 	"weapon_taser"
 	{
 		"en"		"TOP-10 by Zeus"
 		"ru"		"TOP-10 по Зевсам"
+		"chi"		"电击枪击杀排名前十"
 	}
 	"weapon_inferno"
 	{
 		"en"		"TOP-10 by Molotov"
 		"ru"		"TOP-10 по Молотовым"
+		"chi"		"燃烧瓶击杀排名前十"
 	}
 	"weapon_hegrenade"
 	{
 		"en"		"TOP-10 by Hegrenade"
 		"ru"		"TOP-10 по гранатам"
+		"chi"		"手雷击杀排名前十"
 	}
 	"weapon_glock"
 	{
 		"en"		"TOP-10 by Glock"
 		"ru"		"TOP-10 по Glock"
+		"chi"		"格洛克击杀排名前十"
 	}
 	"weapon_hkp2000"
 	{
 		"en"		"TOP-10 by P2000"
 		"ru"		"TOP-10 по P2000"
+		"chi"		"P2000击杀排名前十"
 	}
 	"weapon_tec9"
 	{
 		"en"		"TOP-10 by Tec-9"
 		"ru"		"TOP-10 по Tec-9"
+		"chi"		"Tec-9击杀排名前十"
 	}
 	"weapon_usp_silencer"
 	{
 		"en"		"TOP-10 by USP-S"
 		"ru"		"TOP-10 по USP-S"
+		"chi"		"USP-S击杀排名前十"
 	}
 	"weapon_p250"
 	{
 		"en"		"TOP-10 by P250"
 		"ru"		"TOP-10 по P250"
+		"chi"		"P250击杀排名前十"
 	}
 	"weapon_cz75a"
 	{
 		"en"		"TOP-10 by CZ75-Auto"
 		"ru"		"TOP-10 по CZ75-Auto"
+		"chi"		"CZ75击杀排名前十"
 	}
 	"weapon_fiveseven"
 	{
 		"en"		"TOP-10 by Five-Seven"
 		"ru"		"TOP-10 по Five-Seven"
+		"chi"		"FN57击杀排名前十"
 	}
 	"weapon_elite"
 	{
 		"en"		"TOP-10 by Dual Berettas"
 		"ru"		"TOP-10 по Dual Berettas"
+		"chi"		"双持贝瑞塔击杀排名前十"
 	}
 	"weapon_revolver"
 	{
 		"en"		"TOP-10 by R8 Revolver"
 		"ru"		"TOP-10 по R8 Revolver"
+		"chi"		"R8击杀排名前十"
 	}
 	"weapon_deagle"
 	{
 		"en"		"TOP-10 by Desert Deagle"
 		"ru"		"TOP-10 по Desert Deagle"
+		"chi"		"沙鹰击杀排名前十"
 	}
 	"weapon_negev"
 	{
 		"en"		"TOP-10 by Negev"
 		"ru"		"TOP-10 по Negev"
+		"chi"		"内格夫击杀排名前十"
 	}
 	"weapon_m249"
 	{
 		"en"		"TOP-10 by M249"
 		"ru"		"TOP-10 по M249"
+		"chi"		"M249击杀排名前十"
 	}
 	"weapon_mag7"
 	{
 		"en"		"TOP-10 by MAG-7"
 		"ru"		"TOP-10 по MAG-7"
+		"chi"		"MAG-7击杀排名前十"
 	}
 	"weapon_sawedoff"
 	{
 		"en"		"TOP-10 by Sawedoff"
 		"ru"		"TOP-10 по Sawedoff"
+		"chi"		"Sawedoff击杀排名前十"
 	}
 	"weapon_nova"
 	{
 		"en"		"TOP-10 by Nova"
 		"ru"		"TOP-10 по Nova"
+		"chi"		"新星击杀排名前十"
 	}
 	"weapon_xm1014"
 	{
 		"en"		"TOP-10 by XM1014"
 		"ru"		"TOP-10 по XM1014"
+		"chi"		"XM1014击杀排名前十"
 	}
 	"weapon_bizon"
 	{
 		"en"		"TOP-10 by PP-Bizon"
 		"ru"		"TOP-10 по ПП-19 Бизон"
+		"chi"		"野牛击杀排名前十"
 	}
 	"weapon_mac10"
 	{
 		"en"		"TOP-10 by MAC-10"
 		"ru"		"TOP-10 по MAC-10"
+		"chi"		"MAC-10击杀排名前十"
 	}
 	"weapon_ump45"
 	{
 		"en"		"TOP-10 by UMP-45"
 		"ru"		"TOP-10 по UMP-45"
+		"chi"		"UMP-45击杀排名前十"
 	}
 	"weapon_mp9"
 	{
 		"en"		"TOP-10 by MP9"
 		"ru"		"TOP-10 по MP9"
+		"chi"		"MP9击杀排名前十"
 	}
 	"weapon_mp7"
 	{
 		"en"		"TOP-10 by MP7"
 		"ru"		"TOP-10 по MP7"
+		"chi"		"MP7击杀排名前十"
 	}
 	"weapon_p90"
 	{
 		"en"		"TOP-10 by P90"
 		"ru"		"TOP-10 по P90"
+		"chi"		"P90击杀排名前十"
 	}
 	"weapon_galilar"
 	{
 		"en"		"TOP-10 by Galil AR"
 		"ru"		"TOP-10 по Galil AR"
+		"chi"		"加利尔 AR击杀排名前十"
 	}
 	"weapon_famas"
 	{
 		"en"		"TOP-10 by Famas"
 		"ru"		"TOP-10 по Famas"
+		"chi"		"法玛斯击杀排名前十"
 	}
 	"weapon_ak47"
 	{
 		"en"		"TOP-10 by AK-47"
 		"ru"		"TOP-10 по AK-47"
+		"chi"		"AK-47击杀排名前十"
 	}
 	"weapon_m4a1"
 	{
 		"en"		"TOP-10 by M4A1"
 		"ru"		"TOP-10 по M4A1"
+		"chi"		"M4A1击杀排名前十"
 	}
 	"weapon_m4a1_silencer"
 	{
 		"en"		"TOP-10 by M4A1-S"
 		"ru"		"TOP-10 по M4A1-S"
+		"chi"		"M4A1-S击杀排名前十"
 	}
 	"weapon_aug"
 	{
 		"en"		"TOP-10 by AUG"
 		"ru"		"TOP-10 по AUG"
+		"chi"		"AUG击杀排名前十"
 	}
 	"weapon_sg556"
 	{
 		"en"		"TOP-10 by SG 553"
 		"ru"		"TOP-10 по SG 553"
+		"chi"		"SG 553击杀排名前十"
 	}
 	"weapon_ssg08"
 	{
 		"en"		"TOP-10 by SSG 08"
 		"ru"		"TOP-10 по SSG 08"
+		"chi"		"SSG 08击杀排名前十"
 	}
 	"weapon_awp"
 	{
 		"en"		"TOP-10 by AWP"
 		"ru"		"TOP-10 по AWP"
+		"chi"		"AWP击杀排名前十"
 	}
 	"weapon_scar20"
 	{
 		"en"		"TOP-10 by SCAR-20"
 		"ru"		"TOP-10 по SCAR-20"
+		"chi"		"SCAR-20击杀排名前十"
 	}
 	"weapon_g3sg1"
 	{
 		"en"		"TOP-10 by G3SG1"
 		"ru"		"TOP-10 по G3SG1"
+		"chi"		"G3SG1击杀排名前十"
 	}
 	"weapon_usp"
 	{
 		"en"		"TOP-10 by USP"
 		"ru"		"TOP-10 по USP"
+		"chi"		"USP击杀排名前十"
 	}
 	"weapon_p228"
 	{
 		"en"		"TOP-10 by P228"
 		"ru"		"TOP-10 по P228"
+		"chi"		"P228击杀排名前十"
 	}
 	"weapon_m3"
 	{
 		"en"		"TOP-10 by M3"
 		"ru"		"TOP-10 по M3"
+		"chi"		"M3击杀排名前十"
 	}
 	"weapon_tmp"
 	{
 		"en"		"TOP-10 by TMP"
 		"ru"		"TOP-10 по TMP"
+		"chi"		"TMP击杀排名前十"
 	}
 	"weapon_mp5navy"
 	{
 		"en"		"TOP-10 by MP5"
 		"ru"		"TOP-10 по MP5"
+		"chi"		"MP5击杀排名前十"
 	}
 	"weapon_galil"
 	{
 		"en"		"TOP-10 by Galil"
 		"ru"		"TOP-10 по Galil"
+		"chi"		"Galil击杀排名前十"
 	}
 	"weapon_scout"
 	{
 		"en"		"TOP-10 by Scout"
 		"ru"		"TOP-10 по Scout"
+		"chi"		"Scout击杀排名前十"
 	}
 	"weapon_sg550"
 	{
 		"en"		"TOP-10 by SG 550"
 		"ru"		"TOP-10 по SG 550"
+		"chi"		"SG 550击杀排名前十"
 	}
 	"weapon_sg552"
 	{
 		"en"		"TOP-10 by SG 552"
 		"ru"		"TOP-10 по SG 552"
+		"chi"		"SG 552击杀排名前十"
 	}
 	"weapon_mp5sd"
 	{
 		"en"		"TOP-10 by MP5-SD"
 		"ru"		"TOP-10 по MP5-SD"
+		"chi"		"MP5-SD击杀排名前十"
 	}
 }

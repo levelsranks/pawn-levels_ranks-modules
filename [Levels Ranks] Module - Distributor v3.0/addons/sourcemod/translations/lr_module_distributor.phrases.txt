@@ -5,5 +5,6 @@
 		"#format"	"{1:i},{2:i}"
 		"en"		"{RED}[LR] {WHITE}Your exp: {GREEN}{1} [+{2} for nothing]"
 		"ru"		"{RED}[LR] {WHITE}Ваш опыт: {GREEN}{1} [+{2} за просто так]"
+		"chi"		"{RED}[LR] {WHITE}你的经验值: {GREEN}{1} [+{2} 免费送]"
 	}
 }
