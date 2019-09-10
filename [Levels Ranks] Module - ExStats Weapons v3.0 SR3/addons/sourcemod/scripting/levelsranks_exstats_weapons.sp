@@ -26,7 +26,7 @@ char		g_sTableName[32],
 Database	g_hDatabase;
 
 // levelsranks_exstats_weapons.sp
-public Plugin myinfo = {name = "[LR] Module - ExStats Weapons", author = PLUGIN_AUTHOR, version = "v3.0 SR2"}
+public Plugin myinfo = {name = "[LR] Module - ExStats Weapons", author = PLUGIN_AUTHOR, version = "v3.0 SR3"}
 public void OnPluginStart()
 {
 	LoadTranslations("lr_module_exweapons.phrases");
@@ -112,17 +112,19 @@ void ConfigLoad()
 		{
 			hLR_ExWeapons.GetSectionName(g_sWeaponsBlocksNames[g_iWeaponsBlocksCount], 192);
 
-			g_bWeaponsBlocksAccess[g_iWeaponsBlocksCount] = hLR_ExWeapons.GetNum("showtop", 0) == 0;
-			g_bWeaponsBlocksAccessChat[g_iWeaponsBlocksCount] = hLR_ExWeapons.GetNum("chatcalloff", 0) == 0;
+			g_bWeaponsBlocksAccess[g_iWeaponsBlocksCount] = view_as<bool>(hLR_ExWeapons.GetNum("showtop", 0));
+			g_bWeaponsBlocksAccessChat[g_iWeaponsBlocksCount] = view_as<bool>(hLR_ExWeapons.GetNum("chatcalloff", 0));
 			hLR_ExWeapons.GetString("chatcall", g_sWeaponsBlocksCallCmds[g_iWeaponsBlocksCount], 64, "topknife");
 			g_flWeaponsCoeff[g_iWeaponsBlocksCount++] = hLR_ExWeapons.GetFloat("coefficient", 1.0);
 		}
-		while(hLR_ExWeapons.GotoNextKey() && g_iWeaponsBlocksCount < 47);
+		while(hLR_ExWeapons.GotoNextKey() && g_iWeaponsBlocksCount != 47);
 	}
 	else 
 	{
 		SetFailState("[" ... PLUGIN_NAME ... " ExWeapons] section WeaponsList is not found (%s)", sPath);
 	}
+
+	LR_GetTitleMenu(g_sPluginTitle, 64);
 
 	delete hLR_ExWeapons;
 }
@@ -199,7 +201,6 @@ public void LR_OnMenuItemSelectedTop(int iClient, const char[] sInfo)
 	if(!strcmp(sInfo, "topgeneral"))
 	{
 		TOPGeneral(iClient);
-		LR_GetTitleMenu(g_sPluginTitle, 64);
 	}
 }
 
@@ -226,8 +227,14 @@ public int TOPGeneralHandler(Menu hMenu, MenuAction mAction, int iClient, int iS
 {
 	switch(mAction)
 	{
-		case MenuAction_End: delete hMenu;
-		case MenuAction_Cancel: if(iSlot == MenuCancel_ExitBack) {LR_MenuTopMenu(iClient);}
+		case MenuAction_Cancel: 
+		{
+			if(iSlot == MenuCancel_ExitBack) 
+			{
+				LR_MenuTopMenu(iClient);
+			}
+		}
+
 		case MenuAction_Select:
 		{
 			switch(iSlot)
@@ -243,9 +250,9 @@ void TOPGeneralCount(int iClient)
 {
 	if(LR_GetClientStatus(iClient))
 	{
-		char sQuery[512];
-		FormatEx(sQuery, sizeof(sQuery), "SELECT `name`, `kills` FROM `%s` WHERE `lastconnect` > 0 ORDER BY `kills` DESC LIMIT 10 OFFSET 0", g_sTableName);
+		static char sQuery[512];
 
+		FormatEx(sQuery, sizeof(sQuery), "SELECT `name`, `kills` FROM `%s` WHERE `lastconnect` > 0 ORDER BY `kills` DESC LIMIT 10 OFFSET 0", g_sTableName);
 		g_hDatabase.Query(SQL_TOPGeneralCount, sQuery, iClient);
 	}
 }
@@ -274,7 +281,7 @@ public void SQL_TOPGeneralCount(Database db, DBResultSet dbRs, const char[] sErr
 		}
 	}
 
-	Menu hMenu = new Menu(TOPGeneralCountHandler);
+	Menu hMenu = new Menu(TOPGeneralCountHandler, MenuAction_Select);
 	hMenu.SetTitle("%s | %T\n \n%s\n ", g_sPluginTitle, "TOPGeneralCount", iClient, sTemp);
 
 	FormatEx(sText, sizeof(sText), "%T", "Back", iClient);
@@ -286,10 +293,9 @@ public void SQL_TOPGeneralCount(Database db, DBResultSet dbRs, const char[] sErr
 
 public int TOPGeneralCountHandler(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 {
-	switch(mAction)
+	if(mAction == MenuAction_Select)
 	{
-		case MenuAction_End: delete hMenu;
-		case MenuAction_Select: TOPGeneral(iClient);
+		TOPGeneral(iClient);
 	}
 }
 
@@ -313,6 +319,7 @@ void TOPGeneralWeapon(int iClient)
 	}
 
 	hMenu.ExitBackButton = true;
+
 	hMenu.ExitButton = true;
 	hMenu.Display(iClient, MENU_TIME_FOREVER);
 }
@@ -321,11 +328,17 @@ public int TOPGeneralWeaponHandler(Menu hMenu, MenuAction mAction, int iClient, 
 {
 	switch(mAction)
 	{
-		case MenuAction_End: delete hMenu;
-		case MenuAction_Cancel: if(iSlot == MenuCancel_ExitBack) TOPGeneral(iClient);
+		case MenuAction_Cancel: 
+		{
+			if(iSlot == MenuCancel_ExitBack) 
+			{
+				TOPGeneral(iClient);
+			}
+		}
+
 		case MenuAction_Select:
 		{
-			char sInfo[6];
+			static char sInfo[6];
 
 			hMenu.GetItem(iSlot, sInfo, sizeof(sInfo));
 
@@ -374,7 +387,7 @@ public void SQL_PrintTopWeapons(Database db, DBResultSet dbRs, const char[] sErr
 		}
 	}
 
-	Menu hMenu = new Menu(PrintTopWeaponsHandler);
+	Menu hMenu = new Menu(PrintTopWeaponsHandler, MenuAction_Select);
 
 	hMenu.SetTitle("%s | %T\n \n%s\n ", g_sPluginTitle, g_sWeaponsBlocksNames[iWeaponId], iClient, sTemp);
 
@@ -385,12 +398,11 @@ public void SQL_PrintTopWeapons(Database db, DBResultSet dbRs, const char[] sErr
 	hMenu.Display(iClient, MENU_TIME_FOREVER);
 }
 
-public int PrintTopWeaponsHandler(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
+int PrintTopWeaponsHandler(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 {
-	switch(mAction)
+	if(mAction == MenuAction_Select)
 	{
-		case MenuAction_End: delete hMenu;
-		case MenuAction_Select: TOPGeneralWeapon(iClient);
+		TOPGeneralWeapon(iClient);
 	}
 }
 
