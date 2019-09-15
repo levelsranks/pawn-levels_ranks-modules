@@ -6,7 +6,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} for a open killing]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} за первое убийство]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} за перше вбивство]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} за перше вбивство]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过首杀]"
 	}
 	"Penetrated"
@@ -14,7 +14,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} for a penetrated]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} за прострел]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} за простріл]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} за простріл]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过穿透击杀]"
 	}
 	"NoScope"
@@ -22,7 +22,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} no zoom]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} без прицела]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} без прицілу]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвіду: {GREEN}{1} [{2} без прицілу]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过盲狙]"
 	}
 	"Run"
@@ -30,7 +30,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} on the run]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} на бегу]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} на бігу]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} на бігу]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过跑打击杀]"
 	}
 	"Jump"
@@ -38,7 +38,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} a jump kill]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} в прыжке]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} в стрибку]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} в стрибку]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过空中击杀]"
 	}
 	"Flash"
@@ -46,7 +46,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} blinded by a light grenade]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} с ослеплением от световой гранаты]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} з осліпленням від светової гранати]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} з осліпленням від светової гранати]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过致盲击杀]"
 	}
 	"Smoke"
@@ -54,7 +54,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} in the smoke]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} в дым]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} в дим]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} в дим]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过穿烟击杀]"
 	}
 	"Whirl"
@@ -62,7 +62,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} with a reversal]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} с разворота]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} з розвороту]"
+		"ua"			"{TEAM}[LR] {DEFAULT}ВВаш досвід: {GREEN}{1} [{2} з розвороту]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过大幅度转头击杀]"
 	}
 	"LastClip"
@@ -70,7 +70,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} a last clip]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} последним патроном]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваші поінти досвіду: {GREEN}{1} [{2} останнім патроном]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} останнім патроном]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 最后一发子弹]"
 	}
 }
