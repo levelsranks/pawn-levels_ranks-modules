@@ -39,7 +39,7 @@
 	{
 		"en"		"{RED}[LR] {WHITE}You have no data about hits"
 		"ru"		"{RED}[LR] {WHITE}У вас нету данных о попаданиях"
-		"ua"		"{RED}[LR] {WHITE}У вас немає даних про попадання"
+		"ua"		"{RED}[LR] {WHITE}У вас немає даних про влучення"
 		"chi"		"{RED}[LR] {WHITE}您没有任何命中数据"
 	}
 }
