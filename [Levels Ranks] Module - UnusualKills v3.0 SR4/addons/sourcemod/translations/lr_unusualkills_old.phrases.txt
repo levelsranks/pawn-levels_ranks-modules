@@ -22,7 +22,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} no zoom]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} без прицела]"
-		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвіду: {GREEN}{1} [{2} без прицілу]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} без прицілу]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过盲狙]"
 	}
 	"Run"
@@ -62,7 +62,7 @@
 		"#format"		"{1:i},{2:s}"
 		"en"			"{TEAM}[LR] {DEFAULT}Your exp: {GREEN}{1} [{2} with a reversal]"
 		"ru"			"{TEAM}[LR] {DEFAULT}Ваш опыт: {GREEN}{1} [{2} с разворота]"
-		"ua"			"{TEAM}[LR] {DEFAULT}ВВаш досвід: {GREEN}{1} [{2} з розвороту]"
+		"ua"			"{TEAM}[LR] {DEFAULT}Ваш досвід: {GREEN}{1} [{2} з розвороту]"
 		"chi"			"{TEAM}[LR] {DEFAULT}你的经验值: {GREEN}{1} [{2} 通过大幅度转头击杀]"
 	}
 	"LastClip"
