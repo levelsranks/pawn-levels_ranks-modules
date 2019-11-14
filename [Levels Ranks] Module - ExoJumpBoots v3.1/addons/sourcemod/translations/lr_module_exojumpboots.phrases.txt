@@ -1,0 +1,25 @@
+﻿"Phrases"
+{
+	"ExoJumpBoots_Off"
+	{
+		"en"			"Exo Jump Boots [off]"
+		"ru"			"Экзо-ботинки [выкл]"
+		"ua"			"Екзо-черевики [викл]"
+		"chi"			"Exo 外骨骼 [已禁用]"
+	}
+	"ExoJumpBoots_On"
+	{
+		"en"			"Exo Jump Boots [on]"
+		"ru"			"Экзо-ботинки [вкл]"
+		"ua"			"Екзо-черевики [вкл]"
+		"chi"			"Exo 外骨骼 [已启用]"
+	}
+	"ExoJumpBoots_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Exo Jump Boots [{1} rank]"
+		"ru"			"Экзо-ботинки [{1} ранг]"
+		"ua"			"Екзо-черевики [{1} ранг]"
+		"chi"			"Exo 外骨骼 [需要等级 {1}]"
+	}
+}

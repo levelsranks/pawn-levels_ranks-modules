@@ -1,0 +1,46 @@
+﻿"Phrases"
+{
+	"Medkit_OFF"
+	{
+		"#format"		"{1:i}"
+		"en"			"Medkit [{1} rank]"
+		"ru"			"Аптечка [{1} ранг]"
+		"ua"			"Аптечка [{1} ранг]"
+		"chi"			"医疗包 [需要等级 {1}]"
+	}
+	"Medkit_ON"
+	{
+		"en"			"Medkit"
+		"ru"			"Аптечка"
+		"ua"			"Аптечка"
+		"chi"			"医疗包"
+	}
+	"Alive"
+	{
+		"en"			"{WHITE}You must be alive!"
+		"ru"			"{WHITE}Вы должны быть живы!"
+		"ua"			"{WHITE}Ви повинні бути живі!"
+		"chi"			"{WHITE}您必须活着才能用医疗包!"
+	}
+	"InTeam"
+	{
+		"en"			"{WHITE}You must be in team!"
+		"ru"			"{WHITE}Вы должны быть в команде!"
+		"ua"			"{WHITE}Ви повинні бути в команді!"
+		"chi"			"{WHITE}您必须在队伍中才能用医疗包!"
+	}
+	"Nothing"
+	{
+		"en"			"{WHITE}You ran out of first aid kits!"
+		"ru"			"{WHITE}У вас закончились аптечки!"
+		"ua"			"{WHITE}У вас закінчилися аптечки!"
+		"chi"			"{WHITE}您已经没有医疗包了!"
+	}
+	"NoMedic"
+	{
+		"en"			"{WHITE}You do not need medical help for the time being!"
+		"ru"			"{WHITE}Вам пока что не нужна медпомощь!"
+		"ua"			"{WHITE}Вам поки що не потрібна медична допомога!"
+		"chi"			"{WHITE}您现在不需要使用医疗包!"
+	}
+}

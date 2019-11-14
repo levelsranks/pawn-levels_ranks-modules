@@ -1,0 +1,25 @@
+﻿"Phrases"
+{
+	"LJ_Off"
+	{
+		"en"			"Long jump [off]"
+		"ru"			"Длинный прыжок [выкл]"
+		"ua"			"Довгий стрибок [викл]"
+		"chi"			"Long jump [已禁用]"
+	}
+	"LJ_On"
+	{
+		"en"			"Long jump [on]"
+		"ru"			"Длинный прыжок [вкл]"
+		"ua"			"Довгий стрибок [вкл]"
+		"chi"			"Long jump [已启用]"
+	}
+	"LJ_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Long jump [{1} rank]"
+		"ru"			"Длинный прыжок [{1} ранг]"
+		"ua"			"Довгий стрибок [{1} ранг]"
+		"chi"			"Long jump [需要等级 {1}]"
+	}
+}

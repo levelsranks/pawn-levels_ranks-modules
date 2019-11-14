@@ -1,0 +1,25 @@
+"Phrases"
+{
+	"NoWorldDamage_Off"
+	{
+		"en"			"NoWorldDamage [off]"
+		"ru"			"Нет урона от мира [выкл]"
+		"ua"			"Немає шкоди від світу [викл]"
+		"chi"			"无视掉落伤害 [已禁用]"
+	}
+	"NoWorldDamage_On"
+	{
+		"en"			"NoWorldDamage [on]"
+		"ru"			"Нет урона от мира [вкл]"
+		"ua"			"Немає шкоди від світу [вкл]"
+		"chi"			"无视掉落伤害 [已启用]"
+	}
+	"NoWorldDamage_Closed"
+	{
+		"#format"		"{1:i}"
+		"en"			"NoWorldDamage [{1} rank]"
+		"ru"			"Нет урона от мира [{1} ранг]"
+		"ua"			"Немає шкоди від світу [{1} ранг]"
+		"chi"			"无视掉落伤害 [需要等级 {1}]"
+	}
+}

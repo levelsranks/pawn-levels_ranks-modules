@@ -1,0 +1,19 @@
+﻿"Phrases"
+{
+	"FD_Off"
+	{
+		"en"			"Fast Defuse C4 [off]"
+		"ru"			"Быстрое разминирование C4 [выкл]"
+	}
+	"FD_On"
+	{
+		"en"			"Fast Defuse C4 [on]"
+		"ru"			"Быстрое разминирование C4 [вкл]"
+	}
+	"FD_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Fast Defuse C4 [{1} rank]"
+		"ru"			"Быстрое разминирование C4 [{1} ранг]"
+	}
+}
