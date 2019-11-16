@@ -1,0 +1,25 @@
+"Phrases"
+{
+	"FireDamage_Off"
+	{
+		"en"			"Fire Damage [off]"
+		"ru"			"Пылающий урон [выкл]"
+		"ua"			"Палаючий шкоди [викл]"
+		"chi"			"燃烧伤害 [已禁用]"
+	}
+	"FireDamage_On"
+	{
+		"en"			"Fire Damage [on]"
+		"ru"			"Пылающий урон [вкл]"
+		"ua"			"Палаючий шкоди [вкл]"
+		"chi"			"燃烧伤害 [已启用]"
+	}
+	"FireDamage_Closed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Fire Damage [{1} rank]"
+		"ru"			"Пылающий урон [{1} ранг]"
+		"ua"			"Палаючий шкоди [{1} ранг]"
+		"chi"			"燃烧伤害 [需要等级 {1}]"
+	}
+}

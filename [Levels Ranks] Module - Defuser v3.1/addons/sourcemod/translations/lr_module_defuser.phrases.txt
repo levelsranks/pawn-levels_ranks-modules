@@ -1,0 +1,25 @@
+"Phrases"
+{
+	"Defuser_Off"
+	{
+		"en"			"Defuser [off]"
+		"ru"			"Дефузер [выкл]"
+		"ua"			"Дефузор [викл]"
+		"chi"			"拆弹器 [已禁用]"
+	}
+	"Defuser_On"
+	{
+		"en"			"Defuser [on]"
+		"ru"			"Дефузер [вкл]"
+		"ua"			"Дефузор [вкл]"
+		"chi"			"拆弹器 [已启用]"
+	}
+	"Defuser_Closed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Defuser [{1} rank]"
+		"ru"			"Дефузер [{1} ранг]"
+		"ua"			"Дефузор [{1} ранг]"
+		"chi"			"拆弹器 [需要等级 {1}]"
+	}
+}

@@ -1,0 +1,25 @@
+"Phrases"
+{
+	"NoSelfDamage_Off"
+	{
+		"en"			"No Self Damage [off]"
+		"ru"			"Нет урона от себя [выкл]"
+		"ua"			"Немає шкоди від себе [викл]"
+		"chi"			"无视自我伤害 [已禁用]"
+	}
+	"NoSelfDamage_On"
+	{
+		"en"			"No Self Damage [on]"
+		"ru"			"Нет урона от себя [вкл]"
+		"ua"			"Немає шкоди від себе [вкл]"
+		"chi"			"无视自我伤害 [已启用]"
+	}
+	"NoSelfDamage_Closed"
+	{
+		"#format"		"{1:i}"
+		"en"			"No Self Damage [{1} rank]"
+		"ru"			"Нет урона от себя [{1} ранг]"
+		"ua"			"Немає шкоди від себе [{1} ранг]"
+		"chi"			"无视自我伤害 [需要等级 {1}]"
+	}
+}

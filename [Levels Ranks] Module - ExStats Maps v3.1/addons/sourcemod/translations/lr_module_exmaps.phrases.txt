@@ -1,0 +1,75 @@
+﻿"Phrases"
+{
+	"MapStatisticsButton"
+	{
+		"en"		"Map statistics"
+		"ru"		"Статистика карты"
+		"ua"		"Статистика карти"
+	}
+	"MapTOP"
+	{
+		"en"		"TOP players [Maps]"
+		"ru"		"TOP игроков [Карты]"
+		"ua"		"TOP гравців [Карти]"
+	}
+	"MapTOPClient"
+	{
+		"en"		"TOP-10 maps by kills"
+		"ru"		"TOP-10 карт по убийствам"
+		"ua"		"TOP-10 карт по вбивствам"
+	}
+	"MapTOPAll"
+	{
+		"en"		"TOP-10 killers on the map"
+		"ru"		"TOP-10 убийц на карте"
+		"ua"		"TOP-10 вбивць на мапі"
+	}
+	"MapTOPList"
+	{
+		"#format"	"{1:i},{2:i},{3:s}"
+		"en"		"{1} - [{2} kills] - {3}"
+		"ru"		"{1} - [{2} киллов] - {3}"
+		"ua"		"{1} - [{2} вбивств] - {3}"
+	}
+	"MapStatistics"
+	{
+		"#format"	"{1:s},{2:02d},{3:02d},{4:02d},{5:i},{6:s},{7:s}"
+		"en"		"Map statistics\n \nName map: {1} \nPlayed on map: {2} h {3} m {4} sec \nWin Rate on map: {5} %%\n \n{6}\n \n{7}"
+		"ru"		"Статистика по карте\n \nНазвание карты: {1} \nСыграно на карте: {2} ч {3} м {4} сек \nВинрейт на карте: {5} %%\n \n{6}\n \n{7}"
+		"ua"		"Статистика по карті\n \nНазва карти: {1} \nЗіграно на мапі: {2} ч {3} м {4} сек \nВРейтинг виграшу на карті: {5} %%\n \n{6}\n \n{7}"
+	}
+	"MapStatistics_Cs"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"Hostage rescued: {1} \nHostage killed: {2}"
+		"ru"		"Заложников спасено: {1} \nЗаложников убито: {2}"
+		"ua"		"Заручників врятовано: {1} \nзаручників вбито: {2}"
+	}
+	"MapStatistics_De"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"Bomb planted: {1} \nBomb defused: {2}"
+		"ru"		"Бомб установлено: {1} \nБомб разминировано: {2}"
+		"ua"		"Бомб встановлено: {1} \nбомб разміновано: {2}"
+	}
+	"MapStatistics_Custom"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"Rounds won \nRounds for CT: {1} \nRounds for T: {2}"
+		"ru"		"Выигранные раунды \nРаундов за КТ: {1} \nРаундов за Т: {2}"
+		"ua"		"Виграні раунди \nРаундів за КТ: {1} \nРаундів за Т: {2}"
+	}
+	"MapStatistics_KDStats"
+	{
+		"#format"	"{1:i},{2:i},{3:.2f}"
+		"en"		"Kills: {1} \nDeaths: {2} \nKDR: {3}"
+		"ru"		"Убийств: {1} \nСмертей: {2} \nKDR: {3}"
+		"ua"		"Вбивств: {1} \nсмертей: {2} \nKDR: {3}"
+	}
+	"NoData"
+	{
+		"en"		"No data!"
+		"ru"		"Нет данных!"
+		"ua"		"Немає даних!"
+	}
+}

@@ -1,0 +1,32 @@
+﻿"Phrases"
+{
+	"Particle_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Particles [{1} rank]"
+		"ru"			"Партиклы [{1} ранг]"
+		"ua"			"Партікли [{1} ранг]"
+		"chi"			"粒子 [需要等级 {1}]"
+	}
+	"Particle_RankOpened"
+	{
+		"en"			"Particles"
+		"ru"			"Партиклы"
+		"ua"			"Партікли"
+		"chi"			"粒子"
+	}
+	"Particle_On"
+	{
+		"en"			"Enable particle"
+		"ru"			"Включить партиклы"
+		"ua"			"Включити партікли"
+		"chi"			"粒子 [已启用]"
+	}
+	"Particle_Off"
+	{
+		"en"			"Disable particle"
+		"ru"			"Выключить партиклы"
+		"ua"			"Вимкнути партікли"
+		"chi"			"粒子 [已禁用]"
+	}
+}

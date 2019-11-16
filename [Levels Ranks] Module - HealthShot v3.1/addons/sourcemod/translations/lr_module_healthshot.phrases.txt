@@ -1,0 +1,25 @@
+﻿"Phrases"
+{
+	"HealthShot_Off"
+	{
+		"en"			"HealthShot [off]"
+		"ru"			"Хилшот [выкл]"
+		"ua"			"Медичний шприц  [викл]"
+		"chi"			"医疗针 [已禁用]"
+	}
+	"HealthShot_On"
+	{
+		"en"			"HealthShot [on]"
+		"ru"			"Хилшот [вкл]"
+		"ua"			"Медичний шприц [вкл]"
+		"chi"			"医疗针 [已启用]"
+	}
+	"HealthShot_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"HealthShot [{1} rank]"
+		"ru"			"Хилшот [{1} ранг]"
+		"ua"			"Медичний шприц [{1} ранг]"
+		"chi"			"医疗针 [需要等级 {1}]"
+	}
+}

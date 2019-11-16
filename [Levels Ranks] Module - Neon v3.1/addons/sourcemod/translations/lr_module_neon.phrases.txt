@@ -1,0 +1,32 @@
+﻿"Phrases"
+{
+	"Neon_Off"
+	{
+		"en"			"Neon [off]"
+		"ru"			"Неон [выкл]"
+		"ua"			"Неон [викл]"
+		"chi"			"霓虹灯 [已禁用]"
+	}
+	"Neon_On"
+	{
+		"en"			"Neon [on]"
+		"ru"			"Неон [вкл]"
+		"ua"			"Неон [вкл]"
+		"chi"			"霓虹灯 [已启用]"
+	}
+	"Neon_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Neon [{1} rank]"
+		"ru"			"Неон [{1} ранг]"
+		"ua"			"Неон [{1} рангш]"
+		"chi"			"霓虹灯 [需要等级 {1}]"
+	}
+	"Neon_RankOpened"
+	{
+		"en"			"Neon"
+		"ru"			"Неон"
+		"ua"			"Неон"
+		"chi"			"霓虹灯"
+	}
+}

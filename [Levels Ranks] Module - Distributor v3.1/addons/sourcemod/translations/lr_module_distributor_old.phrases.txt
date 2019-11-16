@@ -1,0 +1,11 @@
+﻿"Phrases"
+{
+	"Distributor"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"{DEFAULT}Your exp: {GREEN}{1} [+{2} for nothing]"
+		"ru"		"{DEFAULT}Ваш опыт: {GREEN}{1} [+{2} за просто так]"
+		"ua"		"{DEFAULT}Ваш досвід: {GREEN}{1} [+{2} задарма]"
+		"chi"		"{DEFAULT}你的经验值: {GREEN}{1} [+{2} 通过保持在线]"
+	}
+}

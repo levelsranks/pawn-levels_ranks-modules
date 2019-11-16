@@ -1,0 +1,25 @@
+"Phrases"
+{
+	"Endurance_Off"
+	{
+		"en"			"Endurance [off]"
+		"ru"			"Выносливость [выкл]"
+		"ua"			"Витривалість [викл]"
+		"chi"			"耐力 [已禁用]"
+	}
+	"Endurance_On"
+	{
+		"en"			"Endurance [on]"
+		"ru"			"Выносливость [вкл]"
+		"ua"			"Витривалість [вкл]"
+		"chi"			"耐力 [已启用]"
+	}
+	"Endurance_Closed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Endurance [{1} rank]"
+		"ru"			"Выносливость [{1} ранг]"
+		"ua"			"Витривалість [{1} ранг]"
+		"chi"			"耐力 [需要等级 {1}]"
+	}
+}
