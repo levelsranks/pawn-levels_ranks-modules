@@ -301,7 +301,6 @@ void ExplodeInArrayList(const char[] sText, ArrayList hArray)
 
 	if(!iLastSize)
 	{
-		PrintToServer(sText);
 		hArray.PushString(sText);
 	}
 }
@@ -419,9 +418,7 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 						{
 							if(g_iExpMode == 1)
 							{
-								LR_ChangeClientValue(iAttacker, g_iExp[iType]);
-
-								if(g_bMessages)
+								if(g_bMessages && LR_ChangeClientValue(iAttacker, g_iExp[iType]))
 								{
 									FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
 									LR_PrintToChat(iAttacker, true, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
