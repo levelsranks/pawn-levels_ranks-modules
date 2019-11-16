@@ -1,0 +1,17 @@
+﻿"Phrases"
+{
+	"Overlay_MenuOff"
+	{
+		"en"			"Overlay [on]"
+		"ru"			"Оверлеи [вкл]"
+		"ua"			"Оверлеї [вкл]"
+		"chi"			"升级覆盖 [开启]"
+	}
+	"Overlay_MenuOn"
+	{
+		"en"			"Overlays [off]"
+		"ru"			"Оверлеи [выкл]"
+		"ua"			"Оверлеї [викл]"
+		"chi"			"升级覆盖 [关闭]"
+	}
+}
