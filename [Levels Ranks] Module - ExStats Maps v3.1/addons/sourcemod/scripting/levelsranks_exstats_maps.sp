@@ -36,13 +36,6 @@ public void OnPluginStart()
 	LoadTranslations("common.phrases");
 	LoadTranslations("lr_module_exmaps.phrases");
 
-	HookEvent("player_death", Hooks, EventHookMode_Pre);
-	HookEvent("round_end", Hooks, EventHookMode_Pre);
-	HookEvent("bomb_planted", Hooks, EventHookMode_Pre);
-	HookEvent("bomb_defused", Hooks, EventHookMode_Pre);
-	HookEvent("hostage_killed", Hooks, EventHookMode_Pre);
-	HookEvent("hostage_rescued", Hooks, EventHookMode_Pre);
-
 	if(LR_IsLoaded())
 	{
 		LR_OnCoreIsReady();
@@ -53,6 +46,13 @@ public void LR_OnCoreIsReady()
 {
 	delete g_hDatabase;
 	g_hDatabase = LR_GetDatabase();
+
+	HookEvent("player_death", Hooks, EventHookMode_Pre);
+	HookEvent("round_end", Hooks, EventHookMode_Pre);
+	HookEvent("bomb_planted", Hooks, EventHookMode_Pre);
+	HookEvent("bomb_defused", Hooks, EventHookMode_Pre);
+	HookEvent("hostage_killed", Hooks, EventHookMode_Pre);
+	HookEvent("hostage_rescued", Hooks, EventHookMode_Pre);
 
 	LR_Hook(LR_OnPlayerLoaded, LoadDataPlayer);
 	LR_Hook(LR_OnResetPlayerStats, ResetDataPlayer);
@@ -70,7 +70,7 @@ public void LR_OnCoreIsReady()
 
 	g_hDatabase.SetCharset("utf8");
 
-	for(int iClient = 1; iClient <= MaxClients; iClient++)
+	for(int iClient = MaxClients + 1; --iClient;)
 	{
 		if(LR_GetClientStatus(iClient))
 		{
@@ -490,7 +490,10 @@ void DatabaseCleanup(LR_CleanupType iType, Transaction hQuery)
 
 public void OnClientDisconnect(int iClient)
 {
-	SaveDataPlayer(iClient);
+	if(g_hDatabase)
+	{
+		SaveDataPlayer(iClient);
+	}
 	g_bPlayerActive[iClient] = false;
 }
 
