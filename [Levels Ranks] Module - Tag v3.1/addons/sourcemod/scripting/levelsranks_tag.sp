@@ -11,7 +11,7 @@
 
 bool		g_bActive[MAXPLAYERS+1],
 		g_bAccess;
-char		g_sClanTags[128][16];
+char		g_sList[128][16];
 Handle	g_hCookie;
 
 public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = PLUGIN_VERSION};
@@ -25,7 +25,6 @@ public void OnPluginStart()
 	g_hCookie = RegClientCookie("LR_TagRank", "LR_TagRank", CookieAccess_Private);
 	CreateTimer(1.0, TimerRepeat, _, TIMER_REPEAT);
 	LoadTranslations("lr_module_tag.phrases");
-	ConfigLoad();
 
 	for(int iClient = MaxClients + 1; --iClient;)
     {
@@ -40,6 +39,7 @@ public void LR_OnCoreIsReady()
 {
 	LR_Hook(LR_OnSettingsModuleUpdate, ConfigLoad);
 	LR_MenuHook(LR_SettingMenu, LR_OnMenuCreated, LR_OnMenuItemSelected);
+	ConfigLoad();
 }
 
 void ConfigLoad()
@@ -63,8 +63,7 @@ void ConfigLoad()
 
 		do
 		{
-			hLR.GetString("tag", g_sClanTags[iTagCount], 16);
-			iTagCount++;
+			hLR.GetString("tag", g_sList[iTagCount++], 16);
 		}
 		while(hLR.GotoNextKey());
 
@@ -82,19 +81,16 @@ public Action TimerRepeat(Handle hTimer)
 		iRank = LR_GetClientInfo(iClient, ST_RANK);
 		if(IsClientInGame(iClient) && (!g_bActive[iClient] || !g_bAccess) && iRank)
 		{
-			CS_SetClientClanTag(iClient, g_sClanTags[iRank - 1]);
+			CS_SetClientClanTag(iClient, g_sList[iRank - 1]);
 		}
 	}
 }
 
 void LR_OnMenuCreated(LR_MenuType OnMenuCreated, int iClient, Menu hMenu)
 {
-	if(g_bAccess)
-	{
-		char sText[64];
-		FormatEx(sText, sizeof(sText), "%T", !g_bActive[iClient] ? "TagRankOn" : "TagRankOff", iClient);
-		hMenu.AddItem("RankTag", sText);
-	}
+	char sText[64];
+	FormatEx(sText, sizeof(sText), "%T", (!g_bActive[iClient] || !g_bAccess) ? "TagRankOn" : "TagRankOff", iClient);
+	hMenu.AddItem("RankTag", sText, g_bAccess ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 }
 
 void LR_OnMenuItemSelected(LR_MenuType OnMenuCreated, int iClient, const char[] sInfo)
@@ -102,8 +98,8 @@ void LR_OnMenuItemSelected(LR_MenuType OnMenuCreated, int iClient, const char[] 
 	if(!strcmp(sInfo, "RankTag"))
 	{
 		g_bActive[iClient] = !g_bActive[iClient];
-		CS_SetClientClanTag(iClient, g_bActive[iClient] ? NULL_STRING : g_sClanTags[LR_GetClientInfo(iClient, ST_RANK) - 1]);
 		LR_ShowMenu(iClient, LR_SettingMenu);
+		CS_SetClientClanTag(iClient, g_bActive[iClient] ? NULL_STRING : g_sList[LR_GetClientInfo(iClient, ST_RANK) - 1]);
 	}
 }
 
