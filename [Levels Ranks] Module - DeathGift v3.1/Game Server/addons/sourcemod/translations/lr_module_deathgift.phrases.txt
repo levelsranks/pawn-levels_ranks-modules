@@ -1,0 +1,11 @@
+"Phrases"
+{
+	"TouchGiftExp"
+	{
+		"#format"	"{1:i},{2:i}"
+		"en"		"{WHITE}Your exp: {GREEN}{1} [+{2} touch gift]"
+		"ru"		"{WHITE}Ваш опыт: {GREEN}{1} [+{2} за подарочек]"
+		"ua"		"{WHITE}Ваш досвід: {GREEN}{1} [+{2} за подаруночок]"
+		"chi"		"{WHITE}你的经验值: {GREEN}{1} [+{2} 通过拾取礼物]"
+	}
+}
