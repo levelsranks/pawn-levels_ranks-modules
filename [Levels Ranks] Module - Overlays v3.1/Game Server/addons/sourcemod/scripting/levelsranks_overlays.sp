@@ -8,7 +8,8 @@
 #define PLUGIN_NAME "[LR] Module - Overlays"
 #define PLUGIN_AUTHOR "RoadSide Romeo"
 
-bool		g_bActive[MAXPLAYERS+1];
+bool		g_bActive[MAXPLAYERS+1],
+		g_bAccess;
 char		g_sOverlaysPath[128][256];
 Handle	g_hCookie;
 
@@ -22,7 +23,6 @@ public void OnPluginStart()
 
 	g_hCookie = RegClientCookie("LR_Overlays", "LR_Overlays", CookieAccess_Private);
 	LoadTranslations("lr_module_overlays.phrases");
-	ConfigLoad();
 
 	for(int iClient = MaxClients + 1; --iClient;)
 	{
@@ -38,6 +38,7 @@ public void LR_OnCoreIsReady()
 	LR_Hook(LR_OnSettingsModuleUpdate, ConfigLoad);
 	LR_Hook(LR_OnLevelChangedPost, OnLevelChanged);
 	LR_MenuHook(LR_SettingMenu, LR_OnMenuCreated, LR_OnMenuItemSelected);
+	ConfigLoad();
 }
 
 void ConfigLoad()
@@ -69,8 +70,10 @@ void ConfigLoad()
 
 	if(hLR.JumpToKey("Overlays"))
 	{
-		int iOverlayCount;
+		g_bAccess = view_as<bool>(hLR.GetNum("access", 0));
+
 		hLR.GotoFirstSubKey();
+		int iOverlayCount;
 
 		do
 		{
@@ -88,8 +91,8 @@ void ConfigLoad()
 void LR_OnMenuCreated(LR_MenuType OnMenuCreated, int iClient, Menu hMenu)
 {
 	char sText[64];
-	FormatEx(sText, sizeof(sText), "%T", !g_bActive[iClient] ? "Overlay_MenuOff" : "Overlay_MenuOn", iClient);
-	hMenu.AddItem("Overlays", sText);
+	FormatEx(sText, sizeof(sText), "%T", (!g_bActive[iClient] || !g_bAccess) ? "Overlay_MenuOff" : "Overlay_MenuOn", iClient);
+	hMenu.AddItem("Overlays", sText, g_bAccess ? ITEMDRAW_DEFAULT : ITEMDRAW_DISABLED);
 }
 
 void LR_OnMenuItemSelected(LR_MenuType OnMenuCreated, int iClient, const char[] sInfo)
@@ -103,7 +106,7 @@ void LR_OnMenuItemSelected(LR_MenuType OnMenuCreated, int iClient, const char[] 
 
 void OnLevelChanged(int iClient, int iNewLevel, int iOldLevel)
 {
-	if(!g_bActive[iClient])
+	if(!g_bActive[iClient] || !g_bAccess)
 	{
 		ClientCommand(iClient, "r_screenoverlay %s", g_sOverlaysPath[iNewLevel - 1]);
 		CreateTimer(3.0, DeleteOverlay, GetClientUserId(iClient));
