@@ -34,7 +34,6 @@ public void OnPluginStart()
 	HookEvent("player_spawn", Event_Neon);
 	HookEvent("player_death", Event_Neon);
 	HookEvent("player_team", Event_Neon);
-	ConfigLoad();
 
 	for(int iClient = 1; iClient <= MaxClients; iClient++)
 	{
@@ -50,6 +49,7 @@ public void LR_OnCoreIsReady()
 	LR_Hook(LR_OnSettingsModuleUpdate, ConfigLoad);
 	LR_Hook(LR_OnLevelChangedPost, OnLevelChanged);
 	LR_MenuHook(LR_SettingMenu, LR_OnMenuCreated, LR_OnMenuItemSelected);
+	ConfigLoad();
 }
 
 void ConfigLoad()

@@ -107,7 +107,7 @@ public Plugin myinfo =
 public void OnPluginStart()
 {
 	LoadTranslations("core.phrases");
-	LoadTranslations("lr_core.phrases");
+	LoadTranslations((g_iEngine = GetEngineVersion()) == Engine_SourceSDK2006 ? "lr_core_old.phrases" : "lr_core.phrases");
 	LoadTranslations("lr_module_exhits.phrases");
 
 	HookEvent("player_hurt", view_as<EventHook>(OnPlayerHurt));

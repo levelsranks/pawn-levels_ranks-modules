@@ -29,7 +29,6 @@ public void OnPluginStart()
 	g_hSkinsCookie = RegClientCookie("LR_Skins", "LR_Skins", CookieAccess_Private);
 	HookEvent("player_spawn", PlayerSpawn, EventHookMode_Post);
 	LoadTranslations("lr_module_skins.phrases");
-	ConfigLoad();
 
 	for(int iClient = 1; iClient <= MaxClients; iClient++)
 	{
@@ -40,15 +39,7 @@ public void OnPluginStart()
 	}
 }
 
-public void LR_OnCoreIsReady()
-{
-	LR_Hook(LR_OnSettingsModuleUpdate, ConfigLoad);
-	LR_Hook(LR_OnLevelChangedPost, OnLevelChanged);
-	LR_Hook(LR_OnPlayerLoaded, OnLoaded);
-	LR_MenuHook(LR_SettingMenu, LR_OnMenuCreated, LR_OnMenuItemSelected);
-}
-
-void ConfigLoad() 
+public void OnMapStart()
 {
 	char sPathDownload[256];
 	File hFile = OpenFile("addons/sourcemod/configs/levels_ranks/downloads_skins.ini", "r");
@@ -63,7 +54,19 @@ void ConfigLoad()
 	}
 
 	hFile.Close();
+}
 
+public void LR_OnCoreIsReady()
+{
+	LR_Hook(LR_OnSettingsModuleUpdate, ConfigLoad);
+	LR_Hook(LR_OnLevelChangedPost, OnLevelChanged);
+	LR_Hook(LR_OnPlayerLoaded, OnLoaded);
+	LR_MenuHook(LR_SettingMenu, LR_OnMenuCreated, LR_OnMenuItemSelected);
+	ConfigLoad();
+}
+
+void ConfigLoad() 
+{
 	static char sPath[PLATFORM_MAX_PATH];
 	if(!sPath[0]) BuildPath(Path_SM, sPath, sizeof(sPath), "configs/levels_ranks/skins.ini");
 	KeyValues hLR = new KeyValues("LR_Skins");

@@ -67,7 +67,7 @@ FROM `%s_unusualkills` WHERE `SteamID` = '%s';"
 	`Flash` = 0, \
 	`Smoke` = 0, \
 	`Whirl` = 0, \
-	`LastClip` = 0, \
+	`LastClip` = 0 \
 WHERE \
 	`SteamID` = '%s';"
 
@@ -89,7 +89,6 @@ DESC LIMIT 10;"
 
 enum struct UK_Settings
 {
-	ArrayList ChatCommands;
 	ArrayList ProhibitedWeapons;
 	ArrayList NoScopeWeapons;
 }
@@ -124,7 +123,6 @@ static const char
 				g_sMenuStatsItem[] = "unusualkills_stats",
 				g_sMenuTopItem[] = "unusualkills_top";
 
-
 EngineVersion	g_iEngine;
 
 Database		g_hDatabase;
@@ -144,6 +142,29 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
+	LoadTranslations("core.phrases");
+
+	if((g_iEngine = GetEngineVersion()) == Engine_SourceSDK2006)
+	{
+		LoadTranslations("lr_unusualkills_old.phrases");
+		LoadTranslations("lr_core_old.phrases");
+	}
+	else
+	{
+		LoadTranslations("lr_unusualkills.phrases");
+		LoadTranslations("lr_core.phrases");
+	}
+
+	LoadTranslations("lr_unusualkills_menu.phrases");
+
+	// m_angRotation = FindSendPropInfo("CBaseEntity", "m_angRotation");
+	m_bIsScoped = FindSendPropInfo("CCSPlayer", "m_bIsScoped");
+	m_iClip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
+	m_hActiveWeapon = FindSendPropInfo("CBasePlayer", "m_hActiveWeapon");
+	m_flFlashDuration = FindSendPropInfo("CCSPlayer", "m_flFlashDuration");
+	m_vecOrigin = FindSendPropInfo("CBaseEntity", "m_vecOrigin");
+	m_vecVelocity = FindSendPropInfo("CBasePlayer", "m_vecVelocity[0]");
+
 	if(LR_IsLoaded())
 	{
 		LR_OnCoreIsReady();
@@ -161,19 +182,6 @@ public void LR_OnCoreIsReady()
 
 	LoadSettings();
 
-	LoadTranslations("core.phrases");
-
-	LoadTranslations((g_iEngine = GetEngineVersion()) == Engine_SourceSDK2006 ? "lr_unusualkills_old.phrases" : "lr_unusualkills.phrases");
-	LoadTranslations("lr_unusualkills_menu.phrases");
-
-	// m_angRotation = FindSendPropInfo("CBaseEntity", "m_angRotation");
-	m_bIsScoped = FindSendPropInfo("CCSPlayer", "m_bIsScoped");
-	m_iClip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
-	m_hActiveWeapon = FindSendPropInfo("CBasePlayer", "m_hActiveWeapon");
-	m_flFlashDuration = FindSendPropInfo("CCSPlayer", "m_flFlashDuration");
-	m_vecOrigin = FindSendPropInfo("CBaseEntity", "m_vecOrigin");
-	m_vecVelocity = FindSendPropInfo("CBasePlayer", "m_vecVelocity[0]");
-
 	g_hSmokeEnt = new ArrayList();
 
 	HookEvent("round_start", view_as<EventHook>(OnRoundStart), EventHookMode_PostNoCopy);
@@ -185,7 +193,7 @@ public void LR_OnCoreIsReady()
 	char sQuery[512];
 
 	FormatEx(sQuery, sizeof(sQuery), g_sSQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
-	(g_hDatabase = LR_GetDatabase()).Query(SQL_Callback, sQuery);
+	(g_hDatabase = LR_GetDatabase()).Query(SQL_Callback, sQuery, DBPrio_High);
 
 	for(int i = MaxClients + 1; --i;)
 	{
@@ -412,16 +420,19 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 				{
 					if(iUKFlags & (1 << iType))
 					{
-						FormatEx(sColumns, sizeof(sColumns), "%s`%s` = %d, ", sColumns, g_sNameUK[iType], ++g_iUK[iAttacker][iType]);
+						FormatEx(sColumns[strlen(sColumns)], sizeof(sColumns), "`%s` = %d, ", g_sNameUK[iType], ++g_iUK[iAttacker][iType]);
 
 						if(g_iExp[iType])
 						{
 							if(g_iExpMode == 1)
 							{
-								if(g_bMessages && LR_ChangeClientValue(iAttacker, g_iExp[iType]))
+								if(g_bMessages)
 								{
-									FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
-									LR_PrintToChat(iAttacker, true, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
+									if(LR_ChangeClientValue(iAttacker, g_iExp[iType]))
+									{
+										FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
+										LR_PrintToChat(iAttacker, true, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
+									}
 								}
 							}
 							else
@@ -432,10 +443,13 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 					}
 				}
 
-				sColumns[strlen(sColumns) - 2] = '\0';
+				if(sColumns[0])
+				{
+					sColumns[strlen(sColumns) - 2] = '\0';
 
-				FormatEx(sQuery, sizeof(sQuery), SQL_SaveData, g_sTableName, sColumns, GetSteamID2(g_iAccountID[iAttacker]));
-				g_hDatabase.Query(SQL_Callback, sQuery);
+					FormatEx(sQuery, sizeof(sQuery), SQL_SaveData, g_sTableName, sColumns, GetSteamID2(g_iAccountID[iAttacker]));
+					g_hDatabase.Query(SQL_Callback, sQuery);
+				}
 			}
 		}
 	}
@@ -519,7 +533,6 @@ void MenuShowTops(int iClient, int iSlot = 0)
 	}
 
 	hMenu.ExitBackButton = true;
-
 	hMenu.DisplayAt(iClient, iSlot, MENU_TIME_FOREVER);
 }
 
@@ -604,7 +617,7 @@ void LoadDataPlayer(int iClient, int iAccountID)
 
 void OnResetPlayerStats(int iClient, int iAccountID)
 {
-	static char sQuery[256];
+	static char sQuery[384];
 
 	if(iClient)
 	{
@@ -620,10 +633,10 @@ void OnResetPlayerStats(int iClient, int iAccountID)
 
 void OnDatabaseCleanup(LR_CleanupType CleanupType, Transaction hTransaction)
 {
-	static char sQuery[512];
-
 	if(CleanupType == LR_AllData || CleanupType == LR_StatsData)
 	{
+		static char sQuery[512];
+
 		FormatEx(sQuery, sizeof(sQuery), "DROP TABLE IF EXISTS `%s_unusualkills`;", g_sTableName);
 		hTransaction.AddQuery(sQuery);
 
@@ -650,20 +663,22 @@ public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] s
 			{
 				Menu hMenu = new Menu(MenuShowTop_Callback, MenuAction_Select);
 
-				char sText[768],
-					 sName[32],
-					 sTrans[48];
+				char sText[768], sName[32], sTrans[48];
 
-				if(hResult.HasResults)
+				if(hResult.RowCount)
 				{
 					for(int j = 0; hResult.FetchRow();)
 					{
 						hResult.FetchString(0, sName, sizeof(sName));
-						FormatEx(sText, sizeof(sText), "%s\n%T\n", sText, "MenuTop_Open", iClient, ++j, hResult.FetchInt(1), sName);
+						FormatEx(sText[strlen(sText)], 64, "%T\n", "MenuTop_Open", iClient, ++j, hResult.FetchInt(1), sName);
 					}
-				}
 
-				strcopy(sText[strlen(sText)], 4, "\n ");
+					sText[strlen(sText)] = ' ';
+				}
+				else
+				{
+					FormatEx(sText[strlen(sText)], 16, "%T\n", "NoData", iClient);
+				}
 
 				FormatEx(sTrans, sizeof(sTrans), "MenuTop_%s", g_sNameUK[iIndex - 1]);
 				hMenu.SetTitle("%s | %T\n \n%s", g_sMenuTitle, sTrans, iClient, sText);

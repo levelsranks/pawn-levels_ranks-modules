@@ -25,6 +25,7 @@ char				g_sTableName[96],
 				g_sCurrentNameMap[128];
 static const char	g_sCreateTable[] = "CREATE TABLE IF NOT EXISTS `%s_maps` (`steam` varchar(32) NOT NULL default '', `name_map` varchar(128) NOT NULL default '', `countplays` int NOT NULL DEFAULT 0, `kills` int NOT NULL DEFAULT 0, `deaths` int NOT NULL DEFAULT 0, `rounds_overall` int NOT NULL DEFAULT 0, `rounds_ct` int NOT NULL DEFAULT 0, `rounds_t` int NOT NULL DEFAULT 0, `bomb_planted` int NOT NULL DEFAULT 0, `bomb_defused` int NOT NULL DEFAULT 0, `hostage_rescued` int NOT NULL DEFAULT 0, `hostage_killed` int NOT NULL DEFAULT 0, `playtime` int NOT NULL DEFAULT 0, PRIMARY KEY (`steam`, `name_map`))%s";
 EngineVersion	g_iEngine;
+Handle			g_hTimer;
 Database		g_hDatabase;
 
 public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = PLUGIN_VERSION};
@@ -32,9 +33,15 @@ public void OnPluginStart()
 {
 	OnMapStart();
 	g_iEngine = GetEngineVersion();
-	CreateTimer(1.0, TimerMap, _, TIMER_REPEAT);
 	LoadTranslations("common.phrases");
 	LoadTranslations("lr_module_exmaps.phrases");
+
+	HookEvent("player_death", Hooks, EventHookMode_Pre);
+	HookEvent("round_end", Hooks, EventHookMode_Pre);
+	HookEvent("bomb_planted", Hooks, EventHookMode_Pre);
+	HookEvent("bomb_defused", Hooks, EventHookMode_Pre);
+	HookEvent("hostage_killed", Hooks, EventHookMode_Pre);
+	HookEvent("hostage_rescued", Hooks, EventHookMode_Pre);
 
 	if(LR_IsLoaded())
 	{
@@ -47,12 +54,8 @@ public void LR_OnCoreIsReady()
 	delete g_hDatabase;
 	g_hDatabase = LR_GetDatabase();
 
-	HookEvent("player_death", Hooks, EventHookMode_Pre);
-	HookEvent("round_end", Hooks, EventHookMode_Pre);
-	HookEvent("bomb_planted", Hooks, EventHookMode_Pre);
-	HookEvent("bomb_defused", Hooks, EventHookMode_Pre);
-	HookEvent("hostage_killed", Hooks, EventHookMode_Pre);
-	HookEvent("hostage_rescued", Hooks, EventHookMode_Pre);
+	delete g_hTimer;
+	g_hTimer = CreateTimer(1.0, TimerMap, _, TIMER_REPEAT);
 
 	LR_Hook(LR_OnPlayerLoaded, LoadDataPlayer);
 	LR_Hook(LR_OnResetPlayerStats, ResetDataPlayer);
@@ -63,14 +66,20 @@ public void LR_OnCoreIsReady()
 	LR_GetTitleMenu(g_sPluginTitle, sizeof(g_sPluginTitle));
 
 	char sQuery[768];
-	SQL_LockDatabase(g_hDatabase);
-	FormatEx(sQuery, sizeof(sQuery), g_sCreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET=utf8 COLLATE utf8_general_ci");
-	SQL_FastQuery(g_hDatabase, sQuery);
-	SQL_UnlockDatabase(g_hDatabase);
+	g_hDatabase.Format(sQuery, sizeof(sQuery), g_sCreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET=utf8 COLLATE utf8_general_ci");
+	g_hDatabase.Query(SQL_CreateTable, sQuery);
+}
+
+public void SQL_CreateTable(Database db, DBResultSet dbRs, const char[] sError, int iData)
+{
+	if(!dbRs)
+	{
+		LogError(PLUGIN_NAME ... " : SQL_CreateTable - error while working with data (%s)", sError);
+		return;
+	}
 
 	g_hDatabase.SetCharset("utf8");
-
-	for(int iClient = MaxClients + 1; --iClient;)
+	for(int iClient = 1; iClient <= MaxClients; iClient++)
 	{
 		if(LR_GetClientStatus(iClient))
 		{
@@ -490,10 +499,7 @@ void DatabaseCleanup(LR_CleanupType iType, Transaction hQuery)
 
 public void OnClientDisconnect(int iClient)
 {
-	if(g_hDatabase)
-	{
-		SaveDataPlayer(iClient);
-	}
+	SaveDataPlayer(iClient);
 	g_bPlayerActive[iClient] = false;
 }
 

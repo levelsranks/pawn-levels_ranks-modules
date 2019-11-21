@@ -100,7 +100,6 @@ public void OnPluginStart()
 
 	g_hChat = RegClientCookie("LR_Chat", "LR_Chat", CookieAccess_Private);
 	LoadTranslations("lr_module_chat.phrases");
-	ConfigLoad();
 
 	for(int iClient = 1; iClient <= MaxClients; iClient++)
 	{
@@ -122,6 +121,7 @@ public void LR_OnCoreIsReady()
 	LR_Hook(LR_OnPlayerLoaded, OnPlayerLoaded);
 	LR_Hook(LR_OnLevelChangedPost, OnLevelChanged);
 	LR_MenuHook(LR_SettingMenu, LR_OnMenuCreated, LR_OnMenuItemSelected);
+	ConfigLoad();
 }
 
 void ConfigLoad()

@@ -90,6 +90,7 @@ void LR_OnMenuItemSelected(LR_MenuType OnMenuType, int iClient, const char[] sIn
 	if(!strcmp(sInfo, "Speed"))
 	{
 		g_bActive[iClient] = !g_bActive[iClient];
+		SetEntPropFloat(iClient, Prop_Data, "m_flLaggedMovementValue", !g_bActive[iClient] ? g_fSpeedCount : 1.0);
 		LR_ShowMenu(iClient, LR_SettingMenu);
 	}
 }
