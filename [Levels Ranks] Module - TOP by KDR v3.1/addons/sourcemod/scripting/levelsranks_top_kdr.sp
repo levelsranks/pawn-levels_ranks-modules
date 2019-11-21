@@ -14,10 +14,9 @@
 int				  g_iLang[MAXPLAYERS+1];
 
 static const char g_sItemName[] = "TopKDR",
-				  g_sTransBack[][] = {"Back to Menu", "Назад в Меню", "Назад в Меню"},
 				  g_sTransFrases[][] = {"TOP-10 by KDR", "TOP-10 по KDR", "TOP-10 за KDR"},
 
-				  g_sSQL_SelectTop[] = "SELECT `name`, `kills`, `deaths` FROM `%.32s` WHERE `kills` >= " ... MINKILLS ... " ORDER by (`kills`/`deaths`) desc LIMIT " ... MAXPLACES ... ";";
+				  g_sSQL_SelectTop[] = "SELECT `name`, 1.0 * `kills` / `deaths` AS `kdr` FROM `%s` WHERE `kills` >= " ... MINKILLS ... " AND `lastconnect` ORDER BY `kdr` DESC LIMIT " ... MAXPLACES ... ";";
 
 // levelsranks_top_kdr.sp
 public Plugin myinfo = 
@@ -30,6 +29,8 @@ public Plugin myinfo =
 
 public void OnPluginStart()
 {
+	LoadTranslations("core.phrases");
+
 	if(LR_IsLoaded())
 	{
 		LR_OnCoreIsReady();
@@ -38,8 +39,8 @@ public void OnPluginStart()
 
 public void LR_OnCoreIsReady()
 {
-    LR_Hook(LR_OnPlayerLoaded, LoadDataPlayer);
-    LR_MenuHook(LR_TopMenu, OnMenuCreatedTop, OnMenuItemSelectedTop);
+	LR_Hook(LR_OnPlayerLoaded, LoadDataPlayer);
+	LR_MenuHook(LR_TopMenu, OnMenuCreatedTop, OnMenuItemSelectedTop);
 }
 
 void LoadDataPlayer(int iClient, int iAccountID)
@@ -58,8 +59,9 @@ public void OnMenuItemSelectedTop(LR_MenuType MenuType, int iClient, const char[
 {
 	if(StrEqual(sInfo, g_sItemName))
 	{
+		static char		sBuf[192];
+
 		static Database hDatabase;
-		static char     sBuf[192];
 
 		if(!hDatabase)
 		{
@@ -89,19 +91,22 @@ public void SQL_PrintTop(Database db, DBResultSet dbRs, const char[] sError, int
 	for(int i; dbRs.HasResults && dbRs.FetchRow();)
 	{
 		dbRs.FetchString(0, sName, sizeof(sName));
-		Format(sText, sizeof(sText), "%s %d - %.2f - %s\n", sText, ++i, float(dbRs.FetchInt(1))/float(dbRs.FetchInt(2)), sName);
+		Format(sText, sizeof(sText), "%s %d - %.2f - %s\n", sText, ++i, dbRs.FetchFloat(1), sName);
 	}
 
 	strcopy(sText[strlen(sText)], 4, "\n ");
+
+	int iClient = iData & 0x7F;
 
 	Menu hMenu = new Menu(Menu_Callback);
 
 	hMenu.SetTitle(sText);
 
-	hMenu.AddItem("", g_sTransBack[iLang]);
+	FormatEx(sText, sizeof(sText), "%T", "Back", iClient);
+	hMenu.AddItem(NULL_STRING, sText);
 
 	hMenu.ExitButton = true;
-	hMenu.Display(iData & 0x7f, MENU_TIME_FOREVER);
+	hMenu.Display(iClient, MENU_TIME_FOREVER);
 }
 
 int Menu_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot) 
