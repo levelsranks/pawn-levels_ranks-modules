@@ -14,7 +14,7 @@ int		g_iLevel,
 bool		g_bActive[MAXPLAYERS+1];
 Handle	g_hCookie;
 
-public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = PLUGIN_VERSION};
+public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = "v3.1 F1"};
 public void OnPluginStart()
 {
 	if(LR_IsLoaded())
@@ -93,7 +93,7 @@ void LR_OnMenuCreated(LR_MenuType OnMenuType, int iClient, Menu hMenu)
 	}
 	else
 	{
-		FormatEx(sText, sizeof(sText), "%T", "AG_RankClosed", iClient, g_iLevel);
+		FormatEx(sText, sizeof(sText), "%T", "Vamp_Closed", iClient, g_iLevel);
 		hMenu.AddItem("Vamp", sText, ITEMDRAW_DISABLED);
 	}
 }

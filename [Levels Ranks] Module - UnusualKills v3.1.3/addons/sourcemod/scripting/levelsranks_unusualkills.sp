@@ -144,6 +144,8 @@ public void OnPluginStart()
 {
 	LoadTranslations("core.phrases");
 
+	g_hSmokeEnt = new ArrayList();
+
 	if((g_iEngine = GetEngineVersion()) == Engine_SourceSDK2006)
 	{
 		LoadTranslations("lr_unusualkills_old.phrases");
@@ -182,11 +184,9 @@ public void LR_OnCoreIsReady()
 
 	LoadSettings();
 
-	g_hSmokeEnt = new ArrayList();
-
 	HookEvent("round_start", view_as<EventHook>(OnRoundStart), EventHookMode_PostNoCopy);
-	HookEvent("smokegrenade_detonate", view_as<EventHook>(OnSmokeEvent));
-	HookEventEx("smokegrenade_expired", view_as<EventHook>(OnSmokeEvent));
+	HookEvent("smokegrenade_detonate", OnSmokeEvent);
+	HookEventEx("smokegrenade_expired", OnSmokeEvent);
 
 	LR_GetTableName(g_sTableName, sizeof(g_sTableName));
 
@@ -243,7 +243,7 @@ void LoadSettings()
 	hKv.GetString("ProhibitedWeapons", sBuffer, sizeof(sBuffer), "hegrenade,molotov,incgrenade");
 	ExplodeInArrayList(sBuffer, g_hSettings.ProhibitedWeapons);
 
-	hKv.JumpToKey("TypeKills"); /**/
+	hKv.JumpToKey("TypeKills");	/**/
 
 	hKv.GotoFirstSubKey();
 	do
@@ -455,7 +455,7 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 	}
 }
 
-void OnSmokeEvent(Event hEvent, const char[] sName)
+void OnSmokeEvent(Event hEvent, const char[] sName, bool bDontBroadcast)
 {
 	if(sName[13] == 'd')
 	{
@@ -571,7 +571,7 @@ void MenuShowInfo(int iClient)
 
 	int iKills = LR_GetClientInfo(iClient, ST_KILLS);
 
-	static char sText[768], sTrans[48];
+	char sText[768], sTrans[48];
 
 	if(!iKills)
 	{

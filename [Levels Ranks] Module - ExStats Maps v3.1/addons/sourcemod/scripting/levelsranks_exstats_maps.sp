@@ -28,11 +28,17 @@ EngineVersion	g_iEngine;
 Handle			g_hTimer;
 Database		g_hDatabase;
 
-public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = PLUGIN_VERSION};
+public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = "v3.1 F1"};
 public void OnPluginStart()
 {
 	OnMapStart();
 	g_iEngine = GetEngineVersion();
+
+	if(LR_IsLoaded())
+	{
+		LR_OnCoreIsReady();
+	}
+
 	LoadTranslations("common.phrases");
 	LoadTranslations("lr_module_exmaps.phrases");
 
@@ -42,11 +48,6 @@ public void OnPluginStart()
 	HookEvent("bomb_defused", Hooks, EventHookMode_Pre);
 	HookEvent("hostage_killed", Hooks, EventHookMode_Pre);
 	HookEvent("hostage_rescued", Hooks, EventHookMode_Pre);
-
-	if(LR_IsLoaded())
-	{
-		LR_OnCoreIsReady();
-	}
 }
 
 public void LR_OnCoreIsReady()
@@ -67,7 +68,7 @@ public void LR_OnCoreIsReady()
 
 	char sQuery[768];
 	g_hDatabase.Format(sQuery, sizeof(sQuery), g_sCreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET=utf8 COLLATE utf8_general_ci");
-	g_hDatabase.Query(SQL_CreateTable, sQuery);
+	g_hDatabase.Query(SQL_CreateTable, sQuery, 0, DBPrio_High);
 }
 
 public void SQL_CreateTable(Database db, DBResultSet dbRs, const char[] sError, int iData)
@@ -270,15 +271,18 @@ public int MapTOPHandler(Menu hMenu, MenuAction mAction, int iClient, int iSlot)
 
 void MapTOPCall(int iClient, int iMode)
 {
-	if(LR_GetClientStatus(iClient))
+	if(g_hDatabase)
 	{
-		char sQuery[512];
-		switch(iMode)
+		if(LR_GetClientStatus(iClient))
 		{
-			case 0: g_hDatabase.Format(sQuery, sizeof(sQuery), "SELECT `name_map`, `kills` FROM `%s_maps` WHERE `steam` = 'STEAM_%i:%i:%i' AND `kills` != 0 ORDER BY `kills` DESC LIMIT 10 OFFSET 0", g_sTableName, g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1);
-			case 1: g_hDatabase.Format(sQuery, sizeof(sQuery), "SELECT `%s`.`name`, `%s_maps`.`kills` FROM `%s`, `%s_maps` WHERE `%s_maps`.`name_map` = '%s' AND `%s`.`steam` = `%s_maps`.`steam` AND `%s_maps`.`kills` != 0 AND `%s`.`lastconnect` != 0 ORDER BY `%s_maps`.`kills` DESC LIMIT 10 OFFSET 0", g_sTableName, g_sTableName, g_sTableName, g_sTableName, g_sTableName, g_sCurrentNameMap, g_sTableName, g_sTableName, g_sTableName, g_sTableName, g_sTableName);
+			char sQuery[512];
+			switch(iMode)
+			{
+				case 0: g_hDatabase.Format(sQuery, sizeof(sQuery), "SELECT `name_map`, `kills` FROM `%s_maps` WHERE `steam` = 'STEAM_%i:%i:%i' AND `kills` != 0 ORDER BY `kills` DESC LIMIT 10 OFFSET 0", g_sTableName, g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1);
+				case 1: g_hDatabase.Format(sQuery, sizeof(sQuery), "SELECT `%s`.`name`, `%s_maps`.`kills` FROM `%s`, `%s_maps` WHERE `%s_maps`.`name_map` = '%s' AND `%s`.`steam` = `%s_maps`.`steam` AND `%s_maps`.`kills` != 0 AND `%s`.`lastconnect` != 0 ORDER BY `%s_maps`.`kills` DESC LIMIT 10 OFFSET 0", g_sTableName, g_sTableName, g_sTableName, g_sTableName, g_sTableName, g_sCurrentNameMap, g_sTableName, g_sTableName, g_sTableName, g_sTableName, g_sTableName);
+			}
+			g_hDatabase.Query(SQL_MapTOPCall, sQuery, GetClientUserId(iClient) << 4 | iMode);
 		}
-		g_hDatabase.Query(SQL_MapTOPCall, sQuery, GetClientUserId(iClient) << 4 | iMode);
 	}
 }
 
@@ -365,12 +369,15 @@ public int MapsStatsHandler(Menu hMenu, MenuAction mAction, int iClient, int iSl
 
 void LoadDataPlayer(int iClient, int iAccountID)
 {
-	char sQuery[512];
-	g_iAccountID[iClient] = iAccountID;
-	g_bPlayerActive[iClient] = false;
+	if(g_hDatabase)
+	{
+		char sQuery[512];
+		g_iAccountID[iClient] = iAccountID;
+		g_bPlayerActive[iClient] = false;
 
-	g_hDatabase.Format(sQuery, sizeof(sQuery), "SELECT `countplays`, `kills`, `deaths`, `rounds_overall`, `rounds_ct`, `rounds_t`, `bomb_planted`, `bomb_defused`, `hostage_rescued`, `hostage_killed`, `playtime` FROM `%s_maps` WHERE `steam` = 'STEAM_%i:%i:%i' AND `name_map` = '%s';", g_sTableName, g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1, g_sCurrentNameMap);
-	g_hDatabase.Query(SQL_LoadDataPlayer, sQuery, GetClientUserId(iClient));
+		g_hDatabase.Format(sQuery, sizeof(sQuery), "SELECT `countplays`, `kills`, `deaths`, `rounds_overall`, `rounds_ct`, `rounds_t`, `bomb_planted`, `bomb_defused`, `hostage_rescued`, `hostage_killed`, `playtime` FROM `%s_maps` WHERE `steam` = 'STEAM_%i:%i:%i' AND `name_map` = '%s';", g_sTableName, g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1, g_sCurrentNameMap);
+		g_hDatabase.Query(SQL_LoadDataPlayer, sQuery, GetClientUserId(iClient));
+	}
 }
 
 public void SQL_LoadDataPlayer(Database db, DBResultSet dbRs, const char[] sError, int iUserID)
@@ -436,9 +443,12 @@ public void SQL_CreateDataPlayer(Database db, DBResultSet dbRs, const char[] sEr
 
 void SaveDataPlayer(int iClient)
 {
-	char sQuery[1024];
-	g_hDatabase.Format(sQuery, sizeof(sQuery), "UPDATE `%s_maps` SET `countplays` = %d, `kills` = %d, `deaths` = %d, `rounds_overall` = %d, `rounds_ct` = %d, `rounds_t` = %d, `bomb_planted` = %d, `bomb_defused` = %d, `hostage_rescued` = %d, `hostage_killed` = %d, `playtime` = %d WHERE `steam` = 'STEAM_%i:%i:%i' AND `name_map` = '%s';", g_sTableName, g_iMapCount_Play[iClient], g_iMapCount_Kills[iClient], g_iMapCount_Deaths[iClient], g_iMapCount_RoundsOverall[iClient], g_iMapCount_Round[iClient][0], g_iMapCount_Round[iClient][1], g_iMapCount_BPlanted[iClient], g_iMapCount_BDefused[iClient], g_iMapCount_HRescued[iClient], g_iMapCount_HKilled[iClient], g_iMapCount_Time[iClient], g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1, g_sCurrentNameMap);
-	g_hDatabase.Query(SQL_SaveDataPlayer, sQuery);
+	if(g_hDatabase)
+	{
+		char sQuery[1024];
+		g_hDatabase.Format(sQuery, sizeof(sQuery), "UPDATE `%s_maps` SET `countplays` = %d, `kills` = %d, `deaths` = %d, `rounds_overall` = %d, `rounds_ct` = %d, `rounds_t` = %d, `bomb_planted` = %d, `bomb_defused` = %d, `hostage_rescued` = %d, `hostage_killed` = %d, `playtime` = %d WHERE `steam` = 'STEAM_%i:%i:%i' AND `name_map` = '%s';", g_sTableName, g_iMapCount_Play[iClient], g_iMapCount_Kills[iClient], g_iMapCount_Deaths[iClient], g_iMapCount_RoundsOverall[iClient], g_iMapCount_Round[iClient][0], g_iMapCount_Round[iClient][1], g_iMapCount_BPlanted[iClient], g_iMapCount_BDefused[iClient], g_iMapCount_HRescued[iClient], g_iMapCount_HKilled[iClient], g_iMapCount_Time[iClient], g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1, g_sCurrentNameMap);
+		g_hDatabase.Query(SQL_SaveDataPlayer, sQuery);
+	}
 }
 
 public void SQL_SaveDataPlayer(Database db, DBResultSet dbRs, const char[] sError, int iCallback)
@@ -452,9 +462,12 @@ public void SQL_SaveDataPlayer(Database db, DBResultSet dbRs, const char[] sErro
 
 void ResetDataPlayer(int iClient, int iAccountID)
 {
-	char sQuery[512];
-	g_hDatabase.Format(sQuery, sizeof(sQuery), "UPDATE `%s_maps` SET `countplays` = 0, `kills` = 0, `deaths` = 0, `rounds_overall` = 0, `rounds_ct` = 0, `rounds_t` = 0, `bomb_planted` = 0, `bomb_defused` = 0, `hostage_rescued` = 0, `hostage_killed` = 0, `playtime` = 0 WHERE `steam` = 'STEAM_%i:%i:%i';", g_sTableName, g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1);
-	g_hDatabase.Query(SQL_ResetDataPlayer, sQuery, iClient ? GetClientUserId(iClient) : 0, DBPrio_High);
+	if(g_hDatabase)
+	{
+		char sQuery[512];
+		g_hDatabase.Format(sQuery, sizeof(sQuery), "UPDATE `%s_maps` SET `countplays` = 0, `kills` = 0, `deaths` = 0, `rounds_overall` = 0, `rounds_ct` = 0, `rounds_t` = 0, `bomb_planted` = 0, `bomb_defused` = 0, `hostage_rescued` = 0, `hostage_killed` = 0, `playtime` = 0 WHERE `steam` = 'STEAM_%i:%i:%i';", g_sTableName, g_iEngine == Engine_CSGO, g_iAccountID[iClient] & 1, g_iAccountID[iClient] >>> 1);
+		g_hDatabase.Query(SQL_ResetDataPlayer, sQuery, iClient ? GetClientUserId(iClient) : 0);
+	}
 }
 
 public void SQL_ResetDataPlayer(Database db, DBResultSet dbRs, const char[] sError, int iUserID)

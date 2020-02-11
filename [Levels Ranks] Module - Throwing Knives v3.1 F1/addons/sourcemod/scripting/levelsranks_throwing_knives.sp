@@ -12,7 +12,7 @@ int		g_iTKCount,
 		g_iTKLevel[64],
 		g_iTKnivesCount[64];
 
-public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = PLUGIN_VERSION};
+public Plugin myinfo = {name = PLUGIN_NAME, author = PLUGIN_AUTHOR, version = "v3.1 F1"};
 public void OnPluginStart()
 {
 	if(LR_IsLoaded())
@@ -65,7 +65,7 @@ void ConfigLoad()
 public void PlayerSpawn(Handle event, char[] name, bool dontBroadcast)
 {	
 	int iClient = GetClientOfUserId(GetEventInt(event, "userid"));
-	if(iClient && IsClientInGame(iClient))
+	if(iClient && IsClientInGame(iClient) && !IsFakeClient(iClient))
 	{
 		int iRank = LR_GetClientInfo(iClient, ST_RANK);
 		TKC_SetClientKnives(iClient, 0, false);

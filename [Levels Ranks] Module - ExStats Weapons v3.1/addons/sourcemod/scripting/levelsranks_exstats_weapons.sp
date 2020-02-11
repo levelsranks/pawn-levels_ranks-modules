@@ -30,14 +30,15 @@ public void OnPluginStart()
 {
 	g_iEngine = GetEngineVersion();
 	g_hWeapons = new StringMap();
-	LoadTranslations("common.phrases");
-	LoadTranslations("lr_module_exweapons.phrases");
-	ConfigLoad();
 
 	if(LR_IsLoaded())
 	{
 		LR_OnCoreIsReady();
 	}
+
+	LoadTranslations("common.phrases");
+	LoadTranslations("lr_module_exweapons.phrases");
+	ConfigLoad();
 }
 
 public void LR_OnCoreIsReady()
@@ -57,13 +58,19 @@ public void LR_OnCoreIsReady()
 	LR_GetTitleMenu(g_sPluginTitle, sizeof(g_sPluginTitle));
 
 	char sQuery[512];
-	SQL_LockDatabase(g_hDatabase);
-	FormatEx(sQuery, sizeof(sQuery), g_sCreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET=utf8 COLLATE utf8_general_ci");
-	SQL_FastQuery(g_hDatabase, sQuery);
-	SQL_UnlockDatabase(g_hDatabase);
+	g_hDatabase.Format(sQuery, sizeof(sQuery), g_sCreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET=utf8 COLLATE utf8_general_ci");
+	g_hDatabase.Query(SQL_CreateTable, sQuery, 0, DBPrio_High);
+}
+
+public void SQL_CreateTable(Database db, DBResultSet dbRs, const char[] sError, int iData)
+{
+	if(!dbRs)
+	{
+		LogError(PLUGIN_NAME ... " : SQL_CreateTable - error while working with data (%s)", sError);
+		return;
+	}
 
 	g_hDatabase.SetCharset("utf8");
-
 	for(int iClient = 1; iClient <= MaxClients; iClient++)
 	{
 		if(LR_GetClientStatus(iClient))
