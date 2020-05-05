@@ -10,8 +10,15 @@
 #endif
 
 #pragma newdecls required
+#pragma tabsize 4
 
 #include <lvl_ranks>
+
+#define SPPP_COMPILER 0
+
+#if !SPPP_COMPILER
+	#define decl static
+#endif
 
 #define MAX_UKTYPES 9
 #define UnusualKill_None 0
@@ -85,51 +92,33 @@ ORDER BY \
 	`%s` \
 DESC LIMIT 10;"
 
-#define RadiusSmoke 100.0
+bool              g_bMessages,
+                  g_bOPKill,
+                  g_bShowItem[MAX_UKTYPES];
 
-enum struct UK_Settings
-{
-	ArrayList ProhibitedWeapons;
-	ArrayList NoScopeWeapons;
-}
+int               g_iAccountID[MAXPLAYERS+1],
+                  g_iExp[MAX_UKTYPES],
+                  g_iExpMode,
+                  g_iWhirlInterval = 2,
+                  g_iUK[MAXPLAYERS+1][MAX_UKTYPES],
+                  m_iClip1,
+                  m_hActiveWeapon,
+                  m_vecVelocity;
 
-bool			g_bMessages,
-				g_bOPKill,
-				g_bShowItem[MAX_UKTYPES];
+float             g_flRotation[MAXPLAYERS+1],
+                  g_flMinLenVelocity = 100.0,
+                  g_flWhirl = 200.0;
 
-int				g_iAccountID[MAXPLAYERS+1],
-				g_iExp[MAX_UKTYPES],
-				g_iExpMode,
-				g_iMinSmokes,
-				g_iWhirlInterval = 2,
-				g_iUK[MAXPLAYERS+1][MAX_UKTYPES],
-				m_bIsScoped,
-				m_iClip1,
-				m_hActiveWeapon,
-				m_flFlashDuration,
-				m_vecOrigin,
-				m_vecVelocity;
+char              g_sTableName[32],
+                  g_sMenuTitle[64];
 
-float			g_flRotation[MAXPLAYERS+1],
-				g_flMinFlash = 5.0,
-				g_flMinLenVelocity = 100.0,
-				g_flWhirl = 200.0;
+static const char g_sNameUK[][] = {"OP", "Penetrated", "NoScope", "Run", "Jump", "Flash", "Smoke", "Whirl", "LastClip"};
 
-char			g_sTableName[32],
-				g_sMenuTitle[64];
+EngineVersion     g_iEngine;
 
-static const char
-				g_sNameUK[][] = {"OP", "Penetrated", "NoScope", "Run", "Jump", "Flash", "Smoke", "Whirl", "LastClip"},
-				g_sMenuStatsItem[] = "unusualkills_stats",
-				g_sMenuTopItem[] = "unusualkills_top";
+Database          g_hDatabase;
 
-EngineVersion	g_iEngine;
-
-Database		g_hDatabase;
-
-UK_Settings		g_hSettings;
-
-ArrayList		g_hSmokeEnt;
+ArrayList         g_hProhibitedWeapons;
 
 // levelsranks_unusualkills.sp
 public Plugin myinfo = 
@@ -144,8 +133,6 @@ public void OnPluginStart()
 {
 	LoadTranslations("core.phrases");
 
-	g_hSmokeEnt = new ArrayList();
-
 	if((g_iEngine = GetEngineVersion()) == Engine_SourceSDK2006)
 	{
 		LoadTranslations("lr_unusualkills_old.phrases");
@@ -159,12 +146,8 @@ public void OnPluginStart()
 
 	LoadTranslations("lr_unusualkills_menu.phrases");
 
-	// m_angRotation = FindSendPropInfo("CBaseEntity", "m_angRotation");
-	m_bIsScoped = FindSendPropInfo("CCSPlayer", "m_bIsScoped");
 	m_iClip1 = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
 	m_hActiveWeapon = FindSendPropInfo("CBasePlayer", "m_hActiveWeapon");
-	m_flFlashDuration = FindSendPropInfo("CCSPlayer", "m_flFlashDuration");
-	m_vecOrigin = FindSendPropInfo("CBaseEntity", "m_vecOrigin");
 	m_vecVelocity = FindSendPropInfo("CBasePlayer", "m_vecVelocity[0]");
 
 	if(LR_IsLoaded())
@@ -175,7 +158,6 @@ public void OnPluginStart()
 
 public void LR_OnCoreIsReady()
 {
-	LR_Hook(LR_OnPlayerLoaded, LoadDataPlayer);
 	LR_Hook(LR_OnResetPlayerStats, OnResetPlayerStats);
 	LR_Hook(LR_OnDatabaseCleanup, OnDatabaseCleanup);
 
@@ -184,43 +166,33 @@ public void LR_OnCoreIsReady()
 
 	LoadSettings();
 
-	HookEvent("round_start", view_as<EventHook>(OnRoundStart), EventHookMode_PostNoCopy);
-	HookEvent("smokegrenade_detonate", OnSmokeEvent);
-	HookEventEx("smokegrenade_expired", OnSmokeEvent);
+	HookEvent("round_start", OnRoundStart, EventHookMode_PostNoCopy);
 
 	LR_GetTableName(g_sTableName, sizeof(g_sTableName));
 
-	char sQuery[512];
+	decl char sQuery[512];
 
 	FormatEx(sQuery, sizeof(sQuery), g_sSQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
 	(g_hDatabase = LR_GetDatabase()).Query(SQL_Callback, sQuery, DBPrio_High);
-
-	for(int i = MaxClients + 1; --i;)
-	{
-		if(LR_GetClientStatus(i))
-		{
-			LoadDataPlayer(i, GetSteamAccountID(i));
-		}
-	}
 }
 
 void LoadSettings()
 {
 	static int  iUKSymbolTypes[] = {127, 127, 127, 127, 127, 5, 127, 127, 127, 4, 127, 8, 127, 2, 0, 1, 127, 3, 6, 127, 127, 127, 7};
 
-	static char sPath[PLATFORM_MAX_PATH], sBuffer[512];
+	static char sPath[PLATFORM_MAX_PATH];
+
+	decl char   sBuffer[512];
 
 	KeyValues hKv = new KeyValues("LR_UnusualKills");
 
 	if(sPath[0])
 	{
-		g_hSettings.ProhibitedWeapons.Clear();
-		g_hSettings.NoScopeWeapons.Clear();
+		g_hProhibitedWeapons.Clear();
 	}
 	else
 	{
-		g_hSettings.ProhibitedWeapons = new ArrayList(64);
-		g_hSettings.NoScopeWeapons = new ArrayList(64);
+		g_hProhibitedWeapons = new ArrayList(64);
 
 		BuildPath(Path_SM, sPath, sizeof(sPath), "configs/levels_ranks/UnusualKills.ini");
 	}
@@ -241,7 +213,7 @@ void LoadSettings()
 	LR_GetTitleMenu(g_sMenuTitle, sizeof(g_sMenuTitle));
 
 	hKv.GetString("ProhibitedWeapons", sBuffer, sizeof(sBuffer), "hegrenade,molotov,incgrenade");
-	ExplodeInArrayList(sBuffer, g_hSettings.ProhibitedWeapons);
+	ExplodeInArrayList(sBuffer, g_hProhibitedWeapons);
 
 	hKv.JumpToKey("TypeKills");	/**/
 
@@ -259,20 +231,9 @@ void LoadSettings()
 				LogError("%s: \"LR_UnusualKills\" -> \"Settings\" -> \"TypeKills\" -> \"%s\" - invalid selection", sPath, sBuffer);
 			}
 
-			case 2:
-			{
-				hKv.GetString("weapons", sBuffer, sizeof(sBuffer));
-				ExplodeInArrayList(sBuffer, g_hSettings.NoScopeWeapons);
-			}
-
 			case 3:
 			{
 				g_flMinLenVelocity = hKv.GetFloat("minspeed", 100.0);
-			}
-
-			case 5:
-			{
-				g_flMinFlash = hKv.GetFloat("degree") * 10.0;
 			}
 
 			case 7:
@@ -283,7 +244,7 @@ void LoadSettings()
 		}
 
 		g_iExp[iUKType] = g_iExpMode ? hKv.GetNum("exp") : 0;
-		g_bShowItem[iUKType] = view_as<bool>(hKv.GetNum("menu"));
+		g_bShowItem[iUKType] = hKv.GetNum("menu") != 0;
 	}
 	while(hKv.GotoNextKey());
 
@@ -294,12 +255,12 @@ void ExplodeInArrayList(const char[] sText, ArrayList hArray)
 {
 	int iLastSize = 0;
 
+	decl char sBuf[64];
+
 	for(int i = 0, iLen = strlen(sText) + 1; i != iLen;)
 	{
 		if(iLen == ++i || sText[i - 1] == ',')
 		{
-			char sBuf[64];
-
 			strcopy(sBuf, i - iLastSize, sText[iLastSize]);
 			hArray.PushString(sBuf);
 
@@ -313,28 +274,26 @@ void ExplodeInArrayList(const char[] sText, ArrayList hArray)
 	}
 }
 
-void OnRoundStart()
+void OnRoundStart(Event hEvent, const char[] sName, bool bDontBroadcast)
 {
 	g_bOPKill = false;
-	g_hSmokeEnt.Clear();
-	g_iMinSmokes = 0;
 }
 
 void OnPlayerKilled(Event hEvent, int& iExpGive)
 {
 	if(LR_CheckCountPlayers())
 	{
-		static char sWeapon[32];
+		decl char sWeapon[32];
 
 		hEvent.GetString("weapon", sWeapon, sizeof(sWeapon));
 
-		if(g_hSettings.ProhibitedWeapons.FindString(sWeapon) == -1 && sWeapon[0] != 'k' && sWeapon[2] != 'y')
+		if(g_hProhibitedWeapons.FindString(sWeapon) == -1 && sWeapon[0] != 'k' && sWeapon[2] != 'y')
 		{
 			int iAttacker = GetClientOfUserId(hEvent.GetInt("attacker")),
 				iActiveWeapon = GetEntDataEnt2(iAttacker, m_hActiveWeapon),
 				iUKFlags = UnusualKill_None;
 
-			static float vecVelocity[3];
+			decl float vecVelocity[3];
 
 			if(!g_bOPKill)
 			{
@@ -347,7 +306,7 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 				iUKFlags |= UnusualKill_Penetrated;
 			}
 
-			if(g_iEngine == Engine_CSGO && !GetEntData(iAttacker, m_bIsScoped) && g_hSettings.NoScopeWeapons.FindString(sWeapon) != -1)
+			if(hEvent.GetBool("noscope"))
 			{
 				iUKFlags |= UnusualKill_NoScope;
 			}
@@ -365,39 +324,14 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 				iUKFlags |= UnusualKill_Run;
 			}
 
-			if(g_flMinFlash < GetEntDataFloat(iAttacker, m_flFlashDuration))
+			if(hEvent.GetBool("attackerblind"))
 			{
 				iUKFlags |= UnusualKill_Flash;
 			}
 
-			for(int iClient = GetClientOfUserId(hEvent.GetInt("userid")), i = g_iMinSmokes, iSmokeEntity; i != g_hSmokeEnt.Length;)
+			if(hEvent.GetBool("thrusmoke"))
 			{
-				if(IsValidEntity((iSmokeEntity = g_hSmokeEnt.Get(i++))))
-				{
-					static float vecClient[3], vecAttacker[3], vecSmoke[3],
-								 flDistance, flDistance2, flDistance3;
-
-					GetEntDataVector(iClient, m_vecOrigin, vecClient);
-					GetEntDataVector(iAttacker, m_vecOrigin, vecAttacker);
-					GetEntDataVector(iSmokeEntity, m_vecOrigin, vecSmoke);
-
-					vecClient[2] -= 64.0;
-
-					flDistance = GetVectorDistance(vecClient, vecSmoke);
-					flDistance2 = GetVectorDistance(vecAttacker, vecSmoke);
-					flDistance3 = GetVectorDistance(vecClient, vecAttacker);
-
-					if((flDistance + flDistance2) * 0.7 <= flDistance3 + RadiusSmoke)
-					{
-						float flHalfPerimeter = (flDistance + flDistance2 + flDistance3) / 2.0;
-
-						if((2.0 * SquareRoot(flHalfPerimeter * (flHalfPerimeter - flDistance) * (flHalfPerimeter - flDistance2) * (flHalfPerimeter - flDistance3))) / flDistance3 < RadiusSmoke)
-						{
-							iUKFlags |= UnusualKill_Smoke;
-							break;
-						}
-					}
-				}
+				iUKFlags |= UnusualKill_Smoke;
 			}
 
 			if((g_flRotation[iAttacker] < 0.0 ? -g_flRotation[iAttacker] : g_flRotation[iAttacker]) > g_flWhirl)
@@ -426,13 +360,10 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 						{
 							if(g_iExpMode == 1)
 							{
-								if(g_bMessages)
+								if(g_bMessages && LR_ChangeClientValue(iAttacker, g_iExp[iType]))
 								{
-									if(LR_ChangeClientValue(iAttacker, g_iExp[iType]))
-									{
-										FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
-										LR_PrintToChat(iAttacker, true, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
-									}
+									FormatEx(sBuffer, sizeof(sBuffer), g_iExp[iType] > 0 ? "+%d" : "%d", g_iExp[iType]);
+									LR_PrintToChat(iAttacker, true, "%T", g_sNameUK[iType], iAttacker, LR_GetClientInfo(iAttacker, ST_EXP), sBuffer);
 								}
 							}
 							else
@@ -455,19 +386,6 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 	}
 }
 
-void OnSmokeEvent(Event hEvent, const char[] sName, bool bDontBroadcast)
-{
-	if(sName[13] == 'd')
-	{
-		g_hSmokeEnt.Push(hEvent.GetInt("entityid"));
-	}
-	else if(++g_iMinSmokes == g_hSmokeEnt.Length)
-	{
-		g_hSmokeEnt.Clear();
-		g_iMinSmokes = 0;
-	}
-}
-
 public void OnPlayerRunCmdPost(int iClient, int iButtons, int iImpulse, const float flVel[3], const float flAngles[3], int iWeapon, int iSubType, int iCmdNum, int iTickCount, int iSeed, const int iMouse[2])
 {
 	static int iInterval[MAXPLAYERS+1];
@@ -479,9 +397,12 @@ public void OnPlayerRunCmdPost(int iClient, int iButtons, int iImpulse, const fl
 	}
 }
 
+static const char g_sMenuStatsItem[] = "unusualkills_stats",
+                  g_sMenuTopItem[] = "unusualkills_top";
+
 void LR_OnMenuCreated(LR_MenuType MenuType, int iClient, Menu hMenu)
 {
-	static char sText[64];
+	decl char sText[64];
 
 	if(MenuType == LR_TopMenu)
 	{
@@ -514,7 +435,7 @@ void MenuShowTops(int iClient, int iSlot = 0)
 {
 	Menu hMenu = new Menu(MenuShowTops_Callback, MenuAction_Select);
 
-	static char sText[96], sTrans[32];
+	decl char sText[96], sTrans[32];
 
 	hMenu.SetTitle("%s | %T\n ", g_sMenuTitle, "MenuTop_UnusualKills", iClient);
 
@@ -542,7 +463,7 @@ int MenuShowTops_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot
 	{
 		case MenuAction_Select:
 		{
-			static char sInfo[2], sQuery[512];
+			decl char sInfo[2], sQuery[512];
 
 			hMenu.GetItem(iSlot, sInfo, sizeof(sInfo));
 
@@ -571,7 +492,9 @@ void MenuShowInfo(int iClient)
 
 	int iKills = LR_GetClientInfo(iClient, ST_KILLS);
 
-	char sText[768], sTrans[48];
+	char sText[768];
+
+	decl char sTrans[48];
 
 	if(!iKills)
 	{
@@ -609,7 +532,7 @@ int MenuShowInfo_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot
 
 void LoadDataPlayer(int iClient, int iAccountID)
 {
-	static char sQuery[256];
+	decl char sQuery[256];
 
 	FormatEx(sQuery, sizeof(sQuery), SQL_LoadData, g_sTableName, GetSteamID2(g_iAccountID[iClient] = iAccountID));
 	g_hDatabase.Query(SQL_Callback, sQuery, GetClientUserId(iClient) << 4);
@@ -617,7 +540,7 @@ void LoadDataPlayer(int iClient, int iAccountID)
 
 void OnResetPlayerStats(int iClient, int iAccountID)
 {
-	static char sQuery[384];
+	decl char sQuery[384];
 
 	if(iClient)
 	{
@@ -635,31 +558,31 @@ void OnDatabaseCleanup(LR_CleanupType CleanupType, Transaction hTransaction)
 {
 	if(CleanupType == LR_AllData || CleanupType == LR_StatsData)
 	{
-		static char sQuery[512];
+		decl char sQuery[512];
 
 		FormatEx(sQuery, sizeof(sQuery), "DROP TABLE IF EXISTS `%s_unusualkills`;", g_sTableName);
 		hTransaction.AddQuery(sQuery);
 
 		FormatEx(sQuery, sizeof(sQuery), g_sSQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
-		g_hDatabase.Query(SQL_Callback, sQuery);
+		g_hDatabase.Query(SQL_Callback, sQuery, -3);
 	}
 }
 
-public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] sError, int iIndex)
+public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] sError, int iData)
 {
-	if(iIndex)
+	if(iData)		// Others
 	{
 		if(!hResult)
 		{
-			LogError("SQL_Callback: error when sending the request (%d) - %s", iIndex, sError);
+			LogError("SQL_Callback: error when sending the request (%d) - %s", iData, sError);
 			return;
 		}
 
-		int iClient = GetClientOfUserId(iIndex >> 4);
+		int iClient = GetClientOfUserId(iData >> 4);
 
 		if(iClient)
 		{
-			if(iIndex &= 0xF)
+			if(iData &= 0xF)
 			{
 				Menu hMenu = new Menu(MenuShowTop_Callback, MenuAction_Select);
 
@@ -680,7 +603,7 @@ public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] s
 					FormatEx(sText[strlen(sText)], 16, "%T\n", "NoData", iClient);
 				}
 
-				FormatEx(sTrans, sizeof(sTrans), "MenuTop_%s", g_sNameUK[iIndex - 1]);
+				FormatEx(sTrans, sizeof(sTrans), "MenuTop_%s", g_sNameUK[iData - 1]);
 				hMenu.SetTitle("%s | %T\n \n%s", g_sMenuTitle, sTrans, iClient, sText);
 
 				FormatEx(sText, sizeof(sText), "%T", "Back", iClient);
@@ -700,7 +623,7 @@ public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] s
 			}
 			else
 			{
-				static char sQuery[256];
+				decl char sQuery[256];
 
 				FormatEx(sQuery, sizeof(sQuery), SQL_CreateData, g_sTableName, GetSteamID2(g_iAccountID[iClient]));
 				g_hDatabase.Query(SQL_Callback, sQuery);
@@ -711,6 +634,18 @@ public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] s
 				}
 			}
 		}
+	}
+	else		// CreateTable
+	{
+		for(int i = MaxClients + 1; --i;)
+		{
+			if(LR_GetClientStatus(i))
+			{
+				LoadDataPlayer(i, GetSteamAccountID(i));
+			}
+		}
+
+		LR_Hook(LR_OnPlayerLoaded, LoadDataPlayer);
 	}
 }
 
