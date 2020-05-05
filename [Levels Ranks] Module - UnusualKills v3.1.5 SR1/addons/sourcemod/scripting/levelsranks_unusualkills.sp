@@ -123,9 +123,9 @@ ArrayList         g_hProhibitedWeapons;
 // levelsranks_unusualkills.sp
 public Plugin myinfo = 
 {
-	name = "[LR] Module - Unusual Kills", 
-	author = "Wend4r", 
-	version = PLUGIN_VERSION, 
+	name = "[LR] Module - Unusual Kills",
+	author = "Wend4r",
+	version = PLUGIN_VERSION ... " SR1",
 	url = "Discord: Wend4r#0001 | VK: vk.com/wend4r"
 };
 
@@ -173,7 +173,7 @@ public void LR_OnCoreIsReady()
 	decl char sQuery[512];
 
 	FormatEx(sQuery, sizeof(sQuery), g_sSQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
-	(g_hDatabase = LR_GetDatabase()).Query(SQL_Callback, sQuery, DBPrio_High);
+	(g_hDatabase = LR_GetDatabase()).Query(SQL_Callback, sQuery, _, DBPrio_High);
 }
 
 void LoadSettings()
@@ -379,7 +379,7 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 					sColumns[strlen(sColumns) - 2] = '\0';
 
 					FormatEx(sQuery, sizeof(sQuery), SQL_SaveData, g_sTableName, sColumns, GetSteamID2(g_iAccountID[iAttacker]));
-					g_hDatabase.Query(SQL_Callback, sQuery);
+					g_hDatabase.Query(SQL_Callback, sQuery, -4);
 				}
 			}
 		}
@@ -626,7 +626,7 @@ public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] s
 				decl char sQuery[256];
 
 				FormatEx(sQuery, sizeof(sQuery), SQL_CreateData, g_sTableName, GetSteamID2(g_iAccountID[iClient]));
-				g_hDatabase.Query(SQL_Callback, sQuery);
+				g_hDatabase.Query(SQL_Callback, sQuery, _, DBPrio_High);
 
 				for(int i = 0; i != MAX_UKTYPES; i++)
 				{
