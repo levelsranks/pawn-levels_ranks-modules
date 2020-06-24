@@ -14,7 +14,7 @@
 
 #include <lvl_ranks>
 
-#define SPPP_COMPILER 0
+#define SPPP_COMPILER 1
 
 #if !SPPP_COMPILER
 	#define decl static
@@ -32,7 +32,7 @@
 #define UnusualKill_Whirl (1 << 7)
 #define UnusualKill_LastClip (1 << 8)
 
-static const char g_sSQL_CreateTable[] = \
+static const char g_sSQL_CREATE_TABLE[] = \
 "CREATE TABLE IF NOT EXISTS `%s_unusualkills` \
 (\
 	`SteamID` varchar(22) PRIMARY KEY, \
@@ -47,9 +47,9 @@ static const char g_sSQL_CreateTable[] = \
 	`LastClip` int NOT NULL DEFAULT 0\
 )%s";
 
-#define SQL_CreateData "INSERT INTO `%s_unusualkills` (`SteamID`) VALUES ('%s');"
+#define SQL_CREATE_DATA "INSERT INTO `%s_unusualkills` (`SteamID`) VALUES ('%s');"
 
-#define SQL_LoadData \
+#define SQL_LOAD_DATA \
 "SELECT \
 	`OP`, \
 	`Penetrated`, \
@@ -62,9 +62,9 @@ static const char g_sSQL_CreateTable[] = \
 	`LastClip` \
 FROM `%s_unusualkills` WHERE `SteamID` = '%s';"
 
-#define SQL_SaveData "UPDATE `%s_unusualkills` SET %s WHERE `SteamID` = '%s';"
+#define SQL_SAVE_DATA "UPDATE `%s_unusualkills` SET %s WHERE `SteamID` = '%s';"
 
-#define SQL_UpdateResetData \
+#define SQL_UPDATE_RESET_DATA \
 "UPDATE `%s_unusualkills` SET \
 	`OP` = 0, \
 	`Penetrated` = 0, \
@@ -78,7 +78,7 @@ FROM `%s_unusualkills` WHERE `SteamID` = '%s';"
 WHERE \
 	`SteamID` = '%s';"
 
-#define SQL_PrintTop \
+#define SQL_PRINT_TOP \
 "SELECT \
 	`name`, \
 	`%s` \
@@ -96,16 +96,16 @@ bool              g_bMessages,
                   g_bOPKill,
                   g_bShowItem[MAX_UKTYPES];
 
-int               g_iAccountID[MAXPLAYERS+1],
+int               g_iAccountID[MAXPLAYERS + 1],
                   g_iExp[MAX_UKTYPES],
                   g_iExpMode,
                   g_iWhirlInterval = 2,
-                  g_iUK[MAXPLAYERS+1][MAX_UKTYPES],
+                  g_iUK[MAXPLAYERS + 1][MAX_UKTYPES],
                   m_iClip1,
                   m_hActiveWeapon,
                   m_vecVelocity;
 
-float             g_flRotation[MAXPLAYERS+1],
+float             g_flRotation[MAXPLAYERS + 1],
                   g_flMinLenVelocity = 100.0,
                   g_flWhirl = 200.0;
 
@@ -125,7 +125,7 @@ public Plugin myinfo =
 {
 	name = "[LR] Module - Unusual Kills",
 	author = "Wend4r",
-	version = PLUGIN_VERSION ... " SR1",
+	version = PLUGIN_VERSION ... " SR2",
 	url = "Discord: Wend4r#0001 | VK: vk.com/wend4r"
 };
 
@@ -172,7 +172,7 @@ public void LR_OnCoreIsReady()
 
 	decl char sQuery[512];
 
-	FormatEx(sQuery, sizeof(sQuery), g_sSQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
+	FormatEx(sQuery, sizeof(sQuery), g_sSQL_CREATE_TABLE, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
 	(g_hDatabase = LR_GetDatabase()).Query(SQL_Callback, sQuery, _, DBPrio_High);
 }
 
@@ -347,8 +347,8 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 			if(iUKFlags)
 			{
 				char sBuffer[8],
-					 sColumns[MAX_UKTYPES * 16],
-					 sQuery[256];
+					 sColumns[MAX_UKTYPES * 18],
+					 sQuery[64 + MAX_UKTYPES * 18];
 
 				for(int iType = 0; iType != MAX_UKTYPES; iType++)
 				{
@@ -378,7 +378,7 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 				{
 					sColumns[strlen(sColumns) - 2] = '\0';
 
-					FormatEx(sQuery, sizeof(sQuery), SQL_SaveData, g_sTableName, sColumns, GetSteamID2(g_iAccountID[iAttacker]));
+					FormatEx(sQuery, sizeof(sQuery), SQL_SAVE_DATA, g_sTableName, sColumns, GetSteamID2(g_iAccountID[iAttacker]));
 					g_hDatabase.Query(SQL_Callback, sQuery, -4);
 				}
 			}
@@ -388,7 +388,7 @@ void OnPlayerKilled(Event hEvent, int& iExpGive)
 
 public void OnPlayerRunCmdPost(int iClient, int iButtons, int iImpulse, const float flVel[3], const float flAngles[3], int iWeapon, int iSubType, int iCmdNum, int iTickCount, int iSeed, const int iMouse[2])
 {
-	static int iInterval[MAXPLAYERS+1];
+	static int iInterval[MAXPLAYERS + 1];
 
 	if(IsPlayerAlive(iClient) && (g_flRotation[iClient] += iMouse[0] / 50.0) && iInterval[iClient] - GetTime() < 1)
 	{
@@ -467,7 +467,7 @@ int MenuShowTops_Callback(Menu hMenu, MenuAction mAction, int iClient, int iSlot
 
 			hMenu.GetItem(iSlot, sInfo, sizeof(sInfo));
 
-			FormatEx(sQuery, sizeof(sQuery), SQL_PrintTop, g_sNameUK[sInfo[0]], g_sTableName, g_sTableName, g_sNameUK[sInfo[0]]);
+			FormatEx(sQuery, sizeof(sQuery), SQL_PRINT_TOP, g_sNameUK[sInfo[0]], g_sTableName, g_sTableName, g_sNameUK[sInfo[0]]);
 			g_hDatabase.Query(SQL_Callback, sQuery, GetClientUserId(iClient) << 4 | sInfo[0] + 1);
 		}
 
@@ -534,7 +534,7 @@ void LoadDataPlayer(int iClient, int iAccountID)
 {
 	decl char sQuery[256];
 
-	FormatEx(sQuery, sizeof(sQuery), SQL_LoadData, g_sTableName, GetSteamID2(g_iAccountID[iClient] = iAccountID));
+	FormatEx(sQuery, sizeof(sQuery), SQL_LOAD_DATA, g_sTableName, GetSteamID2(g_iAccountID[iClient] = iAccountID));
 	g_hDatabase.Query(SQL_Callback, sQuery, GetClientUserId(iClient) << 4);
 }
 
@@ -550,7 +550,7 @@ void OnResetPlayerStats(int iClient, int iAccountID)
 		}
 	}
 
-	FormatEx(sQuery, sizeof(sQuery), SQL_UpdateResetData, g_sTableName, GetSteamID2(iAccountID));
+	FormatEx(sQuery, sizeof(sQuery), SQL_UPDATE_RESET_DATA, g_sTableName, GetSteamID2(iAccountID));
 	g_hDatabase.Query(SQL_Callback, sQuery, -2);
 }
 
@@ -563,7 +563,7 @@ void OnDatabaseCleanup(LR_CleanupType CleanupType, Transaction hTransaction)
 		FormatEx(sQuery, sizeof(sQuery), "DROP TABLE IF EXISTS `%s_unusualkills`;", g_sTableName);
 		hTransaction.AddQuery(sQuery);
 
-		FormatEx(sQuery, sizeof(sQuery), g_sSQL_CreateTable, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
+		FormatEx(sQuery, sizeof(sQuery), g_sSQL_CREATE_TABLE, g_sTableName, LR_GetDatabaseType() ? ";" : " CHARSET = utf8 COLLATE utf8_general_ci;");
 		g_hDatabase.Query(SQL_Callback, sQuery, -3);
 	}
 }
@@ -625,8 +625,8 @@ public void SQL_Callback(Database hDatabase, DBResultSet hResult, const char[] s
 			{
 				decl char sQuery[256];
 
-				FormatEx(sQuery, sizeof(sQuery), SQL_CreateData, g_sTableName, GetSteamID2(g_iAccountID[iClient]));
-				g_hDatabase.Query(SQL_Callback, sQuery, _, DBPrio_High);
+				FormatEx(sQuery, sizeof(sQuery), SQL_CREATE_DATA, g_sTableName, GetSteamID2(g_iAccountID[iClient]));
+				g_hDatabase.Query(SQL_Callback, sQuery, -5, DBPrio_High);
 
 				for(int i = 0; i != MAX_UKTYPES; i++)
 				{
