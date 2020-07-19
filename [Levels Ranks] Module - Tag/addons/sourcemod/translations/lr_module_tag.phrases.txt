@@ -2,14 +2,16 @@
 {
 	"TagRankOff"
 	{
-		"en"		"Tag rank [off]"
+		"en"		"Tag Rank [OFF]"
+		"pt"		"Tag Rank [OFF]"
 		"ru"		"Ранк-тег [выкл]"
 		"ua"		"Ранк-тег [викл]"
 		"chi"		"等级前缀 [已禁用]"
 	}
 	"TagRankOn"
 	{
-		"en"		"Tag rank [on]"
+		"en"		"Tag Rank [ON]"
+		"pt"		"Tag Rank [ON]"
 		"ru"		"Ранк-тег [вкл]"
 		"ua"		"Ранк-тег [вкл]"
 		"chi"		"等级前缀 [已启用]"

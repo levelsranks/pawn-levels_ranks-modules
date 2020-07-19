@@ -9,72 +9,72 @@
 	}
 	"MenuTop_UnusualKills"
 	{
-		"en"			"TOP players [Unusual kills]"
+		"en"			"TOP Players [Unusual Kills]"
 		"ru"			"TOP игроков [Необычные убийства]"
 		"ua"			"ТОП гравців [Незвичайні вбивства]"
 		"chi"			"不寻常击杀方式击杀排名前十"
 	}
 	"MenuTop_OP"
 	{
-		"en"			"TOP-10 by open kills"
-		"ru"			"TOP-10 по первым убийствам"
-		"ua"			"TOP-10 перших вбивств"
+		"en"			"TOP 10 | Open Kills"
+		"ru"			"TOP 10 | по первым убийствам"
+		"ua"			"TOP 10 | перших вбивств"
 		"chi"			"首杀常用武器排名前十"
 	}
 	"MenuTop_Penetrated"
 	{
-		"en"			"TOP-10 by penetration kills"
-		"ru"			"TOP-10 по убийствам с прострелом"
-		"ua"			"TOP-10 вбивств за простріл"
+		"en"			"TOP 10 | Penetration Kills"
+		"ru"			"TOP 10 | по убийствам с прострелом"
+		"ua"			"TOP 10 | вбивств за простріл"
 		"chi"			"穿透击杀常用武器排名前十"
 	}
 	"MenuTop_NoScope"
 	{
-		"en"			"TOP-10 by NoScope kills"
-		"ru"			"TOP-10 по убийствам без прицела"
-		"ua"			"TOP-10 вбивств без прицілу"
+		"en"			"TOP 10 | NoScope Kills"
+		"ru"			"TOP 10 | по убийствам без прицела"
+		"ua"			"TOP 10 | вбивств без прицілу"
 		"chi"			"盲狙常用武器排名前十"
 	}
 	"MenuTop_Run"
 	{
-		"en"			"TOP-10 by run kills"
-		"ru"			"TOP-10 по убийствам на бегу"
-		"ua"			"TOP-10 вбивств на бігу"
+		"en"			"TOP 10 | Run Kills"
+		"ru"			"TOP 10 | по убийствам на бегу"
+		"ua"			"TOP 10 | вбивств на бігу"
 		"chi"			"跑打击杀常用武器排名前十"
 	}
 	"MenuTop_Jump"
 	{
-		"en"			"TOP-10 by jump kills"
-		"ru"			"TOP-10 по убийствам в прыжке"
-		"ua"			"TOP-10 вбивств в стрибку"
+		"en"			"TOP 10 | Jump Kkills"
+		"ru"			"TOP 10 | по убийствам в прыжке"
+		"ua"			"TOP 10 | вбивств в стрибку"
 		"chi"			"空中击杀常用武器排名前十"
 	}
 	"MenuTop_Flash"
 	{
-		"en"			"TOP-10 by light grenade kills"
-		"ru"			"TOP-10 по убийствам с ослеплением от световой гранаты"
-		"ua"			"TOP-10 вбивств з осліпленням від світлової гранати"
+		"en"			"TOP 10 | Light Grenade Kills"
+		"ru"			"TOP 10 | по убийствам с ослеплением от световой гранаты"
+		"ua"			"TOP 10 | вбивств з осліпленням від світлової гранати"
 		"chi"			"致盲击杀常用武器排名前十"
 	}
 	"MenuTop_Smoke"
 	{
-		"en"			"TOP-10 by in the smoke kills"
-		"ru"			"TOP-10 по убийствам в дым"
-		"ua"			"TOP-10 вбивств в дим"
+		"en"			"TOP 10 | In The Smoke Kills"
+		"ru"			"TOP 10 | по убийствам в дым"
+		"ua"			"TOP 10 | вбивств в дим"
 		"chi"			"穿烟击杀常用武器排名前十"
 	}
 	"MenuTop_Whirl"
 	{
-		"en"			"TOP-10 by with a reversal kills"
-		"ru"			"TOP-10 по убийствам с разворота"
-		"ua"			"TOP-10 вбивств з розвороту"
+		"en"			"TOP 10 | With a Reversal Kills"
+		"ru"			"TOP 10 | по убийствам с разворота"
+		"ua"			"TOP 10 | вбивств з розвороту"
 		"chi"			"大幅度转头击杀常用武器排名前十"
 	}
 	"MenuTop_LastClip"
 	{
-		"en"			"TOP-10 by last clip kills"
-		"ru"			"TOP-10 по убийствам последним патроном"
-		"ua"			"TOP-10 вбивств останнім патроном"
+		"en"			"TOP 10 | Last Clip Kills"
+		"ru"			"TOP 10 | по убийствам последним патроном"
+		"ua"			"TOP 10 | вбивств останнім патроном"
 		"chi"			"最后一发子弹击杀常用武器排名前十"
 	}
 	"MenuTop_Open"
@@ -87,7 +87,7 @@
 	}
 	"MenuItem_MyStatsSecondary"
 	{
-		"en"			"Statistics on unusual kills"
+		"en"			"Statistics On Unusual Kills"
 		"ru"			"Cтатистика по необычным убийствам"
 		"ua"			"Cтатистика незвичайних вбивств"
 		"chi"			"特殊方式击杀数据"
@@ -95,7 +95,7 @@
 	"MenuItem_OP"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"Open killing: {1} ({2}%%)"
+		"en"			"Open Killing: {1} ({2}%%)"
 		"ru"			"Первых убийств: {1} ({2}%%)"
 		"ua"			"Перших вбивств: {1} ({2}%%)"
 		"chi"			"首杀: {1} ({2}%%)"
@@ -119,7 +119,7 @@
 	"MenuItem_Run"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"On the run: {1} ({2}%%)"
+		"en"			"On The Run: {1} ({2}%%)"
 		"ru"			"На бегу: {1} ({2}%%)"
 		"ua"			"На бігу: {1} ({2}%%)"
 		"chi"			"跑打击杀: {1} ({2}%%)"
@@ -127,7 +127,7 @@
 	"MenuItem_Jump"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"A jump: {1} ({2}%%)"
+		"en"			"A Jump: {1} ({2}%%)"
 		"ru"			"В прыжке: {1} ({2}%%)"
 		"ua"			"В стрибку: {1} ({2}%%)"
 		"chi"			"空中击杀: {1} ({2}%%)"
@@ -135,7 +135,7 @@
 	"MenuItem_Flash"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"A light grenade: {1} ({2}%%)"
+		"en"			"A Light Grenade: {1} ({2}%%)"
 		"ru"			"С ослеплением от световой гранаты: {1} ({2}%%)"
 		"ua"			"З осліпленням від світлової гранати: {1} ({2}%%)"
 		"chi"			"致盲击杀: {1} ({2}%%)"
@@ -143,7 +143,7 @@
 	"MenuItem_Smoke"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"In the smoke: {1} ({2}%%)"
+		"en"			"In The Smoke: {1} ({2}%%)"
 		"ru"			"В дым: {1} ({2}%%)"
 		"ua"			"В дим: {1} ({2}%%)"
 		"chi"			"穿烟击杀: {1} ({2}%%)"
@@ -151,7 +151,7 @@
 	"MenuItem_Whirl"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"With a reversal: {1} ({2}%%)"
+		"en"			"With a Reversal: {1} ({2}%%)"
 		"ru"			"С разворота: {1} ({2}%%)"
 		"ua"			"З розвороту: {1} ({2}%%)"
 		"chi"			"大幅度转头击杀: {1} ({2}%%)"
@@ -159,7 +159,7 @@
 	"MenuItem_LastClip"
 	{
 		"#format"		"{1:i},{2:i}"
-		"en"			"Last clip: {1} ({2}%%)"
+		"en"			"Last Clip: {1} ({2}%%)"
 		"ru"			"Последним патроном: {1} ({2}%%)"
 		"ua"			"Останнім патроном: {1} ({2}%%)"
 		"chi"			"最后一发子弹击杀: {1} ({2}%%)"

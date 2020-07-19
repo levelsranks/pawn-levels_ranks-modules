@@ -3,23 +3,23 @@
 	"OP"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {GREEN}{1} [{2} for a open killing]"
+		"en"			"Your Exp: {GREEN}{1} [{2} for a open killing]"
 		"ru"			"Ваш опыт: {GREEN}{1} [{2} за первое убийство]"
-		"ua"			"Ваш досвід: {OLIVE}{1} [{2} за перше вбивство]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} за перше вбивство]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过首杀]"
 	}
 	"Penetrated"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {GREEN}{1} [{2} for a penetrated]"
+		"en"			"Your Exp: {GREEN}{1} [{2} for a penetrated]"
 		"ru"			"Ваш опыт: {GREEN}{1} [{2} за прострел]"
-		"ua"			"Ваш досвід: {OLIVE}{1} [{2} за простріл]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} за простріл]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过穿透击杀]"
 	}
 	"NoScope"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {GREEN}{1} [{2} no zoom]"
+		"en"			"Your Exp: {GREEN}{1} [{2} no zoom]"
 		"ru"			"Ваш опыт: {GREEN}{1} [{2} без прицела]"
 		"ua"			"Ваш досвід: {GREEN}{1} [{2} без прицілу]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过盲狙]"
@@ -27,7 +27,7 @@
 	"Run"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {GREEN}{1} [{2} on the run]"
+		"en"			"Your Exp: {GREEN}{1} [{2} on the run]"
 		"ru"			"Ваш опыт: {GREEN}{1} [{2} на бегу]"
 		"ua"			"Ваш досвід: {GREEN}{1} [{2} на бігу]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过跑打击杀]"
@@ -35,41 +35,41 @@
 	"Jump"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {OLIVE}{1} [{2} a jump kill]"
-		"ru"			"Ваш опыт: {OLIVE}{1} [{2} в прыжке]"
-		"ua"			"Ваш досвід: {OLIVE}{1} [{2} в стрибку]"
+		"en"			"Your Exp: {GREEN}{1} [{2} a jump kill]"
+		"ru"			"Ваш опыт: {GREEN}{1} [{2} в прыжке]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} в стрибку]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过空中击杀]"
 	}
 	"Flash"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {1} [{2} blinded by a light grenade]"
-		"ru"			"Ваш опыт: {1} [{2} с ослеплением от световой гранаты]"
-		"ua"			"Ваш досвід: {1} [{2} з осліпленням від светової гранати]"
+		"en"			"Your Exp: {GREEN}{1} [{2} blinded by a light grenade]"
+		"ru"			"Ваш опыт: {GREEN}{1} [{2} с ослеплением от световой гранаты]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} з осліпленням від светової гранати]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过致盲击杀]"
 	}
 	"Smoke"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {GRAY}{1} [{2} in the smoke]"
-		"ru"			"Ваш опыт: {GRAY}{1} [{2} в дым]"
-		"ua"			"Ваш досвід: {GRAY}{1} [{2} в дим]"
+		"en"			"Your Exp: {GREEN}{1} [{2} in the smoke]"
+		"ru"			"Ваш опыт: {GREEN}{1} [{2} в дым]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} в дим]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过穿烟击杀]"
 	}
 	"Whirl"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {OLIVE}{1} [{2} with a reversal]"
-		"ru"			"Ваш опыт: {OLIVE}{1} [{2} с разворота]"
-		"ua"			"Ваш досвід: {OLIVE}{1} [{2} з розвороту]"
+		"en"			"Your Exp: {GREEN}{1} [{2} with a reversal]"
+		"ru"			"Ваш опыт: {GREEN}{1} [{2} с разворота]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} з розвороту]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 通过大幅度转头击杀]"
 	}
 	"LastClip"
 	{
 		"#format"		"{1:i},{2:s}"
-		"en"			"Your exp: {OLIVE}{1} [{2} a last clip]"
-		"ru"			"Ваш опыт: {OLIVE}{1} [{2} последним патроном]"
-		"ua"			"Ваш досвід: {OLIVE}{1} [{2} останнім патроном]"
+		"en"			"Your Exp: {GREEN}{1} [{2} a last clip]"
+		"ru"			"Ваш опыт: {GREEN}{1} [{2} последним патроном]"
+		"ua"			"Ваш досвід: {GREEN}{1} [{2} останнім патроном]"
 		"chi"			"你的经验值: {GREEN}{1} [{2} 最后一发子弹]"
 	}
 }

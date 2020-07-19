@@ -2,41 +2,47 @@
 {
 	"WeaponStatistics"
 	{
-		"en"		"Weapon statistics"
+		"en"		"Weapon Statistics"
+		"pt"		"Weapon Statistics"
 		"ru"		"Статистика по оружиям"
 		"ua"		"Статистика по зброї"
 		"chi"		"武器统计"
 	}
 	"WeaponsTOP"
 	{
-		"en"		"TOP players [Weapons]"
+		"en"		"TOP Players [Weapons]"
+		"pt"		"TOP Players [Weapons]"
 		"ru"		"TOP игроков [Оружия]"
 		"ua"		"TOP гравців [Зброї]"
 	}
 	"WeaponsTOPAll"
 	{
-		"en"		"TOP-10 by count kills"
-		"ru"		"TOP-10 по кол-ву убийств"
-		"ua"		"TOP-10 за кількістю вбивств"
+		"en"		"TOP 10 | Count Kills"
+		"pt"		"TOP 10 | Count Kills"
+		"ru"		"TOP 10 | по кол-ву убийств"
+		"ua"		"TOP 10 | за кількістю вбивств"
 	}
 	"WeaponsTOPWeaponAll"
 	{
-		"en"		"TOP-10 by count kills [weapon]"
-		"ru"		"TOP-10 по кол-ву убийств [оружие]"
-		"ua"		"TOP-10 за кількістю вбивств [зброю]"
+		"en"		"TOP 10 | Cunt Kills [Weapon]"
+		"pt"		"TOP 10 | Count Kills [Weapon]"
+		"ru"		"TOP 10 | по кол-ву убийств [оружие]"
+		"ua"		"TOP 10 | за кількістю вбивств [зброю]"
 	}
 	"WeaponsTOPWeaponAllChoose"
 	{
 		"#format"	"{1:s}"
-		"en"		"TOP-10 by {1}"
-		"ru"		"TOP-10 по {1}"
-		"ua"		"TOP-10 по {1}"
+		"en"		"TOP 10 | by {1}"
+		"pt"		"TOP 10 | by {1}"
+		"ru"		"TOP 10 | по {1}"
+		"ua"		"TOP 10 | по {1}"
 		"chi"		"{1}击杀排名前十"
 	}
 	"WeaponsTOPList"
 	{
 		"#format"	"{1:i},{2:i},{3:s}"
 		"en"		"{1} - {2} kills - {3}"
+		"pt"		"{1} - {2} kills - {3}"
 		"ru"		"{1} - {2} Киллов - {3}"
 		"ua"		"{1} - {2} Вбивств - {3}"
 		"chi"		"{1} - {2} 击杀数 - {3}"
@@ -45,6 +51,7 @@
 	{
 		"#format"	"{1:s},{2:i},{3:i}"
 		"en"		"{1} - {2} kills ({3}%%)"
+		"pt"		"{1} - {2} kills ({3}%%)"
 		"ru"		"{1} - {2} Киллов ({3}%%)"
 		"ua"		"{1} - {2} Вбивств ({3}%%)"
 		"chi"		"{1} - {2} 击杀数 ({3}%%)"
@@ -52,6 +59,7 @@
 	"NoData"
 	{
 		"en"		"No data!"
+		"pt"		"Sem dados!"
 		"ru"		"Нет данных!"
 		"ua"		"Немає даних!"
 	}

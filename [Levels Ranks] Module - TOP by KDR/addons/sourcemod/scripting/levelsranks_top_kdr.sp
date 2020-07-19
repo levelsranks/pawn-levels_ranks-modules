@@ -14,7 +14,7 @@
 int				  g_iLang[MAXPLAYERS+1];
 
 static const char g_sItemName[] = "TopKDR",
-				  g_sTransFrases[][] = {"TOP-10 by KDR", "TOP-10 по KDR", "TOP-10 за KDR"},
+				  g_sTransFrases[][] = {"TOP 10 | KDR", "TOP 10 | KDR", "TOP 10 | KDR"},
 
 				  g_sSQL_SelectTop[] = "SELECT `name`, 1.0 * `kills` / `deaths` AS `kdr` FROM `%s` WHERE `kills` >= " ... MINKILLS ... " AND `lastconnect` ORDER BY `kdr` DESC LIMIT " ... MAXPLACES ... ";";
 

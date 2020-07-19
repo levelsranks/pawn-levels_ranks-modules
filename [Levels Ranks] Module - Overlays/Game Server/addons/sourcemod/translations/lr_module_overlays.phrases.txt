@@ -2,15 +2,17 @@
 {
 	"Overlay_MenuOff"
 	{
-		"en"			"Overlay [on]"
+		"en"			"Overlay [ON]"
 		"ru"			"Оверлеи [вкл]"
+		"pt"			"Overlay [ON]"
 		"ua"			"Оверлеї [вкл]"
 		"chi"			"升级覆盖 [开启]"
 	}
 	"Overlay_MenuOn"
 	{
-		"en"			"Overlays [off]"
+		"en"			"Overlays [OFF]"
 		"ru"			"Оверлеи [выкл]"
+		"pt"			"Overlays [OFF]"
 		"ua"			"Оверлеї [викл]"
 		"chi"			"升级覆盖 [关闭]"
 	}
