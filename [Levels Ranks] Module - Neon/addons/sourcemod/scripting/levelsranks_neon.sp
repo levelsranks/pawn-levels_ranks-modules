@@ -230,7 +230,7 @@ public Action Hook_Hide(int iNeon, int iClient)
 
 void RemoveNeon(int iClient)
 {
-	if(g_iNeon[iClient] && IsValidEdict(g_iNeon[iClient])) AcceptEntityInput(g_iNeon[iClient], "Kill");
+	if(g_iNeon[iClient] && IsValidEdict(g_iNeon[iClient])) RemoveEntity(g_iNeon[iClient]);
 	g_iNeon[iClient] = 0;
 }
 
