@@ -2,14 +2,14 @@
 {
 	"Unlim_Off"
 	{
-		"en"			"Unlimited ammo [off]"
+		"en"			"Unlimited Ammo [OFF]"
 		"ru"			"Бесконечные патроны [выкл]"
 		"ua"			"Необмежені боєприпаси [викл]"
 		"chi"			"无限弹药 [已禁用]"
 	}
 	"Unlim_On"
 	{
-		"en"			"Unlimited ammo [on]"
+		"en"			"Unlimited Ammo [ONN]"
 		"ru"			"Бесконечные патроны [вкл]"
 		"ua"			"Необмежені боєприпаси [вкл]"
 		"chi"			"无限弹药 [已启用]"
@@ -17,7 +17,7 @@
 	"Unlim_Closed"
 	{
 		"#format"		"{1:i}"
-		"en"			"Unlimited ammo [{1} rank]"
+		"en"			"Unlimited Ammo [{1} Rank]"
 		"ru"			"Бесконечные патроны [{1} ранг]"
 		"ua"			"Необмежені боєприпаси [{1} ранг]"
 		"chi"			"无限弹药 [需要等级 {1}]"
