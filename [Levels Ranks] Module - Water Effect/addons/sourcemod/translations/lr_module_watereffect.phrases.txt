@@ -1,0 +1,19 @@
+﻿"Phrases"
+{
+	"WE_Off"
+	{
+		"en"			"Water Effect [Off]"
+		"ru"			"Брызги воды [выкл]"
+	}
+	"WE_On"
+	{
+		"en"			"Water Effect [On]"
+		"ru"			"Брызги воды [вкл]"
+	}
+	"WE_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Water Effect [{1} rank]"
+		"ru"			"Брызги воды [{1} ранг]"
+	}
+}
