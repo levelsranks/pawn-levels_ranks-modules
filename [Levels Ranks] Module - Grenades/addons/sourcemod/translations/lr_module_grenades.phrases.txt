@@ -1,0 +1,63 @@
+﻿"Phrases"
+{
+	"Grenades"
+	{
+		"en"			"Grenades"
+		"ru"			"Гранаты"
+		"ua"			"Гранати"
+	}
+	"Grenades_OFF"
+	{
+		"en"			"Grenades [OFF]"
+		"ru"			"Гранаты [ВЫКЛ]"
+		"ua"			"Гранати [ВИКЛ]"
+	}
+	"Grenades_ON"
+	{
+		"en"			"Grenades [ON]"
+		"ru"			"Гранаты [ВКЛ]"
+		"ua"			"Гранати [ВКЛ]"
+	}
+	"Grenades_HE"
+	{
+		"#format"		"{1:i}"
+		"en"			"Hegrenade [{1}]"
+		"ru"			"Осколочная [{1}]"
+		"ua"			"Осколкова [{1}]"
+	}
+	"Grenades_FB"
+	{
+		"#format"		"{1:i}"
+		"en"			"Flashbang [{1}]"
+		"ru"			"Светошумовая [{1}]"
+		"ua"			"Cвітлошумова [{1}]"
+	}
+	"Grenades_SG"
+	{
+		"#format"		"{1:i}"
+		"en"			"Smokegrenade [{1}]"
+		"ru"			"Дымовая [{1}]"
+		"ua"			"Димова [{1}]"
+	}
+	"Grenades_MT"
+	{
+		"#format"		"{1:i}"
+		"en"			"Molotov [{1}]"
+		"ru"			"Молотов [{1}]"
+		"ua"			"Молотовий [{1}]"
+	}
+	"Grenades_DC"
+	{
+		"#format"		"{1:i}"
+		"en"			"Decoy [{1}]"
+		"ru"			"Ложная [{1}]"
+		"ua"			"Хибна [{1}]"
+	}
+	"Grenades_RankClosed"
+	{
+		"#format"		"{1:i}"
+		"en"			"Grenades [{1} rank]"
+		"ru"			"Гранаты [{1} ранг]"
+		"ua"			"Гранати [{1} ранг]"
+	}
+}
