@@ -1,7 +1,8 @@
-﻿"Phrases"
+"Phrases"
 {
 	"Overlay_MenuOff"
 	{
+		"tr"            "Rütbe Atlama Göster [Açık]"
 		"en"			"Overlay [ON]"
 		"ru"			"Оверлеи [вкл]"
 		"pt"			"Overlay [ON]"
@@ -10,6 +11,7 @@
 	}
 	"Overlay_MenuOn"
 	{
+		"tr"            "Rütbe Atlama Göster [Kapalı]"
 		"en"			"Overlays [OFF]"
 		"ru"			"Оверлеи [выкл]"
 		"pt"			"Overlays [OFF]"
