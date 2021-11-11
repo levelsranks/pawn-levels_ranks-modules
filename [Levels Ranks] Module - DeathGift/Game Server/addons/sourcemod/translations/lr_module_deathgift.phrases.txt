@@ -3,6 +3,7 @@
 	"TouchGiftExp"
 	{
 		"#format"	"{1:i},{2:i}"
+		"tr"		"{WHITE}Puanın: {GREEN}{1} [+{2} Dokunmatik Hediye]"
 		"en"		"{WHITE}Your exp: {GREEN}{1} [+{2} touch gift]"
 		"ru"		"{WHITE}Ваш опыт: {GREEN}{1} [+{2} за подарочек]"
 		"ua"		"{WHITE}Ваш досвід: {GREEN}{1} [+{2} за подаруночок]"
